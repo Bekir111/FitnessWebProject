@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32901.215
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessApp.Web", "FitnessApp.Web\FitnessApp.Web.csproj", "{ADA27225-8513-4AA3-94C6-4328FA1B3F31}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{B57FDFBD-2A32-4E08-961D-AA6BE396556E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{7609ECE5-DEA8-4AE0-AC31-B0BB17D29D14}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessApp.Data", "FitnessApp.Data\FitnessApp.Data.csproj", "{BDC99F27-E3E8-423C-B3E8-565C9DFFEF6C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessApp.Data.Models", "FitnessApp.Data.Models\FitnessApp.Data.Models.csproj", "{46F6DD7A-5E44-4C43-A5F0-9584BF4F9313}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessApp.Common", "FitnessApp.Common\FitnessApp.Common.csproj", "{6F69A30B-AC97-4D69-8493-4B335620D040}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessApp.Web.ViewModels", "FitnessApp.Web.ViewModels\FitnessApp.Web.ViewModels.csproj", "{C1B01927-7026-499A-A0F3-05343C9FFB2C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ADA27225-8513-4AA3-94C6-4328FA1B3F31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADA27225-8513-4AA3-94C6-4328FA1B3F31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADA27225-8513-4AA3-94C6-4328FA1B3F31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADA27225-8513-4AA3-94C6-4328FA1B3F31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDC99F27-E3E8-423C-B3E8-565C9DFFEF6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDC99F27-E3E8-423C-B3E8-565C9DFFEF6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDC99F27-E3E8-423C-B3E8-565C9DFFEF6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDC99F27-E3E8-423C-B3E8-565C9DFFEF6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46F6DD7A-5E44-4C43-A5F0-9584BF4F9313}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46F6DD7A-5E44-4C43-A5F0-9584BF4F9313}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46F6DD7A-5E44-4C43-A5F0-9584BF4F9313}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46F6DD7A-5E44-4C43-A5F0-9584BF4F9313}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F69A30B-AC97-4D69-8493-4B335620D040}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F69A30B-AC97-4D69-8493-4B335620D040}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F69A30B-AC97-4D69-8493-4B335620D040}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F69A30B-AC97-4D69-8493-4B335620D040}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1B01927-7026-499A-A0F3-05343C9FFB2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1B01927-7026-499A-A0F3-05343C9FFB2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1B01927-7026-499A-A0F3-05343C9FFB2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1B01927-7026-499A-A0F3-05343C9FFB2C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{ADA27225-8513-4AA3-94C6-4328FA1B3F31} = {B57FDFBD-2A32-4E08-961D-AA6BE396556E}
+		{BDC99F27-E3E8-423C-B3E8-565C9DFFEF6C} = {7609ECE5-DEA8-4AE0-AC31-B0BB17D29D14}
+		{46F6DD7A-5E44-4C43-A5F0-9584BF4F9313} = {7609ECE5-DEA8-4AE0-AC31-B0BB17D29D14}
+		{C1B01927-7026-499A-A0F3-05343C9FFB2C} = {B57FDFBD-2A32-4E08-961D-AA6BE396556E}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DA5A749F-BC5E-423F-A4BB-769E87B5729F}
+	EndGlobalSection
+EndGlobal
