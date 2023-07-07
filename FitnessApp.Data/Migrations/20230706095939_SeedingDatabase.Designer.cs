@@ -4,6 +4,7 @@ using FitnessApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FitnessApp.Data.Migrations
 {
     [DbContext(typeof(FitnessAppDbContext))]
-    partial class FitnessAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230706095939_SeedingDatabase")]
+    partial class SeedingDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -66,9 +68,11 @@ namespace FitnessApp.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<Guid?>("ProductReviewId")
+                        .IsRequired()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("ProgramReviewId")
+                        .IsRequired()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("SecurityStamp")
@@ -232,7 +236,7 @@ namespace FitnessApp.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ffb4ae5f-dcb6-43ff-b435-f6c425f38577"),
+                            Id = new Guid("f22cbd51-948f-4b55-83d1-af48ea176cb6"),
                             Description = "Elevate Your Performance. High-quality protein powder for muscle recovery and growth. Packed with essential nutrients and amino acids. Enjoy the delicious taste and smooth texture. Unleash your potential with Vital Protein, the key to maximizing your performance and vitality.",
                             Name = "Vital Protein Powder.Chocolate flavor",
                             PictureUrl = "https://cdn10.bigcommerce.com/s-quxuy/products/133/images/504/Main-Image-Whey__17399.1590994371.1280.1280.jpg?c=2",
@@ -240,7 +244,7 @@ namespace FitnessApp.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("9d6b3f09-fd5e-42cd-9dd2-be721f08003b"),
+                            Id = new Guid("09872d33-e965-45bb-98a8-69d052673e51"),
                             Description = "Unleash Your Power. Pure and potent creatine monohydrate supplement. Enhances strength, power, and muscular endurance. Supports explosive workouts and accelerated muscle recovery. Unleash your true potential with Vital Creatine, the ultimate tool for maximizing your athletic performance.",
                             Name = "Vital Creatine Monohydrate",
                             PictureUrl = "https://cdn10.bigcommerce.com/s-quxuy/products/150/images/563/Creatine-main-image-450__28099.1603079104.1280.1280.jpg?c=2",
@@ -248,7 +252,7 @@ namespace FitnessApp.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5cb99474-2363-403a-953d-cbb3e5febe6f"),
+                            Id = new Guid("090aeb2d-9da6-4618-829a-5ae9f6b671ee"),
                             Description = "Ignite Your Workouts. Boosts energy, focus, and endurance. Enhances strength and intensity during training. Experience heightened performance with Vital Pre-Workout, your secret weapon for crushing your workouts and surpassing your limits.",
                             Name = "Vital Pre-Workout",
                             PictureUrl = "https://cdn10.bigcommerce.com/s-quxuy/products/229/images/525/225g-Pre-Workour-Main__55780.1633392104.386.513.jpg?c=2",
@@ -256,7 +260,7 @@ namespace FitnessApp.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c49b970f-08d1-4c43-bfa9-f95c471ac5c8"),
+                            Id = new Guid("dce78659-8e95-4c73-9385-e5a7fa9bd08b"),
                             Description = "Nourish Your Well-being. Provides essential nutrients for optimal health and vitality. Supports immune function, energy levels, and overall well-being. Prioritize your health with Vital Multivitamin, your daily source of essential nutrients for a vibrant life.",
                             Name = "Vital Multivitamin",
                             PictureUrl = "https://cdn01.pharmeasy.in/dam/products_otc/R08152/musclexp-men-daily-vital-fitness-60-tablets-pack-of-3-7-1671744190.jpg",
@@ -330,90 +334,90 @@ namespace FitnessApp.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("2e0a3cbc-b3cb-4310-9390-51d5e5278d0d"),
+                            Id = new Guid("bd22de88-7581-4cd0-bec6-1dd91b2b553d"),
                             CategoryId = 4,
-                            CreatedOn = new DateTime(2023, 7, 7, 13, 34, 38, 932, DateTimeKind.Utc).AddTicks(4517),
+                            CreatedOn = new DateTime(2023, 7, 6, 9, 59, 39, 378, DateTimeKind.Utc).AddTicks(2163),
                             Description = "Customized Workout Solutions. Tailored exercise programs designed to meet your fitness goals. Personalized routines for beginners to advanced athletes. Varied exercises targeting strength, cardio, and flexibility. Achieve your desired results with Essential Program, your ultimate workout companion.",
                             Name = "The Essential Program",
                             PictureUrl = "https://www.bodybuilding.com/images/2016/june/essential-8-exercises-to-get-ripped-v2-5-700xh.jpg"
                         },
                         new
                         {
-                            Id = new Guid("4d4b2334-8b81-4f39-8955-da74edbb42ba"),
+                            Id = new Guid("0a44bafc-eda1-4c0e-9e06-deb458d2d914"),
                             CategoryId = 4,
-                            CreatedOn = new DateTime(2023, 7, 7, 13, 34, 38, 932, DateTimeKind.Utc).AddTicks(4527),
+                            CreatedOn = new DateTime(2023, 7, 6, 9, 59, 39, 378, DateTimeKind.Utc).AddTicks(2170),
                             Description = "An Efficient Training Program. Customized push, pull, and leg workouts designed to optimize muscle growth and strength. Balanced exercises targeting major muscle groups. Varied training intensity and progressive overload. Achieve results with time-efficient workouts.",
                             Name = "Intermediate/Advanced Push Pull Legs",
                             PictureUrl = "https://cdn.shopify.com/s/files/1/1633/7705/articles/push_pull_legs_2000x.jpg?v=1614057323"
                         },
                         new
                         {
-                            Id = new Guid("85f82511-5d09-4791-bc9d-224f0eb0ff36"),
+                            Id = new Guid("34fe7f91-25ef-477c-a4b8-a5e464761d03"),
                             CategoryId = 4,
-                            CreatedOn = new DateTime(2023, 7, 7, 13, 34, 38, 932, DateTimeKind.Utc).AddTicks(4587),
+                            CreatedOn = new DateTime(2023, 7, 6, 9, 59, 39, 378, DateTimeKind.Utc).AddTicks(2172),
                             Description = "Comprehensive and Time-Saving. A complete workout program targeting all muscle groups. Efficient exercises to maximize strength, endurance, and calorie burn. Balanced routines for optimal results. Achieve total body fitness in minimal time.",
                             Name = "Ultimate Full Body",
                             PictureUrl = "https://cdn.shopify.com/s/files/1/1497/9682/files/1.Differences_Between_Full_Body_and_Split_Workouts.jpg?v=1685531264&width=750"
                         },
                         new
                         {
-                            Id = new Guid("27e818ea-2601-4b38-8c81-8a0eb299ca64"),
+                            Id = new Guid("f73958f9-ec36-4b25-b727-3a81246a0487"),
                             CategoryId = 3,
-                            CreatedOn = new DateTime(2023, 7, 7, 13, 34, 38, 932, DateTimeKind.Utc).AddTicks(4590),
+                            CreatedOn = new DateTime(2023, 7, 6, 9, 59, 39, 378, DateTimeKind.Utc).AddTicks(2174),
                             Description = "Sculpted Pecs in Focus. A specialized program to enhance chest muscle growth and definition. Targeted exercises to isolate and stimulate the pectoral muscles. Progressive overload for continuous hypertrophy. Sculpt your chest with precision and achieve an impressive upper body physique.",
                             Name = "Chest Boost",
                             PictureUrl = "https://cdn.shopify.com/s/files/1/1633/7705/articles/outer_chest_exercises_2000x.jpg?v=1649406838"
                         },
                         new
                         {
-                            Id = new Guid("9f06f415-3d00-4a12-8411-7f1bf57baba3"),
+                            Id = new Guid("4255ea39-72d9-4d48-bec4-e520071de04c"),
                             CategoryId = 3,
-                            CreatedOn = new DateTime(2023, 7, 7, 13, 34, 38, 932, DateTimeKind.Utc).AddTicks(4597),
+                            CreatedOn = new DateTime(2023, 7, 6, 9, 59, 39, 378, DateTimeKind.Utc).AddTicks(2193),
                             Description = "Build Strong and Impressive Arms. A dedicated program to maximize arm development. Targeted exercises for biceps, triceps, and forearm muscles. Emphasize progressive overload and proper form for optimal muscle growth. Sculpt your arms with Arm Sculptor and showcase your strength and aesthetics.",
                             Name = "Arm Sculptor",
                             PictureUrl = "https://i.redd.it/6pt9rtvj7ro11.jpg"
                         },
                         new
                         {
-                            Id = new Guid("c76ff025-ef82-4c46-9c05-035979bb6311"),
+                            Id = new Guid("468f9bf5-7e8f-4aea-9ef5-c49de2730574"),
                             CategoryId = 3,
-                            CreatedOn = new DateTime(2023, 7, 7, 13, 34, 38, 932, DateTimeKind.Utc).AddTicks(4599),
+                            CreatedOn = new DateTime(2023, 7, 6, 9, 59, 39, 378, DateTimeKind.Utc).AddTicks(2195),
                             Description = "Build Strong, V-Shaped Back. Comprehensive program targeting lats, traps, and erector spinae. Compound exercises and progressive overload for muscle growth. Build a powerful back with Back Builder, your ultimate tool for a chiseled physique.",
                             Name = "Back Builder",
                             PictureUrl = "https://img.myloview.com/posters/body-builder-posing-rear-lat-spread-strong-healthy-power-fitness-handsome-athletic-man-with-muscular-trained-body-flexing-his-lateral-back-muscle-on-black-background-700-203829669.jpg"
                         },
                         new
                         {
-                            Id = new Guid("93a268cc-d715-4789-87e1-80a3df828d6f"),
+                            Id = new Guid("54c182d6-eb65-48ac-9892-7bfa6aa86da2"),
                             CategoryId = 2,
-                            CreatedOn = new DateTime(2023, 7, 7, 13, 34, 38, 932, DateTimeKind.Utc).AddTicks(4601),
+                            CreatedOn = new DateTime(2023, 7, 6, 9, 59, 39, 378, DateTimeKind.Utc).AddTicks(2197),
                             Description = "Dominate Bench Press. Powerlifting-focused program to maximize your bench press strength. Progressive overload, specialized exercises, and form refinement for optimal gains. Unleash explosive power and achieve new personal records. Conquer the bench and leave a mark in powerlifting.",
                             Name = "Power Bench Press",
                             PictureUrl = "https://www.westend61.de/images/0001492699pw/from-above-of-strong-focused-male-athlete-lying-on-bench-press-and-doing-exercises-with-heavy-barbell-during-workout-in-gym-ADSF19039.jpg"
                         },
                         new
                         {
-                            Id = new Guid("568ddcd7-6ff6-4586-920c-bf4c75c2a449"),
+                            Id = new Guid("dd84c37e-e7a8-4a41-99fe-a6708acd66eb"),
                             CategoryId = 2,
-                            CreatedOn = new DateTime(2023, 7, 7, 13, 34, 38, 932, DateTimeKind.Utc).AddTicks(4623),
+                            CreatedOn = new DateTime(2023, 7, 6, 9, 59, 39, 378, DateTimeKind.Utc).AddTicks(2199),
                             Description = "Dominate Squat Powerlifting. Specialized program for maximizing squat strength. Targeted exercises, proper form, and progressive overload. Build explosive power and achieve new personal records. Conquer the squat platform with PowerSquat and rise as a powerlifting force.",
                             Name = "Power Squat",
                             PictureUrl = "https://wodstarmedia.s3.amazonaws.com/wp-content/uploads/2017/08/squat.jpg"
                         },
                         new
                         {
-                            Id = new Guid("1f22f087-bf4f-4815-b7f7-a47a1a492309"),
+                            Id = new Guid("c0e9affe-c81f-47b0-bdf9-6dcc792004ba"),
                             CategoryId = 1,
-                            CreatedOn = new DateTime(2023, 7, 7, 13, 34, 38, 932, DateTimeKind.Utc).AddTicks(4626),
+                            CreatedOn = new DateTime(2023, 7, 6, 9, 59, 39, 378, DateTimeKind.Utc).AddTicks(2246),
                             Description = "Build Strong, Shapely Glutes. Tailored program for women targeting glute muscle hypertrophy. Targeted exercises, progressive overload, and effective techniques. Sculpt and enhance your lower body with Glute Gain, your key to a curvaceous physique.",
                             Name = "Glute Gain",
                             PictureUrl = "https://www.bodybuilding.com/images/2020/march/glute-and-hamstring-workouts-for-women-1-700xh.jpg"
                         },
                         new
                         {
-                            Id = new Guid("bbc3c616-0fa8-4850-8420-ec5c9b47d918"),
+                            Id = new Guid("6a68658e-a978-4c84-acd3-e1d89fb545c8"),
                             CategoryId = 1,
-                            CreatedOn = new DateTime(2023, 7, 7, 13, 34, 38, 932, DateTimeKind.Utc).AddTicks(4628),
+                            CreatedOn = new DateTime(2023, 7, 6, 9, 59, 39, 378, DateTimeKind.Utc).AddTicks(2248),
                             Description = "Customized Workout Solutions for Women. Tailored exercise programs designed to meet the unique fitness goals of women. Varied routines targeting strength, cardio, and flexibility. Achieve your desired results with HerFit, your personalized workout plan for a stronger and healthier you.",
                             Name = "Her Fit",
                             PictureUrl = "https://medicalchannelasia.com/wp-content/uploads/2022/05/2022.05.31-squats.jpg"
