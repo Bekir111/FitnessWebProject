@@ -29,6 +29,7 @@ namespace FitnessApp.Web
 
             builder.Services.AddControllersWithViews();
 
+
             var app = builder.Build();
 
 

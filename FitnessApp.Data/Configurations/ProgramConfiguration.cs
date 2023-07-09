@@ -16,6 +16,10 @@ namespace FitnessApp.Data.Configurations
                .HasForeignKey(p => p.CategoryId)
                .OnDelete(DeleteBehavior.Restrict);
 
+            builder
+                .Property(p => p.CreatedOn)
+                .HasDefaultValue(DateTime.UtcNow);
+
             builder.HasData(this.GeneratePrograms());
         }
 

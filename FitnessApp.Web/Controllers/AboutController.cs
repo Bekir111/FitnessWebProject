@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace FitnessApp.Web.Controllers
 {
-	public class AboutController : Controller
-	{
-		public IActionResult Index()
+	[AllowAnonymous]
+	public class AboutController : BaseController
+    {
+		public IActionResult All()
 		{
 			return View();
 		}

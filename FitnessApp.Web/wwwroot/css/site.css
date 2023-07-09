@@ -1,21 +1,116 @@
-html {
-  font-size: 14px;
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px;
+}
+
+.about-section {
+    background-color: #f9f9f9;
+}
+
+    .about-section h2 {
+        color: #333;
+        font-size: 32px;
+        margin-bottom: 20px;
+    }
+
+    .about-section p {
+        color: #555;
+        font-size: 18px;
+        line-height: 1.5;
+    }html {
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
+
+
+
+
+
+/*About page*/
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    margin-bottom: 100px;
+    padding: 0;
+    background-color: #333; /* Update the background color to a darker shade */
+    color: #fff; /* Set the text color to white */
+}
+
+.about-section {
+    background-color: #555; /* Darken the background color of the about section */
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+}
+
+
+    .about-section h2 {
+        color: #fff; /* Set the heading color to white */
+        font-size: 32px;
+        margin-bottom: 20px;
+    }
+
+
+    .about-section p {
+        color: #ccc; /* Set the paragraph color to a lighter shade */
+        font-size: 18px;
+        line-height: 1.5;
+    }
+
+.brand {
+    color: #ff0000;
+    font-weight: bold;
+}
+
+footer {
+    background-color: #222; /* Set a solid background color for the footer */
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    margin-bottom: auto;
+}
+
+/* Contact page  */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px;
+}
+
+.contact-section {
+    background-color: #555;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+}
+
+    .contact-section h2 {
+        color: #fff;
+        font-size: 32px;
+        margin-bottom: 20px;
+    }
+
+    .contact-section p {
+        color: #ccc;
+        font-size: 18px;
+        line-height: 1.5;
+    }
+
 
 
 

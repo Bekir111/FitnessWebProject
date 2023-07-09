@@ -1,13 +1,15 @@
 ﻿
 namespace FitnessApp.Web.Controllers
 {
-    using Microsoft.AspNetCore.Mvc;
-    
     using System.Diagnostics;
+    
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Authorization;   
 
     using FitnessApp.Web.ViewModels.Home;
 
-    public class HomeController : Controller
+    [AllowAnonymous]
+    public class HomeController : BaseController
     {
         public HomeController()
         {

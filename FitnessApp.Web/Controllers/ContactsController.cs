@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
+﻿
 namespace FitnessApp.Web.Controllers
 {
-	public class ContactsController : Controller
-	{
-		public IActionResult Index()
-		{
-			return View();
-		}
-	}
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+
+    [AllowAnonymous]
+    public class ContactsController : BaseController
+    {
+        public IActionResult Contact()
+        {
+            return View();
+        }
+    }
 }
