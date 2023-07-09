@@ -25,7 +25,6 @@ namespace FitnessApp.Services.Data
 					CategoryId = p.CategoryId,
 					CategoryName = p.Category.Name
 				})
-				.OrderByDescending(p => p.CategoryId)
 				.ToArrayAsync();
 
 			return programs;

@@ -38,6 +38,13 @@ body {
 }
 
 
+footer {
+    background-color: #222;
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    margin-bottom: auto;
+}
 
 
 
@@ -47,12 +54,12 @@ body {
     margin: 0;
     margin-bottom: 100px;
     padding: 0;
-    background-color: #333; /* Update the background color to a darker shade */
-    color: #fff; /* Set the text color to white */
+    background-color: #333; 
+    color: #fff;
 }
 
 .about-section {
-    background-color: #555; /* Darken the background color of the about section */
+    background-color: #555; 
     padding: 40px;
     border-radius: 20px;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
@@ -60,14 +67,14 @@ body {
 
 
     .about-section h2 {
-        color: #fff; /* Set the heading color to white */
+        color: #fff; 
         font-size: 32px;
         margin-bottom: 20px;
     }
 
 
     .about-section p {
-        color: #ccc; /* Set the paragraph color to a lighter shade */
+        color: #ccc; 
         font-size: 18px;
         line-height: 1.5;
     }
@@ -77,13 +84,6 @@ body {
     font-weight: bold;
 }
 
-footer {
-    background-color: #222; /* Set a solid background color for the footer */
-    color: #fff;
-    text-align: center;
-    font-size: 14px;
-    margin-bottom: auto;
-}
 
 /* Contact page  */
 .container {

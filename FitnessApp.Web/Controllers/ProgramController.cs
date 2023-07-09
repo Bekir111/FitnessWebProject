@@ -1,12 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FitnessApp.Services.Data.Interfaces;
+using FitnessApp.Web.ViewModels.Program;
+using Microsoft.AspNetCore.Mvc;
 
 namespace FitnessApp.Web.Controllers
 {
-	public class ProgramController : Controller
+	public class ProgramController : BaseController
 	{
-		public IActionResult All()
+		private readonly IProgramService programService;
+
+		public ProgramController(IProgramService programService)
 		{
-			return View();
+			this.programService = programService;
+		}
+
+		public async Task<IActionResult> All()
+		{
+			IEnumerable<AllProgramViewModel> programs = await programService.GetAllPrograms();
+			return View(programs);
 		}
 	}
 }

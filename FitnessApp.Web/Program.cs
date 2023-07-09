@@ -5,6 +5,9 @@ namespace FitnessApp.Web
     
     using FitnessApp.Data;
     using FitnessApp.Data.Models;
+    using FitnessApp.Web.Infrastructure.Extensions;
+    using FitnessApp.Services.Data.Interfaces;
+    using FitnessApp.Services.Data;
 
     public class Program
     {
@@ -26,6 +29,9 @@ namespace FitnessApp.Web
                 options.Password.RequiredLength = builder.Configuration.GetValue<int>("Identity:Password:RequiredLength");
             })
                 .AddEntityFrameworkStores<FitnessAppDbContext>();
+
+            builder.Services.AddApplicationServices(typeof(IProgramService));
+
 
             builder.Services.AddControllersWithViews();
 
