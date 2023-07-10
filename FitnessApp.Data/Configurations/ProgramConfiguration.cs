@@ -44,7 +44,7 @@ namespace FitnessApp.Data.Configurations
                 Name = "Intermediate/Advanced Push Pull Legs",
                 CategoryId = 4,
                 CreatedOn = DateTime.UtcNow,
-                PictureUrl = "https://cdn.shopify.com/s/files/1/1633/7705/articles/push_pull_legs_2000x.jpg?v=1614057323",
+                PictureUrl = "https://barbend.com/wp-content/uploads/2021/10/shutterstock_657710845-1.jpg",
                 Description = "An Efficient Training Program. Customized push, pull, and leg workouts designed to optimize muscle growth and strength. Balanced exercises targeting major muscle groups. Varied training intensity and progressive overload. Achieve results with time-efficient workouts."
             };
             programs.Add(program);
@@ -64,7 +64,7 @@ namespace FitnessApp.Data.Configurations
                 Name = "Chest Boost",
                 CategoryId = 3,
                 CreatedOn = DateTime.UtcNow,
-                PictureUrl = "https://cdn.shopify.com/s/files/1/1633/7705/articles/outer_chest_exercises_2000x.jpg?v=1649406838",
+                PictureUrl = "https://i0.wp.com/www.strengthlog.com/wp-content/uploads/2020/11/Arnold-Schwarzenegger-Chest-Muscles-3.jpg?fit=995%2C720&ssl=1",
                 Description = "Sculpted Pecs in Focus. A specialized program to enhance chest muscle growth and definition. Targeted exercises to isolate and stimulate the pectoral muscles. Progressive overload for continuous hypertrophy. Sculpt your chest with precision and achieve an impressive upper body physique."
             };
             programs.Add(program);
@@ -74,7 +74,7 @@ namespace FitnessApp.Data.Configurations
                 Name = "Arm Sculptor",
                 CategoryId = 3,
                 CreatedOn = DateTime.UtcNow,
-                PictureUrl = "https://i.redd.it/6pt9rtvj7ro11.jpg",
+                PictureUrl = "https://www.newbodyplan.co.uk/wp-content/uploads/2021/08/barbell-curl-best-move-for-bigger-biceps.jpg",
                 Description = "Build Strong and Impressive Arms. A dedicated program to maximize arm development. Targeted exercises for biceps, triceps, and forearm muscles. Emphasize progressive overload and proper form for optimal muscle growth. Sculpt your arms with Arm Sculptor and showcase your strength and aesthetics."
             };
             programs.Add(program);

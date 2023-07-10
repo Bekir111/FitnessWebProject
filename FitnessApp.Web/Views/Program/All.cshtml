@@ -2,43 +2,38 @@
 @model IEnumerable<AllProgramViewModel>
 
 <style>
-    .program-list {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 50px;
-        margin-top: 50px;
-    }
-
-    .program {
-        max-width: 300px;
-        text-align: center;
-    }
-
-        .program img {
-            display: flex;
-            width: 200px;
-            height: 200px; /* Adjust the height as per your preference */
-            object-fit: cover;
-        }
+	
 </style>
 
 
-<h2 class="text-center">Programs</h2>
+<h2 class="title">Programs</h2>
 
-<div class="row">
-    @foreach (var program in Model)
-    {
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                <img src="@program.PictureUrl" class="card-img-top" alt="@program.Name">
-                <div class="card-body">
-                    <h5 class="card-title">@program.Name</h5>
-@*                    <a href="@Url.Page("Details", new { id = program.Id })" class="btn btn-primary">Details</a>
-                    <a href="@Url.Page("Join", new { id = program.Id })" class="btn btn-success">Join</a>*@
-                </div>
-            </div>
-        </div>
-    }
-</div>
+@foreach (var category in Model.DistinctBy(x => x.CategoryId).OrderByDescending(c => c.CategoryId))
+{
+
+	<div class="category-section">
+		<h3 class="category-name">@category.CategoryName</h3>
+
+		@foreach (var program in Model)
+		{
+			@if (program.CategoryId == category.CategoryId)
+			{
+
+				<section class="program-section">
+
+					<div class="program">
+						<img src="@program.PictureUrl" alt="@program.Name" class="program-image">
+						<div class="program-title">@program.Name</div>
+						<div class="button-group">
+							<a href="#" class="btn-program text-primary">Details</a>
+							<a href="#" class="btn-program text-success">Join</a>
+						</div>
+					</div>
+				</section>
+			}
+		}
+	</div>
+
+
+}
 
