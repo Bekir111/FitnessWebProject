@@ -1,9 +1,7 @@
 ﻿@using FitnessApp.Web.ViewModels.Program
 @model IEnumerable<AllProgramViewModel>
 
-<style>
-	
-</style>
+
 
 
 <h2 class="title">Programs</h2>
@@ -24,9 +22,12 @@
 					<div class="program">
 						<img src="@program.PictureUrl" alt="@program.Name" class="program-image">
 						<div class="program-title">@program.Name</div>
+						<div class="rate-program">
+							Average rating: @program.AverageRating.ToString("f1");
+						</div>
 						<div class="button-group">
-							<a href="#" class="btn-program text-primary">Details</a>
-							<a href="#" class="btn-program text-success">Join</a>
+							<a class="btn-program text-primary" asp-area="" asp-controller="Program" asp-action="Detail">Details</a>
+							<a class="btn-program text-success" asp-area="" asp-controller="Program" asp-action="Join">Join</a>
 						</div>
 					</div>
 				</section>
@@ -36,4 +37,19 @@
 
 
 }
+
+<script>
+	$(document).ready(function () {
+		$('.rating').each(function () {
+			var rating = $(this).data('rating');
+			setRating($(this), rating);
+		});
+	});
+
+	function setRating(ratingElement, rating) {
+		ratingElement.find('.star').each(function (index) {
+			$(this).toggleClass('filled', index < rating);
+		});
+	}
+</script>
 

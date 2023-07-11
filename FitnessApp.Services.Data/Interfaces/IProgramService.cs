@@ -1,9 +1,10 @@
-﻿using FitnessApp.Web.ViewModels.Program;
-
-namespace FitnessApp.Services.Data.Interfaces
+﻿namespace FitnessApp.Services.Data.Interfaces
 {
-	public interface IProgramService
-	{
-		Task<ICollection<AllProgramViewModel>> GetAllPrograms();
-	}
+    using FitnessApp.Web.ViewModels.Program;
+    public interface IProgramService
+    {
+        Task<ICollection<AllProgramViewModel>> GetAllPrograms();
+
+        Task<DetailProgramViewModel> GetProgramById(string id);
+    }
 }

@@ -45,6 +45,10 @@
 
         private double CalculateAverageRating()
         {
+            if (this.Reviews.Count == 0)
+            {
+                return 0;
+            }
             return Reviews.Average(r => r.Rating);
         }
 
