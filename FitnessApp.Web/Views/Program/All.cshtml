@@ -23,11 +23,11 @@
 						<img src="@program.PictureUrl" alt="@program.Name" class="program-image">
 						<div class="program-title">@program.Name</div>
 						<div class="rate-program">
-							Average rating: @program.AverageRating.ToString("f1");
+							Average rating: @program.AverageRating.ToString("f1")
 						</div>
 						<div class="button-group">
-							<a class="btn-program text-primary" asp-area="" asp-controller="Program" asp-action="Detail">Details</a>
-							<a class="btn-program text-success" asp-area="" asp-controller="Program" asp-action="Join">Join</a>
+							<a class="btn-program text-primary nav-link active" asp-route-id="@program.Id" asp-area="" asp-controller="Program" asp-action="Detail">Details</a>
+							<a class="btn-program text-success nav-link active" asp-area="" asp-controller="Program" asp-action="Join">Join</a>
 						</div>
 					</div>
 				</section>
@@ -37,19 +37,4 @@
 
 
 }
-
-<script>
-	$(document).ready(function () {
-		$('.rating').each(function () {
-			var rating = $(this).data('rating');
-			setRating($(this), rating);
-		});
-	});
-
-	function setRating(ratingElement, rating) {
-		ratingElement.find('.star').each(function (index) {
-			$(this).toggleClass('filled', index < rating);
-		});
-	}
-</script>
 

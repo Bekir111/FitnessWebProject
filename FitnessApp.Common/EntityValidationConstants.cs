@@ -20,7 +20,7 @@
         public static class Review
         {
             public const int ReviewTextMaxLength = 300;
-            public static int ReviewTextMinLength = 10;
+            public const int ReviewTextMinLength = 10;
 
             public const int ReviewRatingMaxValue = 5;
             public const int ReviewRatingMinValue = 0;

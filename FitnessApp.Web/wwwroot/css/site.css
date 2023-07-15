@@ -208,6 +208,107 @@ body {
     font-weight: bold;
 }
 
+/*Program/Detail page*/
+.program-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    text-align: center;
+}
+
+.program-name {
+    width: 100%;
+    font-weight: bold;
+    background-color: darkred;
+}
+
+.program-image img {
+    max-width: 400px;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    background-color: #555;
+}
+
+.program-description {
+    height: 80%;
+    max-height: 800px;
+    margin: 0 auto;
+    background-color: #555;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+}
+
+    .program-description p {
+        font-weight: bold;
+        font-size: 25px;
+    }
+
+.program-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.btn-details {
+    background-color: #007bff;
+}
+
+.btn-join {
+    background-color: #28a745;
+}
+
+.btn:hover {
+    background-color: #555;
+}
+
+.no-reviews {
+    font-size: 20px;
+}
+
+.review-section {
+    margin-top: 30px;
+}
+
+    .review-section h3 {
+        font-size: 24px;
+        font-weight: bold;
+        color: white;
+        text-align: center;
+    }
+
+.review {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f7f7f7;
+    border-radius: 5px;
+}
+
+    .review p {
+        font-size: 16px;
+        color: #333;
+    }
+
+.divider {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 20px 0;
+    width: 100%;
+}
 
 
 

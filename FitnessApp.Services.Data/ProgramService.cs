@@ -7,6 +7,8 @@ namespace FitnessApp.Services.Data
     using FitnessApp.Services.Data.Interfaces;
     using FitnessApp.Web.ViewModels.Program;
     using FitnessApp.Web.ViewModels.Reviews;
+    using FitnessApp.Data.Models;
+
     public class ProgramService : IProgramService
     {
         private readonly FitnessAppDbContext dbContext;
@@ -14,6 +16,20 @@ namespace FitnessApp.Services.Data
         public ProgramService(FitnessAppDbContext dbContext)
         {
             this.dbContext = dbContext;
+        }
+
+        public async Task AddReviewToProgram(ReviewFormViewModel model,string programId,string userId)
+        {
+            var review = new ProgramReview()
+            {
+                ProgramId = Guid.Parse(programId),
+                UserId = Guid.Parse(userId),
+                Rating = model.Rating,
+                ReviewText = model.ReviewText,
+            };
+
+            await dbContext.ProgramReviews.AddAsync(review);
+            await dbContext.SaveChangesAsync();
         }
 
         public async Task<ICollection<AllProgramViewModel>> GetAllPrograms()
@@ -27,6 +43,7 @@ namespace FitnessApp.Services.Data
                     CategoryId = p.CategoryId,
                     CategoryName = p.Category.Name,
                     AverageRating = p.AverageRating,
+                    
                 })
                 .ToArrayAsync();
 
@@ -36,7 +53,7 @@ namespace FitnessApp.Services.Data
         public async Task<DetailProgramViewModel> GetProgramById(string id)
         {
             var program = await this.dbContext.Programs
-                .FindAsync(id);
+                .FirstOrDefaultAsync(p => p.Id.ToString() == id);
 
             if (program == null)
             {
@@ -48,7 +65,6 @@ namespace FitnessApp.Services.Data
                 Id = program.Id.ToString(),
                 Description = program.Description,
                 AverageRating = program.AverageRating,
-                CategoryName = program.Category.Name,
                 CreatedOn = program.CreatedOn.ToString("dd/mm/yyyy"),
                 Name = program.Name,
                 Reviews = await GetAllReviewsByProgramId(program.Id.ToString()),
@@ -67,6 +83,7 @@ namespace FitnessApp.Services.Data
                 .Select(pr => new ProgramReviewInDetailViewModel()
                 {
                     Id = pr.Id.ToString(),
+                    UserId = pr.UserId.ToString(),
                     Rating = pr.Rating,
                     ReviewText = pr.ReviewText,
                     UserName = pr.User.UserName,
