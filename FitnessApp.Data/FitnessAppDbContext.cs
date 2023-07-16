@@ -20,8 +20,6 @@
 
         public DbSet<FoodRecipe> FoodRecipes { get; set; } = null!;
 
-        public DbSet<FoodRecipeAuthor> FoodRecipesAuthors { get; set; } = null!;
-
         public DbSet<Post> Posts { get; set; } = null!;
 
         public DbSet<Product> Products { get; set; } = null!;
@@ -42,6 +40,8 @@
                 ?? Assembly.GetExecutingAssembly();
 
             builder.ApplyConfigurationsFromAssembly(configAssembly);
+
+            
 
             base.OnModelCreating(builder);
         }

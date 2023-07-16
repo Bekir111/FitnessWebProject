@@ -7,7 +7,7 @@ namespace FitnessApp.Data.Models
     {
         public ApplicationUser()
         {
-
+            this.FoodRecipes = new HashSet<FoodRecipe>();
         }
 
         [ForeignKey(nameof(ProgramReview))]
@@ -17,5 +17,7 @@ namespace FitnessApp.Data.Models
         [ForeignKey(nameof(ProductReview))]
         public Guid? ProductReviewId { get; set; }
         public virtual ProductReview ProductReview { get; set; }
+
+        public virtual ICollection<FoodRecipe> FoodRecipes { get; set; }
     }
 }
