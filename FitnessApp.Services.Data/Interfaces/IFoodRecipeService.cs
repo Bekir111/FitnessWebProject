@@ -1,7 +1,11 @@
-﻿namespace FitnessApp.Services.Data.Interfaces
+﻿
+namespace FitnessApp.Services.Data.Interfaces
 {
-	public interface IFoodRecipeService
-	{
+    using FitnessApp.Web.ViewModels.FoodRecipe;
+    public interface IFoodRecipeService
+    {
+        Task<ICollection<AllFoodRecipeViewModel>> GetAllFoodRecipes();
 
-	}
+        Task AddFoodRecipeAsync(FoodRecipeFormModel model,string userId);
+    }
 }

@@ -1,0 +1,106 @@
+﻿@using FitnessApp.Web.ViewModels.FoodRecipe;
+@using static FitnessApp.Common.EntityValidationConstants.FoodRecipe;
+@model FoodRecipeFormModel;
+
+<style>
+    /* Styles for the form */
+
+    .form-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 40px;
+        background-color: dimgray;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+        .form-container label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .form-container input[type="text"],
+        .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            background-color: #272727;
+            border: 1px solid #444;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #fff;
+        }
+
+        .form-container button[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+</style>
+
+<div class="form-container">
+    <h2>Add Recipe</h2>
+
+    <form id="recipeForm" method="post" asp-controller="FoodRecipe" asp-action="Add">
+        <div>
+            <label asp-for="@Model.Name" class="form-label" >Name:</label>
+            <textarea asp-for="@Model.Name" class="form-control" type="text" id="@Model.Name" name="Name" required minlength="@FoodRecipieNameMinLength" maxlength="@FoodRecipieNameMaxLength"></textarea>
+        </div>
+        <div>
+            <label asp-for="@Model.Ingredients" class="form-label">Ingredients:</label>
+            <textarea asp-for="@Model.Ingredients" class="form-control" required minlength="@FooodRecipieIngredientsMinLength" maxlength="@FoodRecipieIngredientsMaxLength"></textarea>
+        </div>
+        <div>
+            <label asp-for="@Model.MethodToMake" class="form-label">Method:</label>
+            <textarea asp-for="@Model.MethodToMake" class="form-control" required minlength="@FoodRecipieMethodToMakeMinLength" maxlength="@FoodRecipieMethodToMakeMaxLength"></textarea>
+        </div>
+        <button type="submit">Add Recipe</button>
+    </form>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation.unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+
+    <script>
+        $(function () {
+            $.validator.setDefaults({
+                errorElement: 'div',
+                errorClass: 'text-danger',
+                highlight: function (element) {
+                    $(element).closest('.form-group').addClass('has-error');
+                },
+                unhighlight: function (element) {
+                    $(element).closest('.form-group').removeClass('has-error');
+                },
+                errorPlacement: function (error, element) {
+                    if (element.attr("name") === "Name") {
+                        error.insertAfter($("#Name"));
+                    } else if (element.attr("name") === "Ingredients") {
+                        error.insertAfter($("#Ingredients"));
+                    } else if (element.attr("name") === "MethodToMake") {
+                        error.insertAfter($("#MethodToMake"));
+                    } else {
+                        error.insertAfter(element);
+                    }
+                }
+            });
+
+            $('#recipeForm').validate();
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#recipeForm').validate();
+        });
+    </script>
+    <partial name="_NotificationPartial" />
+}
