@@ -7,5 +7,7 @@ namespace FitnessApp.Services.Data.Interfaces
         Task<ICollection<AllFoodRecipeViewModel>> GetAllFoodRecipes();
 
         Task AddFoodRecipeAsync(FoodRecipeFormModel model,string userId);
+
+        Task<DetailFoodRecipeViewModel> GetFoodRecipeByIdForDetail(string id);
     }
 }

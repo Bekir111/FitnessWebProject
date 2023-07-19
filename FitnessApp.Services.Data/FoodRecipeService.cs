@@ -1,46 +1,69 @@
-﻿using FitnessApp.Data;
-using FitnessApp.Data.Models;
-using FitnessApp.Services.Data.Interfaces;
-using FitnessApp.Web.ViewModels.FoodRecipe;
-using Microsoft.EntityFrameworkCore;
-
+﻿
 namespace FitnessApp.Services.Data
 {
-	public class FoodRecipeService : IFoodRecipeService
-	{
-		private readonly FitnessAppDbContext dbContext;
+    using Microsoft.EntityFrameworkCore;
 
-		public FoodRecipeService(FitnessAppDbContext dbContext)
-		{
-			this.dbContext = dbContext;
-		}
+    using FitnessApp.Data;
+    using FitnessApp.Data.Models;
+    using FitnessApp.Services.Data.Interfaces;
+    using FitnessApp.Web.ViewModels.FoodRecipe;
 
-		public async Task AddFoodRecipeAsync(FoodRecipeFormModel model,string userId)
-		{
-			var foodRecipe = new FoodRecipe()
-			{
-				Name = model.Name,
-				Ingredients = model.Ingredients,
-				MethodToMake = model.MethodToMake,
-				UserId = Guid.Parse(userId),
-			};
+    public class FoodRecipeService : IFoodRecipeService
+    {
+        private readonly FitnessAppDbContext dbContext;
 
-			await dbContext.FoodRecipes.AddAsync(foodRecipe);
+        public FoodRecipeService(FitnessAppDbContext dbContext)
+        {
+            this.dbContext = dbContext;
+        }
 
-			await dbContext.SaveChangesAsync();
-		}
+        public async Task AddFoodRecipeAsync(FoodRecipeFormModel model, string userId)
+        {
+            var foodRecipe = new FoodRecipe()
+            {
+                Name = model.Name,
+                Ingredients = model.Ingredients,
+                MethodToMake = model.MethodToMake,
+                UserId = Guid.Parse(userId),
+            };
 
-		public async Task<ICollection<AllFoodRecipeViewModel>> GetAllFoodRecipes()
-		{
-			return await dbContext.FoodRecipes
-				.Select(fr => new AllFoodRecipeViewModel()
-				{
-					Id = fr.Id.ToString(),
-					Name = fr.Name,
-					UserName = fr.User.UserName,
-					UserId = fr.UserId.ToString()
-				})
-				.ToArrayAsync();
-		}
-	}
+            await dbContext.FoodRecipes.AddAsync(foodRecipe);
+
+            await dbContext.SaveChangesAsync();
+        }
+
+        public async Task<ICollection<AllFoodRecipeViewModel>> GetAllFoodRecipes()
+        {
+            return await dbContext.FoodRecipes
+                .Select(fr => new AllFoodRecipeViewModel()
+                {
+                    Id = fr.Id.ToString(),
+                    Name = fr.Name,
+                    UserName = fr.User.UserName,
+                    UserId = fr.UserId.ToString()
+                })
+                .ToArrayAsync();
+        }
+
+        public async Task<DetailFoodRecipeViewModel> GetFoodRecipeByIdForDetail(string id)
+        {
+            var foodRecipe = await dbContext.FoodRecipes
+                .FirstOrDefaultAsync(fr => fr.Id.ToString() == id);
+
+            if (foodRecipe == null)
+            {
+                throw new InvalidOperationException("The food recipe cannot be found!");
+            }
+
+
+            return new DetailFoodRecipeViewModel()
+            {
+                Id = foodRecipe.Id.ToString(),
+                Ingredients = foodRecipe.Ingredients,
+                MethodToMake = foodRecipe.MethodToMake,
+                Name = foodRecipe.Name,
+                UserId = foodRecipe.UserId.ToString()
+            };
+        }
+    }
 }

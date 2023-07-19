@@ -52,5 +52,19 @@ namespace FitnessApp.Web.Controllers
                 return this.GeneralError();
             }
         }
+
+        public async Task<IActionResult> Detail(string id)
+        {
+            try
+            {
+                var model = await this.foodRecipeService.GetFoodRecipeByIdForDetail(id);
+
+                return View(model);
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("All", "FoodRecipe");
+            }
+        }
     }
 }

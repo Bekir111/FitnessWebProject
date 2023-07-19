@@ -1,5 +1,4 @@
-﻿@using FitnessApp.Web.ViewModels.FoodRecipe;
-@model IEnumerable<AllFoodRecipeViewModel>;
+﻿@model IEnumerable<AllFoodRecipeViewModel>;
 
 
 
@@ -95,14 +94,14 @@
                     <div>
                         @if (User.GetId().ToString().ToLower() == recipe.UserId.ToLower())
                         {
-                            <a href="@Url.Action("Edit", new { id = recipe.Id })" class="btn-edit btn-warning">Edit</a>
-                            <a href="@Url.Action("Delete", new { id = recipe.Id })" class="btn-delete btn-danger">Delete</a>
+                        <a class="btn-edit btn-warning text-primary nav-link active" asp-route-id="@recipe.Id" asp-area="" asp-controller="FoodRecipe" asp-action="Edit">Edit</a>
+                            <a class="btn-delete btn-danger" asp-route-id="@recipe.Id" asp-area="" asp-controller="FoodRecipe" asp-action="Delete">Delete</a>
                         }
                         else
                         {
                             <button class="btn btn-success" onclick="saveRecipe(@recipe.Id)">Save</button>
                         }
-                            <a href="@Url.Action("Details", new { id = recipe.Id })" class="btn-detail btn-secondary">Details</a>
+                    <a class="btn-detail text-white nav-link active" asp-route-id="@recipe.Id" asp-area="" asp-controller="FoodRecipe" asp-action="Detail">Detail</a>
                     </div>
                     </div>
                 </div>
@@ -110,5 +109,5 @@
 }
 else
 {
-    <p>No recipes found.</p>
+    <p>No recipes added yet.</p>
 }

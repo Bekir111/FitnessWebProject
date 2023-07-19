@@ -1,0 +1,96 @@
+﻿@model DetailFoodRecipeViewModel
+
+<div class="recipe-detail">
+    <h2>@Model.Name</h2>
+    <div class="recipe-content">
+        <div class="ingredients">
+            <h3>Ingredients</h3>
+            <p>@Model.Ingredients</p>
+        </div>
+        <div class="method">
+            <h3>Method</h3>
+            <p>@Model.MethodToMake</p>
+        </div>
+    </div>
+    <div class="button-container">
+
+    @if (User.GetId().ToString().ToLower() == Model.UserId.ToLower())
+    {
+        <a class="btn-edit btn-warning text-black nav-link active" asp-route-id="@Model.Id" asp-area="" asp-controller="FoodRecipe" asp-action="Edit">Edit</a>
+        <a class="btn-delete btn-danger text-white nav-link active" asp-route-id="@Model.Id" asp-area="" asp-controller="FoodRecipe" asp-action="Delete">Delete</a>
+    }
+    else
+    {
+            <a class="btn-save btn-success text-white nav-link active" asp-route-id="@Model.Id" asp-area="" asp-controller="FoodRecipe" asp-action="Save">Save</a>
+    }
+    </div>
+</div>
+
+<style>
+    .recipe-detail {
+        padding: 20px;
+        background-color: dimgrey;
+        color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    }
+
+    h2 {
+        font-size: 40px;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .recipe-content {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .ingredients,
+    .method {
+        flex-basis: calc(50% - 10px);
+    }
+
+    h3 {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .btn-delete {
+        display: inline-block;
+        padding: 10px 30px;
+        background-color: dimgray;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: bold;
+        text-decoration: none;
+        margin-right: 10px;
+    }
+
+    .btn-edit {
+        display: inline-block;
+        padding: 10px 30px;
+        background-color: dimgray;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: bold;
+        text-decoration: none;
+        margin-right: 10px;
+    }
+</style>
