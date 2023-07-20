@@ -1,0 +1,66 @@
+﻿@model IEnumerable<AllPostsViewModel>
+
+<div class="container">
+    <div class="header">
+        <h1>Posts</h1>
+    </div>
+
+    <ul class="posts">
+        @foreach (var post in Model)
+        {
+            <li>
+                <a href="@Url.Action("Details", new { id = post.Id })">@post.Title</a>
+            </li>
+        }
+    </ul>
+</div>
+
+<style>
+
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+
+    .header {
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        padding: 10px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #ccc;
+        margin-bottom: 20px;
+    }
+
+        .header h1 {
+            font-size: 36px;
+            margin: 0;
+        }
+
+    .posts {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+        .posts li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+            .posts li a {
+                font-size: 20px;
+                color: #337ab7;
+                text-decoration: none;
+            }
+
+                .posts li a:hover {
+                    color: #23527c;
+                }
+</style>

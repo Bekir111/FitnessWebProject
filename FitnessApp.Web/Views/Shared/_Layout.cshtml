@@ -45,6 +45,12 @@
 								<a class="nav-link text-white text-uppercase active" asp-area="" asp-controller="FoodRecipe" asp-action="All">Food Recipes</a>
 							</li>
 						}
+						@if (User.Identity.IsAuthenticated)
+						{
+							<li class="nav-item">
+								<a class="nav-link text-white text-uppercase active" asp-area="" asp-controller="Post" asp-action="All">Posts</a>
+							</li>
+						}
 					</ul>
 					<partial name="_LoginPartial" />
 				</div>
