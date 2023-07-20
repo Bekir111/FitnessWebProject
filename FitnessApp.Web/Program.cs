@@ -8,6 +8,7 @@ namespace FitnessApp.Web
     using FitnessApp.Web.Infrastructure.Extensions;
     using FitnessApp.Services.Data.Interfaces;
     using FitnessApp.Services.Data;
+    using FitnessApp.Web.Infrastructure.ModelBinders;
 
     public class Program
     {
@@ -33,7 +34,12 @@ namespace FitnessApp.Web
             builder.Services.AddApplicationServices(typeof(IProgramService));
 
 
-            builder.Services.AddControllersWithViews();
+            builder.Services
+                .AddControllersWithViews()
+                .AddMvcOptions(options =>
+                {
+                    options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
+                });
 
 
             var app = builder.Build();
