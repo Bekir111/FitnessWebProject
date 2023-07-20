@@ -1,0 +1,37 @@
+﻿@model DetailPostViewModel
+
+<div class="container">
+	<div class="header">
+		<h1>@Model.Title</h1>
+		<p>Published: @Model.CreatedOn</p>
+	</div>
+
+	<div class="post-content">
+		@Model.Text
+	</div>
+
+	<div class="actions">
+		<a href="@Url.Action("Save", new { id = Model.Id })" class="btn btn-primary">Save Post</a>
+	</div>
+</div>
+
+
+
+<style>
+	.header {
+		color: #1E90FF;
+		border-bottom: 1px solid #ccc;
+		margin-bottom: 20px;
+	}
+
+	.post-content {
+		font-size: 18px;
+		line-height: 1.6;
+		margin-bottom: 20px;
+		color: #1E90FF; 
+	}
+
+	.actions {
+		margin-top: 20px;
+	}
+</style>

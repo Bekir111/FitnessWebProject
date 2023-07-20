@@ -5,5 +5,7 @@ namespace FitnessApp.Services.Data.Interfaces
     public interface IPostService
     {
         Task<ICollection<AllPostsViewModel>> GetAllPostsAsync();
+
+        Task<DetailPostViewModel> GetPostForDetailAsync(int id);
     }
 }

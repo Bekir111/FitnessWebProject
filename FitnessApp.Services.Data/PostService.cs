@@ -20,9 +20,24 @@ namespace FitnessApp.Services.Data
                 .Select(p => new AllPostsViewModel()
                 {
                     Id = p.Id,
-                    Title = p.Title
+                    Title = p.Title,
+                    CreatedOn = p.CreatedOn.ToString("dd MMMM yyyy")
                 })
                 .ToArrayAsync();
+        }
+
+        public async Task<DetailPostViewModel> GetPostForDetailAsync(int id)
+        {
+            var post = await this.dbContext.Posts
+                .FirstAsync(p => p.Id == id);
+
+            return new DetailPostViewModel()
+            {
+                Id = post.Id,
+                CreatedOn = post.CreatedOn.ToString("dd MMMM yyyy"),
+                Text = post.Text,
+                Title = post.Title
+            };
         }
     }
 }

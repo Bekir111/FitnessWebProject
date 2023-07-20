@@ -8,9 +8,12 @@
     <ul class="posts">
         @foreach (var post in Model)
         {
+            <a asp-route-id="@post.Id" asp-area="" asp-controller="Post" asp-action="Detail">
             <li>
-                <a href="@Url.Action("Details", new { id = post.Id })">@post.Title</a>
+                    @post.Title
+                <p>Published: @post.CreatedOn</p>
             </li>
+            </a>
         }
     </ul>
 </div>
@@ -29,7 +32,6 @@
         color: #fff;
         text-align: center;
         padding: 10px;
-        margin-bottom: 20px;
         border-bottom: 1px solid #ccc;
         margin-bottom: 20px;
     }
@@ -43,24 +45,35 @@
         list-style: none;
         padding: 0;
         margin: 0;
+        background-color: dimgrey;
     }
 
         .posts li {
             margin-bottom: 10px;
             padding: 10px;
-            background-color: #fff;
-            border: 1px solid #ccc;
+            background-color: dimgrey;
+            border: 1px solid skyblue;
+            color: skyblue;
+            text-align: center;
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-            .posts li a {
+            .posts  a {
                 font-size: 20px;
-                color: #337ab7;
-                text-decoration: none;
+            color: skyblue;
+                text-decoration: none; 
+                color: inherit;
             }
 
                 .posts li a:hover {
                     color: #23527c;
                 }
+
+        .posts p {
+            font-size: 14px;
+            color: skyblue;
+            margin: 0;
+            text-align: right;
+        }
 </style>
