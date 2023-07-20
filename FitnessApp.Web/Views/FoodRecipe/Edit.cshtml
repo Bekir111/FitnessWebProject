@@ -35,8 +35,8 @@
             width: 100%;
             padding: 10px;
             margin-top: 20px;
-            background-color: #007bff;
-            color: #fff;
+            background-color: yellow;
+            color: black;
             border: none;
             border-radius: 5px;
             font-size: 16px;
@@ -45,9 +45,9 @@
 </style>
 
 <div class="form-container">
-    <h2>Add Recipe</h2>
+    <h2>Edit Recipe</h2>
 
-    <form id="recipeForm" method="post" asp-controller="FoodRecipe" asp-action="Add">
+    <form id="recipeForm" method="post" asp-controller="FoodRecipe" asp-action="Edit">
         <div>
             <label asp-for="@Model.Name" class="form-label" >Name:</label>
             <textarea asp-for="@Model.Name" class="form-control" type="text" id="@Model.Name" name="Name" required minlength="@FoodRecipieNameMinLength" maxlength="@FoodRecipieNameMaxLength"></textarea>
@@ -60,7 +60,7 @@
             <label asp-for="@Model.MethodToMake" class="form-label">Method:</label>
             <textarea asp-for="@Model.MethodToMake" class="form-control" required minlength="@FoodRecipieMethodToMakeMinLength" maxlength="@FoodRecipieMethodToMakeMaxLength"></textarea>
         </div>
-        <button type="submit">Add Recipe</button>
+        <button type="submit">Edit Recipe</button>
     </form>
 </div>
 

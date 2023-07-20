@@ -6,6 +6,9 @@
 
 
     .add-recipe-button {
+            text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
         display: block;
         width: 100%;
         padding: 10px;
@@ -17,6 +20,7 @@
         border-radius: 5px;
         font-size: 16px;
         cursor: pointer;
+        transition: background-color 0.3s;
     }
     .recipe-card {
         background-color: dimgrey;
@@ -43,6 +47,9 @@
 
 
     .btn-detail {
+            text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
         display: inline-block;
         background-color: #337ab7;
         color: #fff;
@@ -52,20 +59,29 @@
         border-radius: 5px;
         cursor: pointer;
         margin-right: 10px;
+        transition: background-color 0.3s;
     }
 
     .btn-edit {
+            text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
         display: inline-block;
-        color: #fff;
+         background-color: yellow;
+        color: black;
         border: none;
         padding: 10px 15px;
         font-size: 16px;
         border-radius: 5px;
         cursor: pointer;
         margin-right: 10px;
+        transition: background-color 0.3s;
     }
 
     .btn-delete {
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
         display: inline-block;
         background-color: red;
         color: #fff;
@@ -81,7 +97,7 @@
 
 <h2>Food Recipes</h2>
 
-<button type="submit" class="add-recipe-button" asp-controller="FoodRecipe" asp-action="Add">Add Recipe</button>
+<a class="add-recipe-button btn-primary text-center text-white" asp-controller="FoodRecipe" asp-action="Add">Add Recipe</a>
 
 @if (Model != null && Model.Count() > 0)
 {
@@ -94,14 +110,14 @@
                     <div>
                         @if (User.GetId().ToString().ToLower() == recipe.UserId.ToLower())
                         {
-                        <a class="btn-edit btn-warning text-primary nav-link active" asp-route-id="@recipe.Id" asp-area="" asp-controller="FoodRecipe" asp-action="Edit">Edit</a>
+                        <a class="btn-edit btn-warning " asp-route-id="@recipe.Id" asp-area="" asp-controller="FoodRecipe" asp-action="Edit">Edit</a>
                             <a class="btn-delete btn-danger" asp-route-id="@recipe.Id" asp-area="" asp-controller="FoodRecipe" asp-action="Delete">Delete</a>
                         }
                         else
                         {
                             <button class="btn btn-success" onclick="saveRecipe(@recipe.Id)">Save</button>
                         }
-                    <a class="btn-detail text-white nav-link active" asp-route-id="@recipe.Id" asp-area="" asp-controller="FoodRecipe" asp-action="Detail">Detail</a>
+                    <a class="btn-detail text-white btn-primary" asp-route-id="@recipe.Id" asp-area="" asp-controller="FoodRecipe" asp-action="Detail">Detail</a>
                     </div>
                     </div>
                 </div>

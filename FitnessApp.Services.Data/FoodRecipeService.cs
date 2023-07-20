@@ -32,6 +32,41 @@ namespace FitnessApp.Services.Data
             await dbContext.SaveChangesAsync();
         }
 
+        public async Task EditExistingFoodRecipe(FoodRecipeFormModel model,string id)
+        {
+            var foodRecipe = await dbContext.FoodRecipes
+                .FirstAsync(fr => fr.Id.ToString() == id);
+
+            if (foodRecipe == null)
+            {
+                throw new Exception();
+            }
+
+            foodRecipe.Name = model.Name;
+            foodRecipe.MethodToMake = model.MethodToMake;
+            foodRecipe.Ingredients = model.Ingredients;
+
+            await dbContext.SaveChangesAsync();
+        }
+
+        public async Task<FoodRecipeFormModel> FindFoodRecipeByIdForEditAndDelete(string id)
+        {
+            var foodRecipe = await dbContext.FoodRecipes
+                .FirstAsync(fr => fr.Id.ToString() == id);
+
+            if (foodRecipe == null)
+            {
+                throw new Exception();
+            }
+
+            return new FoodRecipeFormModel()
+            {
+                Name = foodRecipe.Name,
+                Ingredients = foodRecipe.Ingredients,
+                MethodToMake = foodRecipe.MethodToMake
+            };
+        }
+
         public async Task<ICollection<AllFoodRecipeViewModel>> GetAllFoodRecipes()
         {
             return await dbContext.FoodRecipes
@@ -52,7 +87,7 @@ namespace FitnessApp.Services.Data
 
             if (foodRecipe == null)
             {
-                throw new InvalidOperationException("The food recipe cannot be found!");
+                throw new Exception();
             }
 
 

@@ -63,7 +63,41 @@ namespace FitnessApp.Web.Controllers
             }
             catch (Exception)
             {
+                TempData[ErrorMessage] = "This food recipe doesnt exist!";
                 return RedirectToAction("All", "FoodRecipe");
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(string id)
+        {
+            try
+            {
+                var model = await this.foodRecipeService.FindFoodRecipeByIdForEditAndDelete(id);
+
+                return View(model);
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = "You cannot edit this food recipe!";
+                return RedirectToAction("All", "FoodRecipe");
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(FoodRecipeFormModel model,string id)
+        {
+            try
+            {
+                await this.foodRecipeService.EditExistingFoodRecipe(model,id);
+
+                TempData[SuccessMessage] = "Your food recipe was edited successfully!";
+                return RedirectToAction("All","FoodRecipe");
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = "Something went wrong try to edit again!";
+                return View(model);
             }
         }
     }
