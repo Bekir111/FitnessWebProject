@@ -18,6 +18,10 @@ namespace FitnessApp.Data.Configurations
                 .WithMany(p => p.Reviews)
                 .HasForeignKey(pr => pr.ProgramId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Property(pr => pr.IsActive)
+                .HasDefaultValue(true);
         }
     }
 }

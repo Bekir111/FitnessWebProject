@@ -35,13 +35,8 @@ namespace FitnessApp.Data.Models
         [Required]
         public string PictureUrl { get; set; } = null!;
 
+        public bool IsAvailable { get; set; }
+
         public virtual ICollection<ProductReview> ProductReviews { get; set; } = null!;
-
-        public double AverageRating => CalculateAverageRating();
-
-        private double CalculateAverageRating()
-        {
-            return ProductReviews.Average(r => r.Rating);
-        }
     }
 }

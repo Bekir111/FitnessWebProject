@@ -20,6 +20,10 @@ namespace FitnessApp.Data.Configurations
                 .Property(p => p.CreatedOn)
                 .HasDefaultValue(DateTime.UtcNow);
 
+            builder
+                .Property(p => p.IsActive)
+                .HasDefaultValue(true);
+
             builder.HasData(this.GeneratePrograms());
         }
 

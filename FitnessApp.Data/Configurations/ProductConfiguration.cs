@@ -15,6 +15,10 @@ namespace FitnessApp.Data.Configurations
                 .Property(p => p.Price)
                 .HasColumnType("decimal(18,4)");
 
+            builder
+                .Property(p => p.IsAvailable)
+                .HasDefaultValue(true);
+
             builder.HasData(this.GenerateProducts());
         }
 

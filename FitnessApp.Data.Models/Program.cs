@@ -42,7 +42,7 @@
 
         public double AverageRating => CalculateAverageRating();
 
-
+        public bool IsActive { get; set; }
         private double CalculateAverageRating()
         {
             if (this.Reviews.Count == 0)

@@ -18,5 +18,7 @@ namespace FitnessApp.Data.Models
         public string Text { get; set; } = null!;
 
         public DateTime CreatedOn { get; set; }
+
+        public bool IsActive { get; set; }
     }
 }

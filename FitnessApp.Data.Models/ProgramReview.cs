@@ -34,5 +34,7 @@ namespace FitnessApp.Data.Models
         [Required]
         [MaxLength(ReviewTextMaxLength)]
         public string ReviewText { get; set; } = null!;
+
+        public bool IsActive { get; set; }
     }
 }

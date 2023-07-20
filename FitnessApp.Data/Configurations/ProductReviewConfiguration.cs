@@ -19,6 +19,10 @@ namespace FitnessApp.Data.Configurations
                 .HasOne(pr => pr.User)
                 .WithOne(u => u.ProductReview)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Property(pr => pr.IsActive)
+                .HasDefaultValue(true);
         }
     }
 }
