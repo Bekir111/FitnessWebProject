@@ -1,0 +1,93 @@
+﻿@model IEnumerable<ProductAllViewModel>
+
+@foreach (var product in Model)
+{
+    <div class="product">
+        <img src="@product.PictureUrl" alt="@product.Name" />
+        <h2>@product.Name</h2>
+        @if (product.IsAvailable)
+        {
+            <p>Price: $@product.Price</p>
+            <button class="detail-btn" onclick="location.href='@Url.Action("Details", "Products", new { id = product.Id })'">Detail</button>
+            <button class="add-to-cart-btn" onclick="addToCart(@product.Id)">Add to Cart</button>
+        }
+        else
+        {
+            <p class="not-available">Not Available</p>
+            <div class="shadow-effect"></div>
+        }
+    </div>
+}
+
+<style>
+
+.product {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #555;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px;
+  background-color: #333;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.product img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.product h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.product p {
+  font-size: 18px;
+}
+
+.product .detail-btn, .product .add-to-cart-btn {
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #e74c3c;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.product .add-to-cart-btn {
+  background-color: #2ecc71;
+}
+
+.product .not-available {
+  font-size: 18px;
+  font-weight: bold;
+  color: #e74c3c;
+}
+
+.product .shadow-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+  pointer-events: none;
+}
+
+ 
+  .product {
+    width: 90%;
+    margin: 20px auto;
+  }
+}
+</style>

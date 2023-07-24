@@ -88,12 +88,12 @@ namespace FitnessApp.Services.Data
                 .ToArrayAsync();
         }
 
-        private async Task<ProgramReviewInDetailViewModel[]> GetAllReviewsByProgramId(string programId)
+        private async Task<ReviewInDetailViewModel[]> GetAllReviewsByProgramId(string programId)
         {
 
             var reviews = await this.dbContext.ProgramReviews
                 .Where(pr => pr.ProgramId.ToString() == programId)
-                .Select(pr => new ProgramReviewInDetailViewModel()
+                .Select(pr => new ReviewInDetailViewModel()
                 {
                     Id = pr.Id.ToString(),
                     UserId = pr.UserId.ToString(),

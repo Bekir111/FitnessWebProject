@@ -36,26 +36,5 @@
             }
 
         }
-
-        [HttpGet]
-        public IActionResult WriteReview()
-        {
-            return View(new ReviewFormViewModel());
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> WriteReview(ReviewFormViewModel model,string id)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            var userId = this.User.GetId();
-
-            await this.programService.AddReviewToProgram(model, id, userId);
-
-            return RedirectToAction("Detail", "Program");
-        }
     }
 }

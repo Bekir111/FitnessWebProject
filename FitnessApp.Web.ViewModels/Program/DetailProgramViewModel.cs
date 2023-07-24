@@ -6,7 +6,7 @@ namespace FitnessApp.Web.ViewModels.Program
     {
         public DetailProgramViewModel()
         {
-            this.Reviews = new HashSet<ProgramReviewInDetailViewModel>();
+            this.Reviews = new HashSet<ReviewInDetailViewModel>();
         }
         public string Id { get; set; } = null!;
 
@@ -20,7 +20,7 @@ namespace FitnessApp.Web.ViewModels.Program
 
         public double AverageRating { get; set; }
 
-        public ICollection<ProgramReviewInDetailViewModel> Reviews { get; set; } = null!;
+        public ICollection<ReviewInDetailViewModel> Reviews { get; set; } = null!;
 
 
     }
