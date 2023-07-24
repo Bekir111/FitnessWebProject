@@ -32,15 +32,21 @@ namespace FitnessApp.Services.Data
             await dbContext.SaveChangesAsync();
         }
 
+        public async Task DeleteFoodRecipeByIdAsync(string id)
+        {
+            var foodrecipe = await this.dbContext.FoodRecipes
+                .Where(fr => fr.IsActive)
+                .FirstAsync(fr => fr.Id.ToString() == id);
+
+            foodrecipe.IsActive = false;
+
+            await this.dbContext.SaveChangesAsync();
+        }
+
         public async Task EditExistingFoodRecipe(FoodRecipeFormModel model,string id)
         {
             var foodRecipe = await dbContext.FoodRecipes
-                .FirstAsync(fr => fr.Id.ToString() == id);
-
-            if (foodRecipe == null)
-            {
-                throw new Exception();
-            }
+                .FirstAsync(fr => fr.Id.ToString() == id && fr.IsActive == true );
 
             foodRecipe.Name = model.Name;
             foodRecipe.MethodToMake = model.MethodToMake;
@@ -52,7 +58,7 @@ namespace FitnessApp.Services.Data
         public async Task<FoodRecipeFormModel> FindFoodRecipeByIdForEditAndDelete(string id)
         {
             var foodRecipe = await dbContext.FoodRecipes
-                .FirstAsync(fr => fr.Id.ToString() == id);
+                .FirstAsync(fr => fr.Id.ToString() == id && fr.IsActive != false);
 
             if (foodRecipe == null)
             {
@@ -70,6 +76,7 @@ namespace FitnessApp.Services.Data
         public async Task<ICollection<AllFoodRecipeViewModel>> GetAllFoodRecipes()
         {
             return await dbContext.FoodRecipes
+                .Where(fr => fr.IsActive == true)
                 .Select(fr => new AllFoodRecipeViewModel()
                 {
                     Id = fr.Id.ToString(),
@@ -83,13 +90,7 @@ namespace FitnessApp.Services.Data
         public async Task<DetailFoodRecipeViewModel> GetFoodRecipeByIdForDetail(string id)
         {
             var foodRecipe = await dbContext.FoodRecipes
-                .FirstOrDefaultAsync(fr => fr.Id.ToString() == id);
-
-            if (foodRecipe == null)
-            {
-                throw new Exception();
-            }
-
+                .FirstAsync(fr => fr.Id.ToString() == id && fr.IsActive != false);
 
             return new DetailFoodRecipeViewModel()
             {
@@ -99,6 +100,20 @@ namespace FitnessApp.Services.Data
                 Name = foodRecipe.Name,
                 UserId = foodRecipe.UserId.ToString()
             };
+        }
+
+        public async Task<bool> IsAuthorIdEqualToUserId(string userId, string foodRecipeId)
+        {
+            var foodRecipe = await dbContext.FoodRecipes
+                .FirstAsync(fr => fr.Id.ToString() == foodRecipeId);
+
+            return foodRecipe.UserId.ToString() == userId;
+        }
+
+        public async Task<bool> IsFoodRecipeExist(string id)
+        {
+            return await this.dbContext.FoodRecipes
+                .AnyAsync(fr => fr.Id.ToString() == id && fr.IsActive != false);
         }
     }
 }

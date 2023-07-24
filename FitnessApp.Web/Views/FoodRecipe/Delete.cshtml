@@ -1,0 +1,64 @@
+﻿@using static FitnessApp.Common.EntityValidationConstants.FoodRecipe;
+@model FoodRecipeFormModel;
+
+<style>
+
+    .form-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 40px;
+        background-color: dimgray;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+        .form-container label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .form-container input[type="text"],
+        .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            background-color: #272727;
+            border: 1px solid #444;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #fff;
+        }
+
+        .form-container button[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: red;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+</style>
+
+<div class="form-container">
+    <h2>Delete Recipe</h2>
+
+    <form id="recipeForm" method="post" asp-controller="FoodRecipe" asp-action="Delete">
+        <div>
+            <label asp-for="@Model.Name" class="form-label" >Name:</label>
+            <textarea readonly asp-for="@Model.Name" class="form-control" type="text" id="@Model.Name" name="Name" required minlength="@FoodRecipieNameMinLength" maxlength="@FoodRecipieNameMaxLength"></textarea>
+        </div>
+        <div>
+            <label asp-for="@Model.Ingredients" class="form-label">Ingredients:</label>
+            <textarea readonly asp-for="@Model.Ingredients" class="form-control" required minlength="@FooodRecipieIngredientsMinLength" maxlength="@FoodRecipieIngredientsMaxLength"></textarea>
+        </div>
+        <div>
+            <label asp-for="@Model.MethodToMake" class="form-label">Method:</label>
+            <textarea readonly asp-for="@Model.MethodToMake" class="form-control" required minlength="@FoodRecipieMethodToMakeMinLength" maxlength="@FoodRecipieMethodToMakeMaxLength"></textarea>
+        </div>
+        <button type="submit">Delete Recipe</button>
+    </form>
+</div>

@@ -1,0 +1,30 @@
+﻿
+<h2>Let AJAX change this text</h2>
+<button type="button" onclick="loadProgramData()" class="text-white">Load Program Data</button>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // Function to load the program data with AJAX
+        function loadProgramData() {
+            $.ajax({
+                url: '/Profile/GetPrograms', // Replace this with the actual URL for fetching program data
+                type: 'GET',
+                dataType: 'html', // Set the data type to html
+                success: function (response) {
+                    // Render the program data inside the container
+                    $('#programContainer').html(response);
+                },
+                error: function () {
+                    alert('Error loading program data.');
+                }
+            });
+        }
+
+        // Attach a click event to the button that triggers the AJAX request
+        $('#loadProgramBtn').on('click', function () {
+            loadProgramData();
+        });
+    });
+</script>

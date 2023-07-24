@@ -1,0 +1,39 @@
+﻿@model IEnumerable<AllProgramViewModel>
+
+
+
+
+<h2 class="title">Programs</h2>
+
+@foreach (var category in Model.DistinctBy(x => x.CategoryId).OrderByDescending(c => c.CategoryId))
+{
+
+	<div class="category-section">
+		<h3 class="category-name">@category.CategoryName</h3>
+
+		@foreach (var program in Model)
+		{
+			@if (program.CategoryId == category.CategoryId)
+			{
+
+				<section class="program-section">
+
+					<div class="program">
+						<img src="@program.PictureUrl" alt="@program.Name" class="program-image">
+						<div class="program-title">@program.Name</div>
+						<div class="rate-program">
+							Average rating: @program.AverageRating.ToString("f1")
+						</div>
+						<div class="button-group">
+							<a class="btn-program text-primary nav-link active" asp-route-id="@program.Id" asp-area="" asp-controller="Program" asp-action="Detail">Details</a>
+							<a class="btn-program text-success nav-link active" asp-area="" asp-controller="Program" asp-action="Join">Join</a>
+						</div>
+					</div>
+				</section>
+			}
+		}
+	</div>
+
+
+}
+

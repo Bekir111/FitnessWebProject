@@ -10,5 +10,7 @@
         Task<DetailProgramViewModel> GetProgramById(string id);
 
         Task AddReviewToProgram(ReviewFormViewModel model,string programId,string userId);
+
+        Task<ICollection<AllProgramViewModel>> GetProgramsByUserId(string id);
     }
 }

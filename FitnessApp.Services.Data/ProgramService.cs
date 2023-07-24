@@ -72,8 +72,21 @@ namespace FitnessApp.Services.Data
             };
         }
 
-
-
+        public async Task<ICollection<AllProgramViewModel>> GetProgramsByUserId(string id)
+        {
+            return await this.dbContext.ProgramUsers
+                .Where(pu => pu.UserId.ToString() == id)
+                .Select(pu => new AllProgramViewModel()
+                {
+                    Id = pu.ProgramId.ToString(),
+                    CategoryId = pu.Program.CategoryId,
+                    CategoryName = pu.Program.Category.Name,
+                    Name = pu.Program.Name,
+                    PictureUrl = pu.Program.PictureUrl,
+                    AverageRating = pu.Program.Reviews.Average(p => p.Rating)
+                })
+                .ToArrayAsync();
+        }
 
         private async Task<ProgramReviewInDetailViewModel[]> GetAllReviewsByProgramId(string programId)
         {

@@ -100,5 +100,68 @@ namespace FitnessApp.Web.Controllers
                 return View(model);
             }
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(string id)
+        {
+            bool isExist = await this.foodRecipeService.IsFoodRecipeExist(id);
+
+            if (!isExist)
+            {
+                TempData[ErrorMessage] = "This food recipe doesn't exist!";
+                return RedirectToAction("All", "FoodRecipe");
+            }
+
+            string userId = this.User.GetId();
+            bool isItTheAuthor = await this.foodRecipeService.IsAuthorIdEqualToUserId(userId, id);
+            if (!isItTheAuthor)
+            {
+                TempData[ErrorMessage] = "Only the author of recipe can delete it!";
+                return RedirectToAction("All", "FoodRecipe");
+            }
+
+            try
+            {
+                var model = await this.foodRecipeService.FindFoodRecipeByIdForEditAndDelete(id);
+
+                return View(model);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(string id,FoodRecipeFormModel model)
+        {
+            bool isExist = await this.foodRecipeService.IsFoodRecipeExist(id);
+
+            if (!isExist)
+            {
+                TempData[ErrorMessage] = "This food recipe doesn't exist!";
+                return RedirectToAction("All", "FoodRecipe");
+            }
+
+            string userId = this.User.GetId();
+            bool isItTheAuthor = await this.foodRecipeService.IsAuthorIdEqualToUserId(userId, id);
+            if (!isItTheAuthor)
+            {
+                TempData[ErrorMessage] = "Only the author of recipe can delete it!";
+                return RedirectToAction("All", "FoodRecipe");
+            }
+
+            try
+            {
+                await this.foodRecipeService.DeleteFoodRecipeByIdAsync(id);
+
+                TempData[WarningMessage] = "You successfuly deleted your food recipe!";
+                return RedirectToAction("All","FoodRecipe");
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
     }
 }
