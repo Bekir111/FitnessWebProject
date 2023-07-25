@@ -9,6 +9,7 @@ namespace FitnessApp.Web
     using FitnessApp.Services.Data.Interfaces;
     using FitnessApp.Services.Data;
     using FitnessApp.Web.Infrastructure.ModelBinders;
+    using FitnessApp.Web.Controllers;
 
     public class Program
     {
@@ -52,7 +53,8 @@ namespace FitnessApp.Web
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Home/Error/500");
+                app.UseStatusCodePagesWithRedirects("/Home/Error?statusCode={0}");
 
                 app.UseHsts();
             }

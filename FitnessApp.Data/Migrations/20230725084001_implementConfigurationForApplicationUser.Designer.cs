@@ -4,6 +4,7 @@ using FitnessApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FitnessApp.Data.Migrations
 {
     [DbContext(typeof(FitnessAppDbContext))]
-    partial class FitnessAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230725084001_implementConfigurationForApplicationUser")]
+    partial class implementConfigurationForApplicationUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -172,10 +174,13 @@ namespace FitnessApp.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<Guid>("AuthorId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("CreatedOn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 7, 25, 8, 56, 25, 452, DateTimeKind.Utc).AddTicks(1646));
+                        .HasDefaultValue(new DateTime(2023, 7, 25, 8, 40, 0, 944, DateTimeKind.Utc).AddTicks(4068));
 
                     b.Property<bool>("IsActive")
                         .ValueGeneratedOnAdd()
@@ -192,14 +197,22 @@ namespace FitnessApp.Data.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("AuthorId");
 
                     b.ToTable("Posts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AuthorId = new Guid("ed4b6f55-acf4-453b-a429-08db7eef598b"),
+                            CreatedOn = new DateTime(2023, 7, 25, 8, 40, 0, 944, DateTimeKind.Utc).AddTicks(4412),
+                            IsActive = false,
+                            Text = "You've probably heard big guys at the gym tossing around the word \"hypertrophy\" when they talk about their lifting goals — but what does that even mean? Are the principles behind the term just some sketchy bro science, a passing fitness fad, or real, lab tested-and-proven physiology?\r\nRest assured, the hype is real. Hypertrophy is, by definition, the enlargement of an organ or tissue from the increase in size of its cells. Not to be confused with hyperplasia, the process of increasing the number of cells, hypertrophy is the process of increasing the size of the cells that are already there.This occurs through a physiologic process that leads to an increased number of contractile proteins (actin and myosin) in each muscle fiber. With the right training regimen, you can catalyze this process — but helps to understand the science behind it.The body has the amazing potential to adapt to its environment. This includes building more strength when repeated stress to the tissue indicates a need to accommodate the new, higher loads. This is exactly what the process of strength training does.When it comes to building muscle, hypertrophy doesn’t just happen on its own. It has to be triggered by a physiological need. Hypertrophy can be thought of as a thickening of muscle fibers, which occurs when the body has been stressed just the right amount to indicate that it must create larger, stronger muscles that can tolerate this new, increased load. This need causes a cellular response, leading to cells synthesizing more materials.For muscles to grow, two things have to happen: stimulation and repair. Dormant cells called satellite cells, which exist between the outer and basement membranes of a muscle fiber become activated by trauma, damage or injury — all possible responses to the stress of weight training. An immune system response is triggered, leading to inflammation, the natural clean up and repair process that occurs on a cellular level.Concurrently, a hormonal response is triggered, causing the release of growth factor, cortisol, and testosterone. These hormones help regulate cell activity. Growth factors help stimulate muscle hypertrophy while testosterone increases protein synthesis. This process leads to satellite cells multiplying and their daughter cells migrating to the damaged tissue. Here, they fuse with skeletal muscle and donate their nuclei to the muscle fibers helping them thicken and grow.",
+                            Title = "Hypertrophy to Grow Muscles"
+                        });
                 });
 
             modelBuilder.Entity("FitnessApp.Data.Models.Product", b =>
@@ -238,7 +251,7 @@ namespace FitnessApp.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("0195a2d6-2a76-435a-a035-509352dec197"),
+                            Id = new Guid("2fd3574e-c087-44b6-b540-b9aa8f1193ef"),
                             Description = "Elevate Your Performance. High-quality protein powder for muscle recovery and growth. Packed with essential nutrients and amino acids. Enjoy the delicious taste and smooth texture. Unleash your potential with Vital Protein, the key to maximizing your performance and vitality.",
                             IsAvailable = false,
                             Name = "Vital Protein Powder.Chocolate flavor",
@@ -247,7 +260,7 @@ namespace FitnessApp.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5b81fc57-02d8-4a33-b0a6-0a14c8e3525a"),
+                            Id = new Guid("e19b8d90-308f-4ed3-ac1a-600f45f83f41"),
                             Description = "Unleash Your Power. Pure and potent creatine monohydrate supplement. Enhances strength, power, and muscular endurance. Supports explosive workouts and accelerated muscle recovery. Unleash your true potential with Vital Creatine, the ultimate tool for maximizing your athletic performance.",
                             IsAvailable = false,
                             Name = "Vital Creatine Monohydrate",
@@ -256,7 +269,7 @@ namespace FitnessApp.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ff43700e-f4b9-438f-99b4-8ab2486209d4"),
+                            Id = new Guid("f79abeb9-8f02-43a2-b887-3c72ca4d8ce1"),
                             Description = "Ignite Your Workouts. Boosts energy, focus, and endurance. Enhances strength and intensity during training. Experience heightened performance with Vital Pre-Workout, your secret weapon for crushing your workouts and surpassing your limits.",
                             IsAvailable = false,
                             Name = "Vital Pre-Workout",
@@ -265,7 +278,7 @@ namespace FitnessApp.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e7e29f1f-d146-451f-b3b9-3b70cb28ba81"),
+                            Id = new Guid("330ea03c-fab7-41c6-9a80-ca354db0eb71"),
                             Description = "Nourish Your Well-being. Provides essential nutrients for optimal health and vitality. Supports immune function, energy levels, and overall well-being. Prioritize your health with Vital Multivitamin, your daily source of essential nutrients for a vibrant life.",
                             IsAvailable = false,
                             Name = "Vital Multivitamin",
@@ -320,7 +333,7 @@ namespace FitnessApp.Data.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 7, 25, 8, 56, 25, 452, DateTimeKind.Utc).AddTicks(5739));
+                        .HasDefaultValue(new DateTime(2023, 7, 25, 8, 40, 0, 944, DateTimeKind.Utc).AddTicks(8400));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -351,9 +364,9 @@ namespace FitnessApp.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("251bae9a-7a89-4d55-b97c-2f53943c0330"),
+                            Id = new Guid("ab4db460-a61c-41b0-9e3c-cccee025c82e"),
                             CategoryId = 4,
-                            CreatedOn = new DateTime(2023, 7, 25, 8, 56, 25, 452, DateTimeKind.Utc).AddTicks(6055),
+                            CreatedOn = new DateTime(2023, 7, 25, 8, 40, 0, 944, DateTimeKind.Utc).AddTicks(8767),
                             Description = "Customized Workout Solutions. Tailored exercise programs designed to meet your fitness goals. Personalized routines for beginners to advanced athletes. Varied exercises targeting strength, cardio, and flexibility. Achieve your desired results with Essential Program, your ultimate workout companion.",
                             IsActive = false,
                             Name = "The Essential Program",
@@ -361,9 +374,9 @@ namespace FitnessApp.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a6fff5ff-8344-45b7-a304-5de5f38426c8"),
+                            Id = new Guid("9c4f9151-4d44-4649-afd1-5a235d6899e2"),
                             CategoryId = 4,
-                            CreatedOn = new DateTime(2023, 7, 25, 8, 56, 25, 452, DateTimeKind.Utc).AddTicks(6062),
+                            CreatedOn = new DateTime(2023, 7, 25, 8, 40, 0, 944, DateTimeKind.Utc).AddTicks(8795),
                             Description = "An Efficient Training Program. Customized push, pull, and leg workouts designed to optimize muscle growth and strength. Balanced exercises targeting major muscle groups. Varied training intensity and progressive overload. Achieve results with time-efficient workouts.",
                             IsActive = false,
                             Name = "Intermediate/Advanced Push Pull Legs",
@@ -371,9 +384,9 @@ namespace FitnessApp.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a45d7b85-2cb6-48bf-982d-fe775648a7d6"),
+                            Id = new Guid("7e1bb685-32a1-4685-ab5c-95e56682a234"),
                             CategoryId = 4,
-                            CreatedOn = new DateTime(2023, 7, 25, 8, 56, 25, 452, DateTimeKind.Utc).AddTicks(6064),
+                            CreatedOn = new DateTime(2023, 7, 25, 8, 40, 0, 944, DateTimeKind.Utc).AddTicks(8797),
                             Description = "Comprehensive and Time-Saving. A complete workout program targeting all muscle groups. Efficient exercises to maximize strength, endurance, and calorie burn. Balanced routines for optimal results. Achieve total body fitness in minimal time.",
                             IsActive = false,
                             Name = "Ultimate Full Body",
@@ -381,9 +394,9 @@ namespace FitnessApp.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c2f7b7fe-f631-4ec1-bc40-871de5d3cb38"),
+                            Id = new Guid("021e2149-6085-4e24-bf21-20c8f4641460"),
                             CategoryId = 3,
-                            CreatedOn = new DateTime(2023, 7, 25, 8, 56, 25, 452, DateTimeKind.Utc).AddTicks(6090),
+                            CreatedOn = new DateTime(2023, 7, 25, 8, 40, 0, 944, DateTimeKind.Utc).AddTicks(8800),
                             Description = "Sculpted Pecs in Focus. A specialized program to enhance chest muscle growth and definition. Targeted exercises to isolate and stimulate the pectoral muscles. Progressive overload for continuous hypertrophy. Sculpt your chest with precision and achieve an impressive upper body physique.",
                             IsActive = false,
                             Name = "Chest Boost",
@@ -391,9 +404,9 @@ namespace FitnessApp.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c1b10a8d-6724-4500-9499-e03ed2a0a696"),
+                            Id = new Guid("80c4de81-e745-4002-a18f-7b4cf7bd47fe"),
                             CategoryId = 3,
-                            CreatedOn = new DateTime(2023, 7, 25, 8, 56, 25, 452, DateTimeKind.Utc).AddTicks(6095),
+                            CreatedOn = new DateTime(2023, 7, 25, 8, 40, 0, 944, DateTimeKind.Utc).AddTicks(8806),
                             Description = "Build Strong and Impressive Arms. A dedicated program to maximize arm development. Targeted exercises for biceps, triceps, and forearm muscles. Emphasize progressive overload and proper form for optimal muscle growth. Sculpt your arms with Arm Sculptor and showcase your strength and aesthetics.",
                             IsActive = false,
                             Name = "Arm Sculptor",
@@ -401,9 +414,9 @@ namespace FitnessApp.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("25830923-f6cd-4e02-99eb-c12b3bbc843c"),
+                            Id = new Guid("278c2e2a-df11-4538-87df-7075a66552de"),
                             CategoryId = 3,
-                            CreatedOn = new DateTime(2023, 7, 25, 8, 56, 25, 452, DateTimeKind.Utc).AddTicks(6138),
+                            CreatedOn = new DateTime(2023, 7, 25, 8, 40, 0, 944, DateTimeKind.Utc).AddTicks(8808),
                             Description = "Build Strong, V-Shaped Back. Comprehensive program targeting lats, traps, and erector spinae. Compound exercises and progressive overload for muscle growth. Build a powerful back with Back Builder, your ultimate tool for a chiseled physique.",
                             IsActive = false,
                             Name = "Back Builder",
@@ -411,9 +424,9 @@ namespace FitnessApp.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("2fc10e3c-6aab-4b8d-807c-6cfd7c607a83"),
+                            Id = new Guid("ba03f92d-ea3f-4ce0-8c57-3b0c53e62782"),
                             CategoryId = 2,
-                            CreatedOn = new DateTime(2023, 7, 25, 8, 56, 25, 452, DateTimeKind.Utc).AddTicks(6140),
+                            CreatedOn = new DateTime(2023, 7, 25, 8, 40, 0, 944, DateTimeKind.Utc).AddTicks(8811),
                             Description = "Dominate Bench Press. Powerlifting-focused program to maximize your bench press strength. Progressive overload, specialized exercises, and form refinement for optimal gains. Unleash explosive power and achieve new personal records. Conquer the bench and leave a mark in powerlifting.",
                             IsActive = false,
                             Name = "Power Bench Press",
@@ -421,9 +434,9 @@ namespace FitnessApp.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5a81ad73-4dd2-414e-b531-94fc7e5eaf3d"),
+                            Id = new Guid("95ab65b7-1288-494f-a60e-baa3e1067fb4"),
                             CategoryId = 2,
-                            CreatedOn = new DateTime(2023, 7, 25, 8, 56, 25, 452, DateTimeKind.Utc).AddTicks(6142),
+                            CreatedOn = new DateTime(2023, 7, 25, 8, 40, 0, 944, DateTimeKind.Utc).AddTicks(8813),
                             Description = "Dominate Squat Powerlifting. Specialized program for maximizing squat strength. Targeted exercises, proper form, and progressive overload. Build explosive power and achieve new personal records. Conquer the squat platform with PowerSquat and rise as a powerlifting force.",
                             IsActive = false,
                             Name = "Power Squat",
@@ -431,9 +444,9 @@ namespace FitnessApp.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("eab83832-6546-43df-acf9-f2b28e17921f"),
+                            Id = new Guid("7ce273b1-d698-4ec7-a2f7-bac08e37b4c2"),
                             CategoryId = 1,
-                            CreatedOn = new DateTime(2023, 7, 25, 8, 56, 25, 452, DateTimeKind.Utc).AddTicks(6145),
+                            CreatedOn = new DateTime(2023, 7, 25, 8, 40, 0, 944, DateTimeKind.Utc).AddTicks(8818),
                             Description = "Build Strong, Shapely Glutes. Tailored program for women targeting glute muscle hypertrophy. Targeted exercises, progressive overload, and effective techniques. Sculpt and enhance your lower body with Glute Gain, your key to a curvaceous physique.",
                             IsActive = false,
                             Name = "Glute Gain",
@@ -441,9 +454,9 @@ namespace FitnessApp.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("049c3e8c-c383-441d-9e52-115851d073c8"),
+                            Id = new Guid("0bc1075c-16cc-49f1-8ed7-6613998e35c9"),
                             CategoryId = 1,
-                            CreatedOn = new DateTime(2023, 7, 25, 8, 56, 25, 452, DateTimeKind.Utc).AddTicks(6147),
+                            CreatedOn = new DateTime(2023, 7, 25, 8, 40, 0, 944, DateTimeKind.Utc).AddTicks(8831),
                             Description = "Customized Workout Solutions for Women. Tailored exercise programs designed to meet the unique fitness goals of women. Varied routines targeting strength, cardio, and flexibility. Achieve your desired results with HerFit, your personalized workout plan for a stronger and healthier you.",
                             IsActive = false,
                             Name = "Her Fit",
@@ -648,13 +661,13 @@ namespace FitnessApp.Data.Migrations
 
             modelBuilder.Entity("FitnessApp.Data.Models.Post", b =>
                 {
-                    b.HasOne("FitnessApp.Data.Models.ApplicationUser", "User")
+                    b.HasOne("FitnessApp.Data.Models.ApplicationUser", "Author")
                         .WithMany("Posts")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.Navigation("Author");
                 });
 
             modelBuilder.Entity("FitnessApp.Data.Models.ProductReview", b =>

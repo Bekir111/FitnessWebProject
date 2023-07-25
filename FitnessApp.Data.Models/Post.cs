@@ -22,9 +22,9 @@ namespace FitnessApp.Data.Models
         public bool IsActive { get; set; }
 
         [Required]
-        [ForeignKey(nameof(Author))]
-        public Guid AuthorId { get; set; }
-        public ApplicationUser Author { get; set; } = null!;
+        [ForeignKey(nameof(User))]
+        public Guid UserId { get; set; }
+        public ApplicationUser User { get; set; } = null!;
 
 
     }
