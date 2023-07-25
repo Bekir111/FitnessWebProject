@@ -7,17 +7,18 @@ namespace FitnessApp.Data.Models
     {
         public ApplicationUser()
         {
+            this.ProgramReviews = new HashSet<ProgramReview>();
+            this.ProductReviews = new HashSet<ProductReview>();
             this.FoodRecipes = new HashSet<FoodRecipe>();
+            this.Posts = new HashSet<Post>();
         }
 
-        [ForeignKey(nameof(ProgramReview))]
-        public Guid? ProgramReviewId { get; set; }
-        public virtual ProgramReview ProgramReview { get; set; }
+        public virtual ICollection<ProgramReview> ProgramReviews { get; set; }
 
-        [ForeignKey(nameof(ProductReview))]
-        public Guid? ProductReviewId { get; set; }
-        public virtual ProductReview ProductReview { get; set; }
+        public virtual ICollection<ProductReview>  ProductReviews { get; set;}
 
         public virtual ICollection<FoodRecipe> FoodRecipes { get; set; }
+
+        public virtual ICollection<Post> Posts { get; set; }
     }
 }

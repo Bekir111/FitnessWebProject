@@ -17,7 +17,8 @@ namespace FitnessApp.Data.Configurations
 
             builder
                 .HasOne(pr => pr.User)
-                .WithOne(u => u.ProductReview)
+                .WithMany(u => u.ProductReviews)
+                .HasForeignKey(pr => pr.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder

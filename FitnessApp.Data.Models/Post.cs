@@ -2,7 +2,7 @@
 namespace FitnessApp.Data.Models
 {
     using System.ComponentModel.DataAnnotations;
-
+    using System.ComponentModel.DataAnnotations.Schema;
     using static FitnessApp.Common.EntityValidationConstants.Post;
     public class Post
     {
@@ -20,5 +20,12 @@ namespace FitnessApp.Data.Models
         public DateTime CreatedOn { get; set; }
 
         public bool IsActive { get; set; }
+
+        [Required]
+        [ForeignKey(nameof(Author))]
+        public Guid AuthorId { get; set; }
+        public ApplicationUser Author { get; set; } = null!;
+
+
     }
 }
