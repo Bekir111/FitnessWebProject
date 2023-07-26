@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -8,7 +8,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FitnessApp.Common\FitnessApp.Common.csproj" />
+    <ProjectReference Include="..\FitnessApp.Data.Models\FitnessApp.Data.Models.csproj" />
     <ProjectReference Include="..\FitnessApp.Data\FitnessApp.Data.csproj" />
+    <ProjectReference Include="..\FitnessApp.Services.Data.Models\FitnessApp.Services.Data.Models.csproj" />
     <ProjectReference Include="..\FitnessApp.Web.ViewModels\FitnessApp.Web.ViewModels.csproj" />
   </ItemGroup>
 

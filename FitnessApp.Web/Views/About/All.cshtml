@@ -1,5 +1,8 @@
-﻿<section class="about-section">
+﻿
+<section class="about-section">
+    
 <div class="about-page">
+
     <div class="about-content">
         <h2>About Us</h2>
         <p>At <span class="brand">Vital Fitness</span>, we believe that a healthy and active lifestyle is the key to unlocking your full potential. We are passionate about helping individuals like you achieve their fitness goals and improve their overall well-being.</p>
@@ -11,3 +14,88 @@
     </div>
 </div>
 </section>
+
+<div class="mb-5"></div>
+
+<div class="row">
+    <div class="col-12 text-center">
+        <button class="btn btn-danger" id="statistics_btn">Show Statistics</button>
+    </div>
+</div>
+
+<div class="mt-4 p-5 d-none" id="statistics_box">
+    <div class="row">
+        <h2 class="col-md-6 text-center" id="total_users"></h2>
+        <h2 class="col-md-6 text-center" id="total_programs">2</h2>
+        <h2 class="col-md-6 text-center" id="total_recipes">3</h2>
+        <h2 class="col-md-6 text-center" id="total_products">4</h2>
+    </div>
+</div>
+
+<style>
+    #statistics_btn{
+        display: block;
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 40px;
+        background-color: red;
+        color: black;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    #statistics_box {
+        border-radius: 20px;
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        margin-bottom: 100px;
+        padding: 0;
+        background-color: #555;
+        color: #fff;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .h2 {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        margin-bottom: 100px;
+        padding: 0;
+        background-color: #555;
+        color: #ccc;
+        font-size: 18px;
+        line-height: 1.5;
+    }
+</style>
+
+@section Scripts{
+    <script>
+        $('#statistics_btn').on('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            // hasClass('d-none') -> Statistics are hidden
+            if ($('#statistics_box').hasClass('d-none')) {
+                $.get('https://localhost:7276/api/statistics', function (data) {
+                    $('#total_users').text(data.totalUsers + " Users");
+                    $('#total_programs').text(data.totalPrograms + " Programs");
+                    $('#total_recipes').text(data.totalRecipes + " Recipes");
+                    $('#total_products').text(data.totalProducts + " Products");
+
+                    $('#statistics_box').removeClass('d-none');
+
+                    $('#statistics_btn').text('Hide Statistics');
+                    $('#statistics_btn').removeClass('btn-primary');
+                    $('#statistics_btn').addClass('btn-danger');
+                });
+            } else {
+                $('#statistics_box').addClass('d-none');
+
+                $('#statistics_btn').text('Show Statistics');
+                $('#statistics_btn').removeClass('btn-danger');
+                $('#statistics_btn').addClass('btn-primary');
+            }
+        });
+    </script>
+} 
