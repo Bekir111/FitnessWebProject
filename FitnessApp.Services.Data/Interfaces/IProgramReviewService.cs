@@ -8,7 +8,7 @@ namespace FitnessApp.Services.Data.Interfaces
 
 		Task AddReviewToProgram(ReviewFormViewModel model, string programId, string userId);
 
-		Task<bool> IsUserHaveReview(string userId);
+		Task<bool> IsUserHaveReviewInThisProgram(string userId,string programId);
 
     }
 }

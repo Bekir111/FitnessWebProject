@@ -7,5 +7,7 @@ namespace FitnessApp.Services.Data.Interfaces
         Task<ICollection<AllPostsViewModel>> GetAllPostsAsync();
 
         Task<DetailPostViewModel> GetPostForDetailAsync(int id);
+
+        Task<bool> IsPostExistbyId(int id); 
     }
 }

@@ -1,6 +1,8 @@
-﻿namespace FitnessApp.Web.ViewModels.Post
+﻿using FitnessApp.Web.ViewModels.Post.Interfaces;
+
+namespace FitnessApp.Web.ViewModels.Post
 {
-    public class AllPostsViewModel
+    public class AllPostsViewModel : IPostDetailModel
     {
         public int Id { get; set; }
 

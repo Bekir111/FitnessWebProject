@@ -45,10 +45,10 @@ namespace FitnessApp.Services.Data
             await dbContext.SaveChangesAsync();
         }
 
-		public async Task<bool> IsUserHaveReview(string userId)
+		public async Task<bool> IsUserHaveReviewInThisProgram(string userId,string programId)
 		{
 			return await this.dbContext.ProgramReviews
-				.AnyAsync(r => r.UserId.ToString() == userId);
+				.AnyAsync(r => r.UserId.ToString() == userId && r.ProgramId.ToString() == programId);
 		}
 	}
 }

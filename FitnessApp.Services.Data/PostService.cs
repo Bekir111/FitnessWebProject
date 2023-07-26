@@ -39,5 +39,10 @@ namespace FitnessApp.Services.Data
                 Title = post.Title
             };
         }
+
+        public async Task<bool> IsPostExistbyId(int id)
+        {
+            return await this.dbContext.Posts.AnyAsync(p => p.Id == id);
+        }
     }
 }

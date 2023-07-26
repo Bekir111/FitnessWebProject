@@ -6,6 +6,8 @@ namespace FitnessApp.Web.Controllers
     using FitnessApp.Services.Data.Interfaces;
 
     using static Common.NotificationMessagesConstants;
+    using FitnessApp.Web.Infrastructure.Extensions;
+
     public class PostController : BaseController
     {
         private readonly IPostService postService;
@@ -21,18 +23,30 @@ namespace FitnessApp.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Detail(int id)
+        public async Task<IActionResult> Detail(int id,string information)
         {
+            bool postExist = await this.postService.IsPostExistbyId(id);
+            if (!postExist)
+            {
+                return NotFound();
+            }
+
+            var model = await this.postService.GetPostForDetailAsync(id);
+
+            if (model.GetUrlInfo() != information)
+            {
+                return NotFound();
+            }
+
             try
             {
-                var model = await this.postService.GetPostForDetailAsync(id);
+                var viewwModel = await this.postService.GetPostForDetailAsync(id);
 
-                return View(model);
+                return View(viewwModel);
             }
             catch (Exception)
             {
-                TempData[ErrorMessage] = "This post doesnt exist";
-                return RedirectToAction("All","Post");
+                return GeneralError();
             }
         }
     }

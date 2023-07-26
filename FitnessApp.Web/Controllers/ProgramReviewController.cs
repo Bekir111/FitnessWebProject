@@ -22,7 +22,7 @@ namespace FitnessApp.Web.Controllers
         public async Task<IActionResult> Add(string id)
         {
             string userId = this.User.GetId();
-            bool isUserHaveReview = await this.reviewService.IsUserHaveReview(userId);
+            bool isUserHaveReview = await this.reviewService.IsUserHaveReviewInThisProgram(userId,id);
             if (isUserHaveReview)
             {
                 TempData[ErrorMessage] = "You already had wrote a review!";
@@ -41,7 +41,7 @@ namespace FitnessApp.Web.Controllers
             }
 
             var userId = this.User.GetId();
-            bool isUserHaveReview = await this.reviewService.IsUserHaveReview(userId);
+            bool isUserHaveReview = await this.reviewService.IsUserHaveReviewInThisProgram(userId,id);
             if (isUserHaveReview)
             {
                 TempData[ErrorMessage] = "You have already written a review!";
