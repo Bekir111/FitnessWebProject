@@ -58,5 +58,14 @@
             public const int PostTextMinLength = 100;
         }
 
+        public static class ApplicationUser
+        {
+            public const int FirstNameMaxLength = 16;
+            public const int FirstNameMinLength = 2;
+
+            public const int LastNameMaxLength = 20;
+            public const int LastNameMinLength = 2;
+        }
+
     }
 }

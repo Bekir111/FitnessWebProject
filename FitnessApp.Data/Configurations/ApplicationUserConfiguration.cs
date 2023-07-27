@@ -1,9 +1,10 @@
-﻿using FitnessApp.Data.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
+﻿
 namespace FitnessApp.Data.Configurations
 {
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+    using FitnessApp.Data.Models;
     public class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>
     {
         public void Configure(EntityTypeBuilder<ApplicationUser> builder)
@@ -29,6 +30,14 @@ namespace FitnessApp.Data.Configurations
                .WithOne(p => p.User)
                .HasForeignKey(u => u.Id)
                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Property(u => u.FirstName)
+                .HasDefaultValue("Test");
+
+            builder
+                .Property(u => u.LastName)
+                .HasDefaultValue("Testov");
         }
     }
 }
