@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using FitnessApp.Data;
 namespace FitnessApp.Web
 {
     using Microsoft.AspNetCore.Identity;

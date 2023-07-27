@@ -60,6 +60,9 @@
 
         public static class ApplicationUser
         {
+            public const int PasswordMinLength = 6;
+            public const int PasswordMaxLength = 100;
+
             public const int FirstNameMaxLength = 16;
             public const int FirstNameMinLength = 2;
 
