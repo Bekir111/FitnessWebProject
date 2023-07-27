@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FitnessApp.Data.Migrations
 {
-    public partial class DeletedDataFromPost : Migration
+    public partial class AddFirstAndLastNameInUser : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,11 +13,32 @@ namespace FitnessApp.Data.Migrations
                 name: "FK_Posts_AspNetUsers_AuthorId",
                 table: "Posts");
 
-            migrationBuilder.DeleteData(
+           
+            migrationBuilder.RenameColumn(
+                name: "AuthorId",
                 table: "Posts",
-                keyColumn: "Id",
-                keyValue: 1);
- 
+                newName: "UserId");
+
+            migrationBuilder.RenameIndex(
+                name: "IX_Posts_AuthorId",
+                table: "Posts",
+                newName: "IX_Posts_UserId");
+
+            migrationBuilder.AddColumn<string>(
+                name: "FirstName",
+                table: "AspNetUsers",
+                type: "nvarchar(16)",
+                maxLength: 16,
+                nullable: false,
+                defaultValue: "Test");
+
+            migrationBuilder.AddColumn<string>(
+                name: "LastName",
+                table: "AspNetUsers",
+                type: "nvarchar(20)",
+                maxLength: 20,
+                nullable: false,
+                defaultValue: "Testov");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Posts_AspNetUsers_UserId",
@@ -34,6 +55,13 @@ namespace FitnessApp.Data.Migrations
                 name: "FK_Posts_AspNetUsers_UserId",
                 table: "Posts");
 
+            migrationBuilder.DropColumn(
+                name: "FirstName",
+                table: "AspNetUsers");
+
+            migrationBuilder.DropColumn(
+                name: "LastName",
+                table: "AspNetUsers");
 
             migrationBuilder.RenameColumn(
                 name: "UserId",
@@ -44,7 +72,6 @@ namespace FitnessApp.Data.Migrations
                 name: "IX_Posts_UserId",
                 table: "Posts",
                 newName: "IX_Posts_AuthorId");
-
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Posts_AspNetUsers_AuthorId",

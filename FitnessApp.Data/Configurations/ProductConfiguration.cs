@@ -19,7 +19,7 @@ namespace FitnessApp.Data.Configurations
                 .Property(p => p.IsAvailable)
                 .HasDefaultValue(true);
 
-            builder.HasData(this.GenerateProducts());
+            //builder.HasData(this.GenerateProducts());
         }
 
 

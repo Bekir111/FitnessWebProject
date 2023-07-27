@@ -11,11 +11,6 @@ namespace FitnessApp.Data.Configurations
         {
             builder.HasKey(x => x.Id);
 
-            builder.HasMany(u => u.Posts)
-                .WithOne(p => p.User)
-                .HasForeignKey(u => u.Id)
-                .OnDelete(DeleteBehavior.Restrict);
-
             builder.HasMany(u => u.ProgramReviews)
                 .WithOne(p => p.User)
                 .HasForeignKey(u => u.Id)
