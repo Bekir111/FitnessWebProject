@@ -117,7 +117,7 @@ namespace FitnessApp.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
 
                     b.HasData(
                         new
@@ -175,7 +175,7 @@ namespace FitnessApp.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("FoodRecipes");
+                    b.ToTable("FoodRecipes", (string)null);
                 });
 
             modelBuilder.Entity("FitnessApp.Data.Models.Post", b =>
@@ -213,7 +213,7 @@ namespace FitnessApp.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Posts");
+                    b.ToTable("Posts", (string)null);
                 });
 
             modelBuilder.Entity("FitnessApp.Data.Models.Product", b =>
@@ -247,7 +247,7 @@ namespace FitnessApp.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("FitnessApp.Data.Models.ProductReview", b =>
@@ -281,7 +281,7 @@ namespace FitnessApp.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ProductReviews");
+                    b.ToTable("ProductReviews", (string)null);
                 });
 
             modelBuilder.Entity("FitnessApp.Data.Models.Program", b =>
@@ -322,7 +322,7 @@ namespace FitnessApp.Data.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Programs");
+                    b.ToTable("Programs", (string)null);
                 });
 
             modelBuilder.Entity("FitnessApp.Data.Models.ProgramReview", b =>
@@ -356,7 +356,7 @@ namespace FitnessApp.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ProgramReviews");
+                    b.ToTable("ProgramReviews", (string)null);
                 });
 
             modelBuilder.Entity("FitnessApp.Data.Models.ProgramUser", b =>
@@ -371,7 +371,7 @@ namespace FitnessApp.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ProgramUsers");
+                    b.ToTable("ProgramUsers", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>

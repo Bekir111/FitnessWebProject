@@ -7,8 +7,11 @@ namespace FitnessApp.Web.Controllers
     using FitnessApp.Data.Models;
     using FitnessApp.Web.ViewModels.User;
     using static FitnessApp.Common.NotificationMessagesConstants;
+    using Microsoft.AspNetCore.Authentication;
+    using Microsoft.AspNetCore.Authorization;
 
-    public class UserController : Controller
+    [AllowAnonymous]
+    public class UserController : BaseController
     {
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly UserManager<ApplicationUser> userManager;
@@ -42,11 +45,12 @@ namespace FitnessApp.Web.Controllers
             };
 
             await this.userManager.SetEmailAsync(user, model.Email);
-            await this.userManager.SetUserNameAsync(user, $"{model.FirstName} {model.LastName}");
+            await this.userManager.SetUserNameAsync(user, model.UserName);
+            await this.userStore.SetUserNameAsync(user, model.UserName, CancellationToken.None);
 
             var result = await this.userManager.CreateAsync(user, model.Password);
 
-            if (result.Succeeded)
+            if (!result.Succeeded)
             {
                 foreach (var identityError in result.Errors)
                 {
@@ -61,6 +65,39 @@ namespace FitnessApp.Web.Controllers
             TempData[SuccessMessage] = "You was registered successfully!";
 
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Login(string returnUrl = null)
+        {
+            await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+
+            LoginFormModel model = new LoginFormModel()
+            {
+                ReturnUrl = returnUrl,
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginFormModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var result = await this.signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, true);
+
+            if (!result.Succeeded)
+            {
+                TempData[ErrorMessage] = "Invalid username or password";
+
+                return View(model);
+            }
+
+            return this.Redirect(model.ReturnUrl ?? "/Home/Index");
         }
     }
 }

@@ -1,0 +1,147 @@
+﻿@model LoginFormModel
+
+@{
+	ViewData["Title"] = "Log in";
+}
+
+
+<div class="container-login">
+
+	<h2>@ViewData["Title"]</h2>
+
+	<form method="post">
+
+		<div class="form-group">
+			<label asp-for="Username"></label>
+			<input asp-for="Username" class="form-control" autocomplete="username" aria-required="true" />
+			<span asp-validation-for="Username" class="text-danger"></span>
+		</div>
+
+		<div class="form-group">
+			<label asp-for="Password"></label>
+			<input asp-for="Password" class="form-control" autocomplete="password" aria-required="true" />
+			<span asp-validation-for="Password" class="text-danger"></span>
+		</div>
+
+		<div class="form-group">
+			<div class="form-check">
+				<input class="form-check-input" type="checkbox" asp-for="RememberMe" />
+				<label class="form-check-label" asp-for="RememberMe">Remember me</label>
+			</div>
+		</div>
+
+		<button type="submit" class="btn btn-primary">Login</button>
+
+		<p>
+			<a class="register-link" asp-controller="User" asp-action="Register">Register as a new user</a>
+		</p>
+	</form>
+
+</div>
+
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}
+
+	<style>
+		.container-login {
+			max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+        background-color:  #444444;;
+    margin-top: 50px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+		}
+
+
+        h2 {
+                color:  #ff0000;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .label {
+               font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+        color: #ffffff;
+        }
+
+        .form-group{
+                margin-bottom: 15px;
+        }
+
+        .form-control {
+                 width: 100%;
+                padding: 10px;
+                font-size: 16px;
+                background-color: #555555;
+                border: 1px solid #555555;
+                color: #ffffff;
+                border-radius: 4px;
+        }
+
+        .form-control:focus {
+            background-color: #495057;
+            color: #fff;
+            border-color: #495057;
+            box-shadow: none;
+        }
+
+        .form-check-input {
+            background-color: #454d55;
+            border-color: #454d55;
+        }
+
+        .form-check-label {
+            color: #fff;
+        }
+
+                button[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            color: #ffffff;
+            background-color: #ff0000;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-primary:hover {
+                background-color: #cc0000;           
+        }
+
+        .text-danger {
+                color: #cc0000;
+        }
+
+        .validation-summary-errors {
+                color: #cc0000;
+                border: 1px solid #cc0000;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .validation-summary-errors ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .validation-summary-errors li {
+            margin-bottom: 5px;
+        }
+
+                 .register-link {
+            display: block;
+            text-align: left;
+            margin-top: 20px;
+        }
+	</style>

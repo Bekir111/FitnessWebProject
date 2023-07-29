@@ -33,5 +33,11 @@ namespace FitnessApp.Web.ViewModels.User
         [StringLength(LastNameMaxLength, MinimumLength = LastNameMinLength)]
         [Display(Name = "Last Name")]
         public string LastName { get; set; } = null!;
+
+        [Required]
+        [StringLength(UsernameMaxLength, MinimumLength = UsernameMinLength)]
+        [DataType(DataType.Text)]
+        [Display(Name = "User Name")]
+        public string UserName { get; set; } = null!;
     }
 }

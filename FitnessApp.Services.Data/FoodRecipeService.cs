@@ -25,6 +25,7 @@ namespace FitnessApp.Services.Data
                 Ingredients = model.Ingredients,
                 MethodToMake = model.MethodToMake,
                 UserId = Guid.Parse(userId),
+                IsActive = true,
             };
 
             await dbContext.FoodRecipes.AddAsync(foodRecipe);

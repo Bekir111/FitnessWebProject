@@ -39,6 +39,12 @@ namespace FitnessApp.Web
             builder.Services.AddApplicationServices(typeof(IProgramService));
 
 
+            builder.Services.ConfigureApplicationCookie(config =>
+            {
+                config.LoginPath = "/User/Login";
+            });
+
+
             builder.Services
                 .AddControllersWithViews()
                 .AddMvcOptions(options =>
