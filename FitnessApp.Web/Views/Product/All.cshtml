@@ -8,7 +8,7 @@
         @if (product.IsAvailable)
         {
             <p>Price: $@product.Price</p>
-            <button class="detail-btn" onclick="location.href='@Url.Action("Details", "Products", new { id = product.Id })'">Detail</button>
+            <a class="detail-btn" asp-action="Detail" asp-controller="Product" asp-route-id="@product.Id" asp-area="">Detail</a>
             <button class="add-to-cart-btn" onclick="addToCart(@product.Id)">Add to Cart</button>
         }
         else

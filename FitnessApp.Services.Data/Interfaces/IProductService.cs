@@ -5,5 +5,11 @@ namespace FitnessApp.Services.Data.Interfaces
     public interface IProductService
     {
         Task<ICollection<ProductAllViewModel>> GetAllProducts();
+
+        Task<ProductDetailViewModel> GetProductByIdForDetail(string id);
+
+        Task<bool> IsProductExist(string id);
+
+
     }
 }

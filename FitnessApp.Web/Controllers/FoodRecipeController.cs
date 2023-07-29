@@ -55,6 +55,14 @@ namespace FitnessApp.Web.Controllers
 
         public async Task<IActionResult> Detail(string id)
         {
+            bool isExist = await this.foodRecipeService.IsFoodRecipeExist(id);
+
+            if (!isExist)
+            {
+                TempData[ErrorMessage] = "This food recipe doesn't exist!";
+                return RedirectToAction("All", "FoodRecipe");
+            }
+
             try
             {
                 var model = await this.foodRecipeService.GetFoodRecipeByIdForDetail(id);
@@ -71,6 +79,14 @@ namespace FitnessApp.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(string id)
         {
+            bool isExist = await this.foodRecipeService.IsFoodRecipeExist(id);
+
+            if (!isExist)
+            {
+                TempData[ErrorMessage] = "This food recipe doesn't exist!";
+                return RedirectToAction("All", "FoodRecipe");
+            }
+
             try
             {
                 var model = await this.foodRecipeService.FindFoodRecipeByIdForEditAndDelete(id);
@@ -87,6 +103,14 @@ namespace FitnessApp.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(FoodRecipeFormModel model,string id)
         {
+            bool isExist = await this.foodRecipeService.IsFoodRecipeExist(id);
+
+            if (!isExist)
+            {
+                TempData[ErrorMessage] = "This food recipe doesn't exist!";
+                return RedirectToAction("All", "FoodRecipe");
+            }
+
             try
             {
                 await this.foodRecipeService.EditExistingFoodRecipe(model,id);
