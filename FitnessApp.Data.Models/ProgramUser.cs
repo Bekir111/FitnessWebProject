@@ -16,5 +16,7 @@ namespace FitnessApp.Data.Models
         [ForeignKey(nameof(User))]
         public Guid UserId { get; set; }
         public ApplicationUser User { get; set; } = null!;
+
+        public bool IsActive { get; set; }
     }
 }

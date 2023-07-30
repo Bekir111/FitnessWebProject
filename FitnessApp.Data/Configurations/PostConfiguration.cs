@@ -24,7 +24,7 @@ namespace FitnessApp.Data.Configurations
                 .Property(p => p.IsActive)
                 .HasDefaultValue(true);
 
-           //builder.HasData(this.GeneratePosts());
+           builder.HasData(this.GeneratePosts());
         }
 
         private Post[] GeneratePosts()
