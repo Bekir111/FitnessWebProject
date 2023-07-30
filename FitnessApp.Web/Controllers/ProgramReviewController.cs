@@ -22,7 +22,7 @@ namespace FitnessApp.Web.Controllers
         public async Task<IActionResult> Add(string id)
         {
             string userId = this.User.GetId();
-            bool isUserHaveReview = await this.reviewService.IsUserHaveReviewInThisProgram(userId,id);
+            bool isUserHaveReview = await this.reviewService.IsUserHaveReviewInThisProgram(userId, id);
             if (isUserHaveReview)
             {
                 TempData[ErrorMessage] = "You already had wrote a review!";
@@ -41,17 +41,17 @@ namespace FitnessApp.Web.Controllers
             }
 
             var userId = this.User.GetId();
-            bool isUserHaveReview = await this.reviewService.IsUserHaveReviewInThisProgram(userId,id);
+            bool isUserHaveReview = await this.reviewService.IsUserHaveReviewInThisProgram(userId, id);
             if (isUserHaveReview)
             {
-                TempData[ErrorMessage] = "You have already written a review!";
+                TempData[ErrorMessage] = "You have already written a review for this program!";
                 return RedirectToAction("Detail", "Program", new { id = id });
             }
 
             try
             {
                 await this.reviewService.AddReviewToProgram(model, id, userId);
-                TempData[SuccessMessage] = "Review added successfully";
+                TempData[SuccessMessage] = "Review was added successfully!";
                 return RedirectToAction("Detail", "Program", new { id = id });
 
             }
@@ -60,6 +60,53 @@ namespace FitnessApp.Web.Controllers
                 return GeneralError();
             }
 
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(string id)
+        {
+            string userId = this.User.GetId();
+            bool isUserHaveReview = await reviewService.IsUserHaveReviewInThisProgram(userId, id);
+            if (!isUserHaveReview)
+            {
+                TempData[ErrorMessage] = "You cannot edit review because you dont have one!";
+                return RedirectToAction("Detail", "Program", new { id = id });
+            }
+
+            try
+            {
+                var model = await this.reviewService.FindReviewByUserIdAndProgramId(userId, id);
+                return View(model);
+
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(ReviewFormViewModel model, string id)
+        {
+            string userId = this.User.GetId();
+            bool isUserHaveReview = await reviewService.IsUserHaveReviewInThisProgram(userId, id);
+            if (!isUserHaveReview)
+            {
+                TempData[ErrorMessage] = "You cannot edit review because you dont have one!";
+                return RedirectToAction("Detail", "Program", new { id = id });
+            }
+
+            try
+            {
+                await this.reviewService.EditReviewInProgram(model, userId, id);
+
+                TempData[SuccessMessage] = "You edited your review successfully!";
+                return RedirectToAction("Detail", "Program", new { id = id });
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
     }
 }

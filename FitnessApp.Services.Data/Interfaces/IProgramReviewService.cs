@@ -10,5 +10,11 @@ namespace FitnessApp.Services.Data.Interfaces
 
 		Task<bool> IsUserHaveReviewInThisProgram(string userId,string programId);
 
+		Task EditReviewInProgram(ReviewFormViewModel model, string userId, string programId);
+
+		Task DeleteReviewInProgram(string userId, string programId);
+
+		Task<ReviewFormViewModel> FindReviewByUserIdAndProgramId(string userId, string programId);	
+
     }
 }

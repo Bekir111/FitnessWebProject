@@ -25,14 +25,14 @@
 		color: #ff0000;
 	}
 
-	.btn-primary {
-		background-color: #007bff;
-		border-color: #007bff;
+	.btn-warning {
+		background-color: yellow;
+		border-color: yellow;
 	}
 
-		.btn-primary:hover {
-			background-color: #0056b3;
-			border-color: #0056b3;
+		.btn-warning:hover {
+			background-color: yellow;
+			border-color: yellow;
 		}
 
 
@@ -55,7 +55,7 @@
 
 <h2 class="title-review">Write a Review</h2>
 
-<form id="reviewForm" method="post" asp-controller="ProgramReview" asp-action="Add">
+<form id="reviewForm" method="post" asp-controller="ProgramReview" asp-action="Edit">
 	<div class="form-group">
 		<label asp-for="@Model.Rating">Rating</label>
 		<input asp-for="@Model.Rating" class="form-control" type="number" min="0" max="5" step="1" />
@@ -70,7 +70,7 @@
 	</div>
 	<span id="reviewTextError" class="text-danger"></span>
 	<dib>
-		<button id="Button" type="submit" class="btn btn-primary">Submit Review</button>
+		<button id="Button" type="submit" class="btn btn-warning text-black">Edit Review</button>
 	</dib>
 </form>
 
@@ -99,6 +99,6 @@
 		}
 
 		// Perform additional validation or submit the form as needed
-		 reviewForm.submit();
+		reviewForm.submit();
 	});
 </script>

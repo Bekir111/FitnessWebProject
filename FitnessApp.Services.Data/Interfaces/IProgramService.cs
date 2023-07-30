@@ -9,8 +9,17 @@
 
         Task<DetailProgramViewModel> GetProgramById(string id);
 
-        Task AddReviewToProgram(ReviewFormViewModel model,string programId,string userId);
+        //Task AddReviewToProgram(ReviewFormViewModel model,string programId,string userId);
 
         Task<ICollection<AllProgramViewModel>> GetProgramsByUserId(string id);
+
+        Task JoinTheProgramByIdAndUserId(string programId, string userId);
+
+        Task<bool> IsUserJoinedTheProgram(string programId, string userId);
+
+        Task LeaveTheProgramByIdAndUserId(string programId, string userId);
+
+        Task<ICollection<AllProgramViewModel>> GetAllProgramsForUser(string userId);
+
     }
 }

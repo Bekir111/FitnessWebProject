@@ -3,6 +3,8 @@ using FitnessApp.Data.Models;
 using FitnessApp.Services.Data.Interfaces;
 using FitnessApp.Web.ViewModels.Reviews;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
+using static FitnessApp.Common.EntityValidationConstants;
 
 namespace FitnessApp.Services.Data
 {
@@ -50,5 +52,38 @@ namespace FitnessApp.Services.Data
 			return await this.dbContext.ProgramReviews
 				.AnyAsync(r => r.UserId.ToString() == userId && r.ProgramId.ToString() == programId);
 		}
+
+		public async Task EditReviewInProgram(ReviewFormViewModel model, string userId,string programId)
+		{
+			var review = await dbContext.ProgramReviews
+				.FirstAsync(r => r.ProgramId.ToString() == programId && r.UserId.ToString() == userId);
+
+			review.ReviewText = model.ReviewText;
+			review.Rating = model.Rating;
+
+			await dbContext.SaveChangesAsync();
+		}
+
+		public async Task DeleteReviewInProgram(string userId, string programId)
+		{
+            var review = await dbContext.ProgramReviews
+                .FirstAsync(r => r.ProgramId.ToString() == programId && r.UserId.ToString() == userId);
+
+            review.IsActive = false;
+
+			await dbContext.SaveChangesAsync();
+        }
+
+		public async Task<ReviewFormViewModel> FindReviewByUserIdAndProgramId(string userId, string programId)
+		{
+            var review = await dbContext.ProgramReviews
+               .FirstAsync(r => r.ProgramId.ToString() == programId && r.UserId.ToString() == userId);
+
+			return new ReviewFormViewModel()
+			{
+				Rating = review.Rating,
+				ReviewText = review.ReviewText,
+			};
+        }
 	}
 }

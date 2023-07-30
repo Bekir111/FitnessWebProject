@@ -18,7 +18,7 @@
 		<a>
 			@if (Model.Reviews.FirstOrDefault(r => r.UserId.ToUpper() == this.User.GetId().ToUpper()) != null)
 			{
-				<a class="btn btn-warning text-white" asp-route-id="@Model.Id" asp-area="" asp-controller="Program" asp-action="Detail">Edit Review</a>
+				<a class="btn btn-warning text-white" asp-route-id="@Model.Id" asp-area="" asp-controller="ProgramReview" asp-action="Edit">Edit Review</a>
 				<a class="btn btn-danger text-white" asp-route-id="" asp-area="" asp-controller="Program" asp-action="Detail">Delete Review</a>
 			}
 			else

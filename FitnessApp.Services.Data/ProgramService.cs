@@ -18,19 +18,19 @@ namespace FitnessApp.Services.Data
             this.dbContext = dbContext;
         }
 
-        public async Task AddReviewToProgram(ReviewFormViewModel model,string programId,string userId)
-        {
-            var review = new ProgramReview()
-            {
-                ProgramId = Guid.Parse(programId),
-                UserId = Guid.Parse(userId),
-                Rating = model.Rating,
-                ReviewText = model.ReviewText,
-            };
+        //public async Task AddReviewToProgram(ReviewFormViewModel model,string programId,string userId)
+        //{
+        //    var review = new ProgramReview()
+        //    {
+        //        ProgramId = Guid.Parse(programId),
+        //        UserId = Guid.Parse(userId),
+        //        Rating = model.Rating,
+        //        ReviewText = model.ReviewText,
+        //    };
 
-            await dbContext.ProgramReviews.AddAsync(review);
-            await dbContext.SaveChangesAsync();
-        }
+        //    await dbContext.ProgramReviews.AddAsync(review);
+        //    await dbContext.SaveChangesAsync();
+        //}
 
         public async Task<ICollection<AllProgramViewModel>> GetAllPrograms()
         {
@@ -48,6 +48,22 @@ namespace FitnessApp.Services.Data
                 .ToArrayAsync();
 
             return programs;
+        }
+
+        public async Task<ICollection<AllProgramViewModel>> GetAllProgramsForUser(string userId)
+        {
+            return await this.dbContext.ProgramUsers
+                .Where(pu => pu.UserId.ToString() == userId)
+                .Select(pu => new AllProgramViewModel()
+                {
+                    Id = pu.Program.Id.ToString(),
+                    CategoryId = pu.Program.CategoryId,
+                    CategoryName = pu.Program.Category.Name,
+                    Name = pu.Program.Name,
+                    PictureUrl = pu.Program.PictureUrl,
+                    AverageRating = pu.Program.AverageRating,
+                })
+                .ToArrayAsync();
         }
 
         public async Task<DetailProgramViewModel> GetProgramById(string id)
@@ -86,6 +102,34 @@ namespace FitnessApp.Services.Data
                     AverageRating = pu.Program.Reviews.Average(p => p.Rating)
                 })
                 .ToArrayAsync();
+        }
+
+        public async Task<bool> IsUserJoinedTheProgram(string programId, string userId)
+        {
+            return await this.dbContext.ProgramUsers
+                .AnyAsync(pu => pu.ProgramId.ToString() == programId && pu.UserId.ToString() == userId);
+        }
+
+        public async Task JoinTheProgramByIdAndUserId(string programId, string userId)
+        {
+            var programUser = new ProgramUser()
+            {
+                ProgramId = Guid.Parse(programId),
+                UserId = Guid.Parse(userId)
+            };
+
+            await this.dbContext.ProgramUsers.AddAsync(programUser);
+            await this.dbContext.SaveChangesAsync();
+        }
+
+        public async Task LeaveTheProgramByIdAndUserId(string programId, string userId)
+        {
+            var programUser = await this.dbContext.ProgramUsers
+                .FirstAsync(pu => pu.UserId.ToString() == userId && pu.ProgramId.ToString() == programId && pu.IsActive);
+
+            programUser.IsActive = false;
+
+            await dbContext.SaveChangesAsync();
         }
 
         private async Task<ReviewInDetailViewModel[]> GetAllReviewsByProgramId(string programId)
