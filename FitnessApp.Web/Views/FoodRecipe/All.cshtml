@@ -113,10 +113,6 @@
                         <a class="btn-edit btn-warning " asp-route-id="@recipe.Id" asp-area="" asp-controller="FoodRecipe" asp-action="Edit">Edit</a>
                             <a class="btn-delete btn-danger" asp-route-id="@recipe.Id" asp-area="" asp-controller="FoodRecipe" asp-action="Delete">Delete</a>
                         }
-                        else
-                        {
-                            <button class="btn btn-success" onclick="saveRecipe(@recipe.Id)">Save</button>
-                        }
                     <a class="btn-detail text-white btn-primary" asp-route-id="@recipe.Id" asp-area="" asp-controller="FoodRecipe" asp-action="Detail">Detail</a>
                     </div>
                     </div>

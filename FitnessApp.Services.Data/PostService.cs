@@ -45,7 +45,7 @@ namespace FitnessApp.Services.Data
         public async Task<DetailPostViewModel> GetPostForDetailAsync(int id)
         {
             var post = await this.dbContext.Posts
-                .FirstAsync(p => p.Id == id);
+                .FirstAsync(p => p.Id == id && p.IsActive == true);
 
             return new DetailPostViewModel()
             {
@@ -56,6 +56,19 @@ namespace FitnessApp.Services.Data
             };
         }
 
+        public async Task<PostFormModel> FindPostByIdForEditAndDelete(int id)
+        {
+            var post = await this.dbContext.Posts
+                .FirstAsync(p => p.Id == id && p.IsActive);
+
+            return new PostFormModel()
+            {
+                Text = post.Text,
+                Title = post.Title
+            };
+            
+        }
+
         public async Task<bool> IsPostExistbyId(int id)
         {
             return await this.dbContext.Posts.AnyAsync(p => p.Id == id);
@@ -64,7 +77,28 @@ namespace FitnessApp.Services.Data
         public async Task<bool> IsThisUserAuthorOfThePost(string userId, int postId)
         {
             return await this.dbContext.Posts
-                .AnyAsync(p => p.UserId.ToString() == userId && p.Id == postId);
+                .AnyAsync(p => p.UserId.ToString() == userId && p.Id == postId && p.IsActive);
+        }
+
+        public async Task EditExistingPost(PostFormModel model, int id)
+        {
+            var post = await dbContext.Posts
+               .FirstAsync(p => p.Id == id && p.IsActive == true);
+
+            post.Title = model.Title;
+            post.Text = model.Text;
+
+            await dbContext.SaveChangesAsync();
+        }
+
+        public async Task DeleteExistingPost(int id)
+        {
+            var post = await dbContext.Posts
+               .FirstAsync(p => p.Id == id && p.IsActive == true);
+
+            post.IsActive = false;
+
+            await dbContext.SaveChangesAsync();
         }
     }
 }

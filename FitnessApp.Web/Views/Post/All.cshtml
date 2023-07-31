@@ -19,8 +19,8 @@
                 <p>Published: @post.CreatedOn</p>
                     @if (await PostService.IsThisUserAuthorOfThePost(this.User.GetId(), post.Id))
                     {
-                    <a class="btn btn-warning text-white align-content-center" asp-route-id="@post.Id" asp-area="" asp-controller="Post" asp-action="Edit">Edit Review</a>
-                    <a class="btn btn-danger text-white  align-content-center" asp-route-id="@post.Id" asp-area="" asp-controller="Post" asp-action="Delete">Delete Review</a>
+                    <a class="btn btn-warning text-white align-content-center" asp-route-id="@post.Id" asp-area="" asp-controller="Post" asp-action="Edit">Edit Post</a>
+                    <a class="btn btn-danger text-white  align-content-center" asp-route-id="@post.Id" asp-area="" asp-controller="Post" asp-action="Delete">Delete Post</a>
                     }
             </li>
             </a>

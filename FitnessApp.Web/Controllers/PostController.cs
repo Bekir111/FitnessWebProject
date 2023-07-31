@@ -76,5 +76,120 @@ namespace FitnessApp.Web.Controllers
                 return GeneralError();
             }
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            bool postExist = await this.postService.IsPostExistbyId(id);
+            if (!postExist)
+            {
+                return NotFound();
+            }
+
+            bool isUserAuthor = await this.postService.IsThisUserAuthorOfThePost(User.GetId(), id);
+            if (!isUserAuthor)
+            {
+                TempData[WarningMessage] = "You cannot edit this post!";
+                return RedirectToAction("All", "Post");
+            }
+
+            try
+            {
+                var model = await this.postService.FindPostByIdForEditAndDelete(id);
+                return View(model);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(PostFormModel model,int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            bool postExist = await this.postService.IsPostExistbyId(id);
+            if (!postExist)
+            {
+                return NotFound();
+            }
+
+            bool isUserAuthor = await this.postService.IsThisUserAuthorOfThePost(User.GetId(), id);
+            if (!isUserAuthor)
+            {
+                TempData[WarningMessage] = "You cannot edit this post!";
+                return RedirectToAction("All", "Post");
+            }
+
+            try
+            {
+                await this.postService.EditExistingPost(model, id);
+                TempData[SuccessMessage] = "You successfully edited your post!";
+                return RedirectToAction("All", "Post");
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            bool postExist = await this.postService.IsPostExistbyId(id);
+            if (!postExist)
+            {
+                return NotFound();
+            }
+
+            bool isUserAuthor = await this.postService.IsThisUserAuthorOfThePost(User.GetId(), id);
+            if (!isUserAuthor)
+            {
+                TempData[WarningMessage] = "You cannot delete this post!";
+                return RedirectToAction("All", "Post");
+            }
+
+            try
+            {
+                var model = await this.postService.FindPostByIdForEditAndDelete(id);
+                return View(model);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(PostFormModel model, int id)
+        {
+            bool postExist = await this.postService.IsPostExistbyId(id);
+            if (!postExist)
+            {
+                return NotFound();
+            }
+
+            bool isUserAuthor = await this.postService.IsThisUserAuthorOfThePost(User.GetId(), id);
+            if (!isUserAuthor)
+            {
+                TempData[WarningMessage] = "You cannot delete this post!";
+                return RedirectToAction("All", "Post");
+            }
+
+            try
+            {
+                await this.postService.DeleteExistingPost(id);
+                TempData[WarningMessage] = "You deleted your post successfully!";
+                return RedirectToAction("All","Post");
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
     }
 }

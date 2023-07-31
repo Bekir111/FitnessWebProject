@@ -1,0 +1,100 @@
+﻿@using static FitnessApp.Common.EntityValidationConstants.Post;
+@model PostFormModel;
+
+<style>
+
+    .form-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 40px;
+        background-color: dimgray;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+        .form-container label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .form-container input[type="text"],
+        .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            background-color: #272727;
+            border: 1px solid #444;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #fff;
+        }
+
+        .form-container button[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #ffc40c;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+
+        }
+</style>
+
+<div class="form-container">
+    <h2>Edit Post</h2>
+
+    <form id="postForm" method="post" asp-controller="Post" asp-action="Edit">
+        <div>
+            <label asp-for="@Model.Title" class="form-label">Title:</label>
+            <textarea asp-for="@Model.Title" class="form-control" type="text" id="@Model.Title" name="Title" required minlength="@PostTitleMinLength" maxlength="@PostTitleMaxLength"></textarea>
+        </div>
+        <div>
+            <label asp-for="@Model.Text" class="form-label">Text:</label>
+            <textarea asp-for="@Model.Text" class="form-control" required minlength="@PostTextMinLength" maxlength="@PostTextMaxLength"></textarea>
+        </div>
+        <button type="submit" class="btn-warning">Edit Post</button>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation.unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+
+    <script>
+        $(function () {
+            $.validator.setDefaults({
+                errorElement: 'div',
+                errorClass: 'text-danger',
+                highlight: function (element) {
+                    $(element).closest('.form-group').addClass('has-error');
+                },
+                unhighlight: function (element) {
+                    $(element).closest('.form-group').removeClass('has-error');
+                },
+                errorPlacement: function (error, element) {
+                    if (element.attr("name") === "Title") {
+                        error.insertAfter($("#Title"));
+                    } else if (element.attr("name") === "Text") {
+                        error.insertAfter($("#Text"));
+                    } else {
+                        error.insertAfter(element);
+                    }
+                }
+            });
+
+            $('#postForm').validate();
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#postForm').validate();
+        });
+    </script>
+}

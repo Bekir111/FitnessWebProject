@@ -47,7 +47,7 @@ namespace FitnessApp.Services.Data
         public async Task EditExistingFoodRecipe(FoodRecipeFormModel model,string id)
         {
             var foodRecipe = await dbContext.FoodRecipes
-                .FirstAsync(fr => fr.Id.ToString() == id && fr.IsActive == true );
+                .FirstAsync(fr => fr.Id.ToString() == id && fr.IsActive == true);
 
             foodRecipe.Name = model.Name;
             foodRecipe.MethodToMake = model.MethodToMake;
