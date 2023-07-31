@@ -64,7 +64,7 @@ namespace FitnessApp.Web
 
             var app = builder.Build();
 
-           // app.UseSession();
+            // app.UseSession();
 
             if (app.Environment.IsDevelopment())
             {
@@ -87,14 +87,17 @@ namespace FitnessApp.Web
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.SeedAdministrator("admin@admin.com");
+            if (app.Environment.IsDevelopment())
+            {
+                app.SeedAdministrator("admin@admin.com"); // You have to replace it with registered user in your local machine
+            }
 
             app.UseEndpoints(config =>
             {
                 config.MapControllerRoute(
                     name: "ProtectingUrlPattern",
                     pattern: "/{controller}/{action}/{id}/{information}",
-                    defaults: new { Controller = "Post", Action = "Detail"}
+                    defaults: new { Controller = "Post", Action = "Detail" }
                     );
                 config.MapDefaultControllerRoute();
                 config.MapRazorPages();
