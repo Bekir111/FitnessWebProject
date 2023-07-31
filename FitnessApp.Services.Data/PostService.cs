@@ -1,10 +1,12 @@
-﻿using FitnessApp.Data;
-using FitnessApp.Services.Data.Interfaces;
-using FitnessApp.Web.ViewModels.Post;
-using Microsoft.EntityFrameworkCore;
-
+﻿
 namespace FitnessApp.Services.Data
 {
+    using Microsoft.EntityFrameworkCore;
+
+    using FitnessApp.Data;
+    using FitnessApp.Data.Models;
+    using FitnessApp.Services.Data.Interfaces;
+    using FitnessApp.Web.ViewModels.Post;
     public class PostService : IPostService
     {
         private readonly FitnessAppDbContext dbContext;
@@ -12,6 +14,19 @@ namespace FitnessApp.Services.Data
         public PostService(FitnessAppDbContext dbContext)
         {
             this.dbContext = dbContext;
+        }
+
+        public async Task AddPost(PostFormModel model,string userId)
+        {
+            var post = new Post()
+            {
+                Text = model.Text,
+                Title = model.Title,
+                UserId = Guid.Parse(userId),
+            };
+
+            await dbContext.Posts.AddAsync(post);
+            await dbContext.SaveChangesAsync();
         }
 
         public async Task<ICollection<AllPostsViewModel>> GetAllPostsAsync()

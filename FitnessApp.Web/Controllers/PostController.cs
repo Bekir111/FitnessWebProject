@@ -7,6 +7,7 @@ namespace FitnessApp.Web.Controllers
 
     using static Common.NotificationMessagesConstants;
     using FitnessApp.Web.Infrastructure.Extensions;
+    using FitnessApp.Web.ViewModels.Post;
 
     public class PostController : BaseController
     {
@@ -43,6 +44,32 @@ namespace FitnessApp.Web.Controllers
                 var viewwModel = await this.postService.GetPostForDetailAsync(id);
 
                 return View(viewwModel);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
+
+        [HttpGet]
+        public IActionResult Add()
+        {
+            return View(new PostFormModel());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(PostFormModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            try
+            {
+                await this.postService.AddPost(model, this.User.GetId());
+                TempData[SuccessMessage] = "You added a post successfully!";
+                return RedirectToAction("All", "Post");
             }
             catch (Exception)
             {

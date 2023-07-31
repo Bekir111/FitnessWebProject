@@ -11,5 +11,7 @@ namespace FitnessApp.Services.Data.Interfaces
         Task<bool> IsPostExistbyId(int id);
 
         Task<bool> IsThisUserAuthorOfThePost(string userId, int postId);
+
+        Task AddPost(PostFormModel model,string userId);
     }
 }
