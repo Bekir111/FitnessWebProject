@@ -10,10 +10,12 @@
     public class ProgramController : BaseController
     {
         private readonly IProgramService programService;
+        private readonly IProgramReviewService reviewService;
 
-        public ProgramController(IProgramService programService)
+        public ProgramController(IProgramService programService,IProgramReviewService reviewService)
         {
             this.programService = programService;
+            this.reviewService = reviewService;
         }
 
         public async Task<IActionResult> All()
@@ -27,12 +29,13 @@
             try
             {
                 var program = await programService.GetProgramById(id);
+                program.Reviews = await this.reviewService.GetAllReviewsByProgramId(id);
                 return View(program);
 
             }
             catch (Exception)
             {
-                return RedirectToAction("All", "Program");
+                return NotFound();
             }
 
         }

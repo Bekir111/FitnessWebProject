@@ -8,6 +8,8 @@ namespace FitnessApp.Services.Data.Interfaces
 
         Task<DetailPostViewModel> GetPostForDetailAsync(int id);
 
-        Task<bool> IsPostExistbyId(int id); 
+        Task<bool> IsPostExistbyId(int id);
+
+        Task<bool> IsThisUserAuthorOfThePost(string userId, int postId);
     }
 }

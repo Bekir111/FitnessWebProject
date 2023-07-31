@@ -17,6 +17,7 @@ namespace FitnessApp.Services.Data
         public async Task<ICollection<AllPostsViewModel>> GetAllPostsAsync()
         {
             return await this.dbContext.Posts
+                .Where(p => p.IsActive == true)
                 .Select(p => new AllPostsViewModel()
                 {
                     Id = p.Id,
@@ -43,6 +44,12 @@ namespace FitnessApp.Services.Data
         public async Task<bool> IsPostExistbyId(int id)
         {
             return await this.dbContext.Posts.AnyAsync(p => p.Id == id);
+        }
+
+        public async Task<bool> IsThisUserAuthorOfThePost(string userId, int postId)
+        {
+            return await this.dbContext.Posts
+                .AnyAsync(p => p.UserId.ToString() == userId && p.Id == postId);
         }
     }
 }

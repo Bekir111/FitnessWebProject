@@ -1,8 +1,14 @@
 ﻿@model IEnumerable<AllPostsViewModel>
+@inject IPostService PostService
+@inject IUserService UserService
 
 <div class="container">
     <div class="header">
         <h1>Posts</h1>
+        <a>
+
+				<a class="btn btn-primary text-white" asp-area="" asp-controller="Post" asp-action="Add">Add Post</a>
+		</a>
     </div>
 
     <ul class="posts">
@@ -11,6 +17,11 @@
             <a asp-route-id="@post.Id" asp-route-information="@post.GetUrlInfo()" asp-area="" asp-controller="Post" asp-action="Detail">
             <li>
                     @post.Title
+            @if (await PostService.IsThisUserAuthorOfThePost(this.User.GetId(),post.Id))
+			{
+				<a class="btn btn-warning text-white" asp-route-id="@post.Id" asp-area="" asp-controller="Post" asp-action="Edit">Edit Review</a>
+				<a class="btn btn-danger text-white" asp-route-id="@post.Id" asp-area="" asp-controller="Post" asp-action="Delete">Delete Review</a>
+			}
                 <p>Published: @post.CreatedOn</p>
             </li>
             </a>

@@ -18,23 +18,10 @@ namespace FitnessApp.Services.Data
             this.dbContext = dbContext;
         }
 
-        //public async Task AddReviewToProgram(ReviewFormViewModel model,string programId,string userId)
-        //{
-        //    var review = new ProgramReview()
-        //    {
-        //        ProgramId = Guid.Parse(programId),
-        //        UserId = Guid.Parse(userId),
-        //        Rating = model.Rating,
-        //        ReviewText = model.ReviewText,
-        //    };
-
-        //    await dbContext.ProgramReviews.AddAsync(review);
-        //    await dbContext.SaveChangesAsync();
-        //}
-
         public async Task<ICollection<AllProgramViewModel>> GetAllPrograms()
         {
             var programs = await this.dbContext.Programs
+                .Where(p => p.IsActive == true)
                 .Select(p => new AllProgramViewModel()
                 {
                     Id = p.Id.ToString(),
@@ -83,7 +70,6 @@ namespace FitnessApp.Services.Data
                 AverageRating = program.AverageRating,
                 CreatedOn = program.CreatedOn.ToString("dd/mm/yyyy"),
                 Name = program.Name,
-                Reviews = await GetAllReviewsByProgramId(program.Id.ToString()),
                 PictureUrl = program.PictureUrl,
             };
         }
@@ -131,24 +117,5 @@ namespace FitnessApp.Services.Data
 
             await dbContext.SaveChangesAsync();
         }
-
-        private async Task<ReviewInDetailViewModel[]> GetAllReviewsByProgramId(string programId)
-        {
-
-            var reviews = await this.dbContext.ProgramReviews
-                .Where(pr => pr.ProgramId.ToString() == programId)
-                .Select(pr => new ReviewInDetailViewModel()
-                {
-                    Id = pr.Id.ToString(),
-                    UserId = pr.UserId.ToString(),
-                    Rating = pr.Rating,
-                    ReviewText = pr.ReviewText,
-                    UserName = pr.User.UserName,
-                })
-                .ToArrayAsync();
-
-            return reviews;
-        }
-
     }
 }

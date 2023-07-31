@@ -14,7 +14,9 @@ namespace FitnessApp.Services.Data.Interfaces
 
 		Task DeleteReviewInProgram(string userId, string programId);
 
-		Task<ReviewFormViewModel> FindReviewByUserIdAndProgramId(string userId, string programId);	
+		Task<ReviewFormViewModel> FindReviewByUserIdAndProgramId(string userId, string programId);
+
+		Task<ReviewInDetailViewModel[]> GetAllReviewsByProgramId(string programId);
 
     }
 }

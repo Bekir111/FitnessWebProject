@@ -69,7 +69,7 @@ namespace FitnessApp.Web.Controllers
             bool isUserHaveReview = await reviewService.IsUserHaveReviewInThisProgram(userId, id);
             if (!isUserHaveReview)
             {
-                TempData[ErrorMessage] = "You cannot edit review because you dont have one!";
+                TempData[ErrorMessage] = "You cannot edit review because you dont have one in this program!";
                 return RedirectToAction("Detail", "Program", new { id = id });
             }
 
@@ -101,6 +101,51 @@ namespace FitnessApp.Web.Controllers
                 await this.reviewService.EditReviewInProgram(model, userId, id);
 
                 TempData[SuccessMessage] = "You edited your review successfully!";
+                return RedirectToAction("Detail", "Program", new { id = id });
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(string id)
+        {
+            string userId = this.User.GetId();
+            bool isUserHaveReview = await reviewService.IsUserHaveReviewInThisProgram(userId, id);
+            if (!isUserHaveReview)
+            {
+                TempData[ErrorMessage] = "You cannot delete review because you dont have one in this program!";
+                return RedirectToAction("Detail", "Program", new { id = id });
+            }
+
+            try
+            {
+                var model = await this.reviewService.FindReviewByUserIdAndProgramId(userId, id);
+                return View(model);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(ReviewFormViewModel model, string id)
+        {
+            string userId = this.User.GetId();
+            bool isUserHaveReview = await reviewService.IsUserHaveReviewInThisProgram(userId, id);
+            if (!isUserHaveReview)
+            {
+                TempData[ErrorMessage] = "You cannot delete review because you dont have one in this program!";
+                return RedirectToAction("Detail", "Program", new { id = id });
+            }
+
+            try
+            {
+                await this.reviewService.DeleteReviewInProgram(userId, id);
+                TempData[WarningMessage] = "Tour review was deleted successfully!";
                 return RedirectToAction("Detail", "Program", new { id = id });
             }
             catch (Exception)

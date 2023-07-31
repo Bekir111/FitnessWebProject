@@ -1,173 +1,187 @@
 ﻿@model ProductDetailViewModel
 
 @{
-    ViewData["Title"] = "Product Details";
+	ViewData["Title"] = "Product Details";
 }
 
 <h2>@Model.Name</h2>
 <img src="@Model.PictureUrl" alt="Product Image" class="product-image" />
-@if(Model.IsAvailable){
-<p>Price: @Model.Price</p>
+@if (Model.IsAvailable)
+{
+	<p>Price: @Model.Price</p>
 }
-else{
-    <p>Not Available</p>
+else
+{
+	<p>Not Available</p>
 }
 <p>Description: @Model.Description</p>
 @if (Model.IsAvailable)
 {
-    <p class="availability">Availability: Available</p>
+	<p class="availability">Availability: Available</p>
+	<div>
+		<button type="button" class="btn @(!Model.IsAvailable ? "btn-disabled" : "btn-primary")"
+			id="addToCartBtn" @(!Model.IsAvailable ? "disabled" : "")>
+			@(!Model.IsAvailable ? "Not Available" : "Add to Cart")
+		</button>
+	</div>
 }
 else
 {
-    <p class="unavailability">Availability: Not Available</p>
+	<p class="unavailability">Availability: Not Available</p>
 }
+<div class="review-section">
+	<h3>Reviews</h3>
+	<a>
+		@if (Model.Reviews.FirstOrDefault(r => r.UserId.ToUpper() == this.User.GetId().ToUpper()) != null)
+		{
+			<a class="btn btn-warning text-white" asp-route-id="@Model.Id" asp-area="" asp-controller="ProgramReview" asp-action="Edit">Edit Review</a>
+			<a class="btn btn-danger text-white" asp-route-id="" asp-area="" asp-controller="Program" asp-action="Detail">Delete Review</a>
+		}
+		else
+		{
+			<a class="btn btn-primary text-white" asp-route-id="@Model.Id" asp-area="" asp-controller="ProgramReview" asp-action="Add">Write Review</a>
+		}
+	</a>
+	<hr class="divider">
+	<div class="write-review-section">
+	</div>
+	<div class="reviews">
+		@if (Model.Reviews.Count == 0)
+		{
+			<p class="no-reviews">There is no reviews for this program!</p>
+		}
+		else
+		{
+			@foreach (var review in Model.Reviews)
+			{
+				<div class="rating-container">
+					<div class="rating">
+						<span class="username">User: @review.UserName</span>
+						<div class="rating">
+							<span class="rating-number">Rating: @review.Rating</span>
+						</div>
+						<div class="review-text">
+							<span class="review">@review.ReviewText</span>
+						</div>
+					</div>
+				</div>
 
-<hr class="divider">
-<div class="write-review-section">
+			}
+		}
+
+	</div>
 </div>
-<div class="reviews">
-    @if (Model.Reviews.Count == 0)
-    {
-        <p class="no-reviews">There is no reviews for this program!</p>
-    }
-    else
-    {
-        @foreach (var review in Model.Reviews)
-        {
-            <div class="rating-container">
-                <div class="rating">
-                    <span class="username">User: @review.UserName</span>
-                    <div class="rating">
-                        <span class="rating-number">Rating: @review.Rating</span>
-                    </div>
-                    <div class="review-text">
-                        <span class="review">@review.ReviewText</span>
-                    </div>
-                </div>
-            </div>
 
-        }
-    }
-
-</div>
-    </div>
-
-<div>
-    <button type="button" class="btn @(!Model.IsAvailable ? "btn-disabled" : "btn-primary")" 
-            id="addToCartBtn" @(!Model.IsAvailable ? "disabled" : "")>
-        @(!Model.IsAvailable ? "Not Available" : "Add to Cart")
-    </button>
-</div>
 
 <style>
-    h2 {
-        font-size: 28px;
-        font-weight: bold;
-        margin-bottom: 10px;
-    }
+	h2 {
+		font-size: 28px;
+		font-weight: bold;
+		margin-bottom: 10px;
+	}
 
-    .product-image {
-        max-width: 300px;
-        max-height: 300px;
-        margin-bottom: 15px;
-    }
+	.product-image {
+		max-width: 300px;
+		max-height: 300px;
+		margin-bottom: 15px;
+	}
 
-    p {
-        font-size: 16px;
-        margin-bottom: 5px;
-    }
+	p {
+		font-size: 16px;
+		margin-bottom: 5px;
+	}
 
-    /* Styling for the "Add to Cart" button */
-    #addToCartBtn {
-        font-size: 18px;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
+	/* Styling for the "Add to Cart" button */
+	#addToCartBtn {
+		font-size: 18px;
+		padding: 10px 20px;
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
+		transition: background-color 0.3s ease;
+	}
 
-        #addToCartBtn:not([disabled]) {
-            background-color: #ff4500;
-            color: #fff;
-        }
+		#addToCartBtn:not([disabled]) {
+			background-color: #ff4500;
+			color: #fff;
+		}
 
-        #addToCartBtn:disabled {
-            background-color: #ccc;
-            color: #000;
-            cursor: not-allowed;
-        }
+		#addToCartBtn:disabled {
+			background-color: #ccc;
+			color: #000;
+			cursor: not-allowed;
+		}
 
-    /* Styling for the availability message */
-    .availability {
-        font-size: 16px;
-        color: #00e676;
-    }
+	/* Styling for the availability message */
+	.availability {
+		font-size: 16px;
+		color: #00e676;
+	}
 
-    .unavailability {
-        font-size: 16px;
-        color: #ff5252;
-    }
+	.unavailability {
+		font-size: 16px;
+		color: #ff5252;
+	}
 
-    .no-reviews {
-        font-size: 20px;
-    }
+	.no-reviews {
+		font-size: 20px;
+	}
 
-    .review-section {
-        margin-top: 30px;
-    }
+	.review-section {
+		margin-top: 30px;
+	}
 
-        .review-section h3 {
-            font-size: 24px;
-            font-weight: bold;
-            color: white;
-            text-align: center;
-        }
+		.review-section h3 {
+			font-size: 24px;
+			font-weight: bold;
+			color: white;
+			text-align: center;
+		}
 
-    .review {
-        margin-top: 20px;
-        padding: 10px;
-        background-color: #f7f7f7;
-        border-radius: 5px;
-    }
+	.review {
+		margin-top: 20px;
+		padding: 10px;
+		background-color: #f7f7f7;
+		border-radius: 5px;
+	}
 
-        .review p {
-            font-size: 16px;
-            color: #333;
-        }
+		.review p {
+			font-size: 16px;
+			color: #333;
+		}
 
-    .divider {
-        border: none;
-        border-top: 1px solid #ccc;
-        margin: 20px 0;
-        width: 100%;
-    }
+	.divider {
+		border: none;
+		border-top: 1px solid #ccc;
+		margin: 20px 0;
+		width: 100%;
+	}
 
-    .rating-container {
-        background-color: #555;
-        padding: 10px;
-        margin-bottom: 10px;
-        width: 700px;
-    }
+	.rating-container {
+		background-color: #555;
+		padding: 10px;
+		margin-bottom: 10px;
+		width: 700px;
+	}
 
-    .rating-number {
-        color: #fff;
-        align-items: center;
-        margin-bottom: 10px;
-    }
+	.rating-number {
+		color: #fff;
+		align-items: center;
+		margin-bottom: 10px;
+	}
 
-    .username {
-        font-weight: bold;
-    }
+	.username {
+		font-weight: bold;
+	}
 
-    .review {
-        margin: 10px;
-        background: #555;
-        font-style: italic;
-        font-weight: bold;
-    }
+	.review {
+		margin: 10px;
+		background: #555;
+		font-style: italic;
+		font-weight: bold;
+	}
 
-    .review-text {
-        margin-top: 10px;
-    }
+	.review-text {
+		margin-top: 10px;
+	}
 </style>

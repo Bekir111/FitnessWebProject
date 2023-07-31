@@ -85,5 +85,23 @@ namespace FitnessApp.Services.Data
 				ReviewText = review.ReviewText,
 			};
         }
-	}
+
+        public async Task<ReviewInDetailViewModel[]> GetAllReviewsByProgramId(string programId)
+		{
+            var reviews = await this.dbContext.ProgramReviews
+                .Where(pr => pr.ProgramId.ToString() == programId)
+                .Select(pr => new ReviewInDetailViewModel()
+                {
+                    Id = pr.Id.ToString(),
+                    UserId = pr.UserId.ToString(),
+                    Rating = pr.Rating,
+                    ReviewText = pr.ReviewText,
+                    UserName = pr.User.UserName,
+                })
+                .ToArrayAsync();
+
+            return reviews;
+        }
+
+    }
 }
