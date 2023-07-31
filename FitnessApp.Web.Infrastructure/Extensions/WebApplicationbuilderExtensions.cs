@@ -1,10 +1,14 @@
 ﻿namespace FitnessApp.Web.Infrastructure.Extensions
 {
+    using System.Reflection;
 
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.Extensions.DependencyInjection;
+
+    using FitnessApp.Data.Models;
     using FitnessApp.Services.Data;
     using FitnessApp.Services.Data.Interfaces;
-    using Microsoft.Extensions.DependencyInjection;
-    using System.Reflection;
 
     public static class WebApplicationbuilderExtensions
     {
@@ -39,6 +43,38 @@
 
                 services.AddScoped(interfaceType, implementationType);
             }
+        }
+
+        public static IApplicationBuilder SeedAdministrator(this IApplicationBuilder app, string email)
+        {
+            using IServiceScope scopedService = app.ApplicationServices.CreateScope();
+
+            IServiceProvider serviceProvider = scopedService.ServiceProvider;
+
+            UserManager<ApplicationUser> userManager =
+                serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            RoleManager<IdentityRole<Guid>> roleManager =
+                serviceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
+
+            Task.Run(async () =>
+            {
+                if (await roleManager.RoleExistsAsync("Administrator"))
+                {
+                    return;
+                }
+
+                IdentityRole<Guid> role = new IdentityRole<Guid>("Administrator");
+
+                await roleManager.CreateAsync(role);
+
+                ApplicationUser adminUser = await userManager.FindByEmailAsync(email);
+
+                await userManager.AddToRoleAsync(adminUser, "Administrator");
+            })
+                .GetAwaiter()
+                .GetResult();
+
+            return app;
         }
     }
 }

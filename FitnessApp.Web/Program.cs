@@ -34,6 +34,7 @@ namespace FitnessApp.Web
                 options.Password.RequireNonAlphanumeric = builder.Configuration.GetValue<bool>("Identity:Password:RequireNonAlphanumeric");
                 options.Password.RequiredLength = builder.Configuration.GetValue<int>("Identity:Password:RequiredLength");
             })
+                .AddRoles<IdentityRole<Guid>>()
                 .AddEntityFrameworkStores<FitnessAppDbContext>();
 
             builder.Services.AddApplicationServices(typeof(IProgramService));
@@ -44,6 +45,13 @@ namespace FitnessApp.Web
                 config.LoginPath = "/User/Login";
             });
 
+            //builder.Services.AddDistributedMemoryCache();
+
+            //builder.Services.AddSession(options =>
+            //{
+            //    options.IdleTimeout = TimeSpan.FromMinutes(30);
+            //    options.Cookie.IsEssential = true;
+            //});
 
             builder.Services
                 .AddControllersWithViews()
@@ -56,6 +64,7 @@ namespace FitnessApp.Web
 
             var app = builder.Build();
 
+           // app.UseSession();
 
             if (app.Environment.IsDevelopment())
             {
@@ -77,6 +86,8 @@ namespace FitnessApp.Web
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.SeedAdministrator("admin@admin.com");
 
             app.UseEndpoints(config =>
             {
