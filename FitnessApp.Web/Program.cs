@@ -45,13 +45,13 @@ namespace FitnessApp.Web
                 config.LoginPath = "/User/Login";
             });
 
-            //builder.Services.AddDistributedMemoryCache();
+            builder.Services.AddDistributedMemoryCache();
 
-            //builder.Services.AddSession(options =>
-            //{
-            //    options.IdleTimeout = TimeSpan.FromMinutes(30);
-            //    options.Cookie.IsEssential = true;
-            //});
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.IsEssential = true;
+            });
 
             builder.Services
                 .AddControllersWithViews()
@@ -64,7 +64,7 @@ namespace FitnessApp.Web
 
             var app = builder.Build();
 
-            // app.UseSession();
+            app.UseSession();
 
             if (app.Environment.IsDevelopment())
             {
@@ -89,7 +89,7 @@ namespace FitnessApp.Web
 
             if (app.Environment.IsDevelopment())
             {
-                app.SeedAdministrator("admin@admin.com"); // You have to replace it with registered user in your local machine
+                app.SeedAdministrator("admin@admin.com"); // You have to replace it with registered user in your local machine that you want to be an Administrator
             }
 
             app.UseEndpoints(config =>

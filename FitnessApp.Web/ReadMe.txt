@@ -1,0 +1,1 @@
+﻿-In Program.cs i have method that seeds administrator. When you run the app the first user that you will register to be the admin. In the method in Program.cs only you need to write your user's e-mail. 
