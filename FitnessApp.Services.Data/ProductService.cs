@@ -2,6 +2,7 @@
 namespace FitnessApp.Services.Data
 {
     using FitnessApp.Data;
+    using FitnessApp.Data.Models;
     using FitnessApp.Services.Data.Interfaces;
     using FitnessApp.Web.ViewModels.Product;
     using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,20 @@ namespace FitnessApp.Services.Data
         public ProductService(FitnessAppDbContext dbContext)
         {
             this.dbContext = dbContext;
+        }
+
+        public async Task<CartItem> FindProductById(string id)
+        {
+            var product = await this.dbContext.Products.FindAsync(Guid.Parse(id));
+
+            return new CartItem()
+            {
+                ProductId = product.Id.ToString(),
+                PictureUrl = product.PictureUrl,
+                Price = product.Price,
+                ProductName = product.Name,
+                Quantity = 1
+            };
         }
 
         public async Task<ICollection<ProductAllViewModel>> GetAllProducts()

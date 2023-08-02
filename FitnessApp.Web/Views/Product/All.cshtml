@@ -9,7 +9,7 @@
         {
             <p>Price: $@product.Price</p>
             <a class="detail-btn" asp-action="Detail" asp-controller="Product" asp-route-id="@product.Id" asp-area="">Detail</a>
-            <button class="add-to-cart-btn" onclick="addToCart(@product.Id)">Add to Cart</button>
+            <a class="add-to-cart-btn" asp-controller="Cart" asp-action="Add" asp-route-id="@product.Id">Add to Cart</a>
         }
         else
         {
