@@ -13,9 +13,20 @@ namespace FitnessApp.Web.Controllers
             this.programService = programService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            try
+            {
+                string userId = this.User.GetId();
+                var programs = await this.programService.GetProgramsByUserId(userId);
+
+                return View(programs);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public async Task<IActionResult> GetPrograms()
@@ -25,12 +36,11 @@ namespace FitnessApp.Web.Controllers
                 string userId = this.User.GetId();
                 var programs = await this.programService.GetProgramsByUserId(userId);
 
-                return PartialView("_ProgramPartial", programs);
+                return View(programs);
             }
             catch (Exception)
             {
-
-                throw;
+                return GeneralError();
             }
         }
     }

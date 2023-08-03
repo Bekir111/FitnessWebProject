@@ -8,7 +8,7 @@
 <img src="@Model.PictureUrl" alt="Product Image" class="product-image" />
 @if (Model.IsAvailable)
 {
-	<p>Price: @Model.Price</p>
+	<p>Price: @Model.Price$</p>
 }
 else
 {
@@ -19,10 +19,7 @@ else
 {
 	<p class="availability">Availability: Available</p>
 	<div>
-		<button type="button" class="btn @(!Model.IsAvailable ? "btn-disabled" : "btn-primary")"
-			id="addToCartBtn" @(!Model.IsAvailable ? "disabled" : "")>
-			@(!Model.IsAvailable ? "Not Available" : "Add to Cart")
-		</button>
+		<a class="btn btn-success text-white" asp-route-id="@Model.Id" asp-area="" asp-controller="Cart" asp-action="Add">Add To Cart</a>
 	</div>
 }
 else
@@ -39,7 +36,7 @@ else
 		}
 		else
 		{
-			<a class="btn btn-primary text-white" asp-route-id="@Model.Id" asp-area="" asp-controller="ProgramReview" asp-action="Add">Write Review</a>
+			<a id="write-review" class="btn btn-primary text-white" asp-route-id="@Model.Id" asp-area="" asp-controller="ProgramReview" asp-action="Add">Write Review</a>
 		}
 	</a>
 	<hr class="divider">
@@ -92,13 +89,14 @@ else
 	}
 
 	/* Styling for the "Add to Cart" button */
-	#addToCartBtn {
+	.btn-success {
 		font-size: 18px;
 		padding: 10px 20px;
 		border: none;
 		border-radius: 5px;
 		cursor: pointer;
 		transition: background-color 0.3s ease;
+		background-color: #2ecc71
 	}
 
 		#addToCartBtn:not([disabled]) {
@@ -125,6 +123,7 @@ else
 
 	.no-reviews {
 		font-size: 20px;
+		margin-bottom: 20px;
 	}
 
 	.review-section {
@@ -170,6 +169,12 @@ else
 		margin-bottom: 10px;
 	}
 
+	#write-review{
+		text-align: center;
+		align-items: center;
+		
+	}
+
 	.username {
 		font-weight: bold;
 	}
@@ -183,5 +188,6 @@ else
 
 	.review-text {
 		margin-top: 10px;
+
 	}
 </style>

@@ -21,7 +21,7 @@ namespace FitnessApp.Services.Data
         public async Task<ICollection<AllProgramViewModel>> GetAllPrograms()
         {
             var programs = await this.dbContext.Programs
-                .Where(p => p.IsActive == true)
+                .Where(p => p.IsActive)
                 .Select(p => new AllProgramViewModel()
                 {
                     Id = p.Id.ToString(),
@@ -37,31 +37,10 @@ namespace FitnessApp.Services.Data
             return programs;
         }
 
-        public async Task<ICollection<AllProgramViewModel>> GetAllProgramsForUser(string userId)
-        {
-            return await this.dbContext.ProgramUsers
-                .Where(pu => pu.UserId.ToString() == userId)
-                .Select(pu => new AllProgramViewModel()
-                {
-                    Id = pu.Program.Id.ToString(),
-                    CategoryId = pu.Program.CategoryId,
-                    CategoryName = pu.Program.Category.Name,
-                    Name = pu.Program.Name,
-                    PictureUrl = pu.Program.PictureUrl,
-                    AverageRating = pu.Program.AverageRating,
-                })
-                .ToArrayAsync();
-        }
-
         public async Task<DetailProgramViewModel> GetProgramById(string id)
         {
             var program = await this.dbContext.Programs
-                .FirstOrDefaultAsync(p => p.Id.ToString() == id);
-
-            if (program == null)
-            {
-                throw new InvalidOperationException("The program cannot be found!");
-            }
+                .FirstOrDefaultAsync(p => p.Id.ToString() == id && p.IsActive);
 
             return new DetailProgramViewModel()
             {
@@ -77,7 +56,7 @@ namespace FitnessApp.Services.Data
         public async Task<ICollection<AllProgramViewModel>> GetProgramsByUserId(string id)
         {
             return await this.dbContext.ProgramUsers
-                .Where(pu => pu.UserId.ToString() == id)
+                .Where(pu => pu.UserId.ToString() == id && pu.IsActive)
                 .Select(pu => new AllProgramViewModel()
                 {
                     Id = pu.ProgramId.ToString(),
@@ -90,10 +69,15 @@ namespace FitnessApp.Services.Data
                 .ToArrayAsync();
         }
 
+        public async Task<bool> IsProgramExist(string id)
+        {
+            return await dbContext.Programs.AnyAsync(p => p.Id.ToString() == id && p.IsActive);
+        }
+
         public async Task<bool> IsUserJoinedTheProgram(string programId, string userId)
         {
             return await this.dbContext.ProgramUsers
-                .AnyAsync(pu => pu.ProgramId.ToString() == programId && pu.UserId.ToString() == userId);
+                .AnyAsync(pu => pu.ProgramId.ToString() == programId && pu.UserId.ToString() == userId && pu.IsActive);
         }
 
         public async Task JoinTheProgramByIdAndUserId(string programId, string userId)

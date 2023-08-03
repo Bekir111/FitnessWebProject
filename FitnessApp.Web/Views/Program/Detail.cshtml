@@ -11,7 +11,7 @@
 		<p>@Model.Description</p>
 	</div>
 	<div class="program-actions">
-		<a href="#" class="btn btn-join">Join</a>
+		<a class="btn btn-join" asp-area="" asp-controller="Program" asp-action="Join" asp-route-id="@Model.Id">Join</a>
 	</div>
 	<div class="review-section">
 		<h3>Reviews</h3>

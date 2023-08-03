@@ -9,7 +9,7 @@
 
         Task<DetailProgramViewModel> GetProgramById(string id);
 
-        //Task AddReviewToProgram(ReviewFormViewModel model,string programId,string userId);
+        Task<bool> IsProgramExist(string id);
 
         Task<ICollection<AllProgramViewModel>> GetProgramsByUserId(string id);
 
@@ -18,8 +18,6 @@
         Task<bool> IsUserJoinedTheProgram(string programId, string userId);
 
         Task LeaveTheProgramByIdAndUserId(string programId, string userId);
-
-        Task<ICollection<AllProgramViewModel>> GetAllProgramsForUser(string userId);
 
     }
 }

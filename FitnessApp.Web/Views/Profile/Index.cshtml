@@ -1,31 +1,45 @@
-﻿
+﻿<style>
+    .red-button {
+        background-color: darkred;
+    }
 
-<h2>Let AJAX change this text</h2>
-<button type="button" onclick="loadProgramData()" class="text-white">Load Program Data</button>
+    .green-button {
+        background-color: darkgreen;
+    }
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    .blue-button {
+        background-color: darkblue;
+    }
 
-<script>
-    $(document).ready(function () {
-        // Function to load the program data with AJAX
-        function loadProgramData() {
-            $.ajax({
-                url: 'FitnessApp/Web/Controllers/ProfileController/GetPrograms', // Replace this with the actual URL for fetching program data
-                type: 'GET',
-                dataType: 'html', // Set the data type to html
-                success: function (response) {
-                    // Render the program data inside the container
-                    $('#programContainer').html(response);
-                },
-                error: function () {
-                    alert('Error loading program data.');
-                }
-            });
-        }
+    .big-button {
+        font-size: 24px;
+        padding: 15px;
+        margin: 10px 0;
+        border: none;
+        color: #fff;
+        text-decoration: none;
+        display: inline-block;
+        width: 200px;
+        text-align: center;
+        border-radius: 5px;
+        cursor: pointer;
+    }
 
-        // Attach a click event to the button that triggers the AJAX request
-        $('#loadProgramBtn').on('click', function () {
-            loadProgramData();
-        });
-    });
-</script>
+    .button-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+</style>
+
+<h2 class="text-danger text-center">Profile</h2>
+
+<div class="button-container">
+
+    <a class="big-button red-button active text-white" asp-controller="Profile" asp-action="GetPrograms">My Programs</a>
+
+    <a class="big-button green-button active text-white" asp-controller="Profile" asp-action="GetFoodRecipes">My Food Recipes</a>
+
+    <a class="big-button blue-button active text-white" asp-controller="Profile" asp-action="GetPosts">My Posts</a>
+</div>
+
