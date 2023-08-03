@@ -88,6 +88,20 @@ namespace FitnessApp.Services.Data
                 .ToArrayAsync();
         }
 
+        public async Task<ICollection<AllFoodRecipeViewModel>> GetAllFoodRecipesByUserId(string id)
+        {
+            return await dbContext.FoodRecipes
+                .Where(fr => fr.IsActive == true && fr.UserId.ToString() == id)
+                .Select(fr => new AllFoodRecipeViewModel()
+                {
+                    Id = fr.Id.ToString(),
+                    Name = fr.Name,
+                    UserName = fr.User.UserName,
+                    UserId = fr.UserId.ToString()
+                })
+                .ToArrayAsync();
+        }
+
         public async Task<DetailFoodRecipeViewModel> GetFoodRecipeByIdForDetail(string id)
         {
             var foodRecipe = await dbContext.FoodRecipes

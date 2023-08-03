@@ -5,6 +5,7 @@ namespace FitnessApp.Services.Data.Interfaces
     public interface IFoodRecipeService
     {
         Task<ICollection<AllFoodRecipeViewModel>> GetAllFoodRecipes();
+        Task<ICollection<AllFoodRecipeViewModel>> GetAllFoodRecipesByUserId(string id);
 
         Task AddFoodRecipeAsync(FoodRecipeFormModel model,string userId);
 
@@ -18,5 +19,7 @@ namespace FitnessApp.Services.Data.Interfaces
 
         Task<bool> IsFoodRecipeExist(string id);
         Task<bool> IsAuthorIdEqualToUserId(string userId,string foodRecipeId);
+
+
     }
 }

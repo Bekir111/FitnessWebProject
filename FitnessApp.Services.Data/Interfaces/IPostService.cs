@@ -6,6 +6,8 @@ namespace FitnessApp.Services.Data.Interfaces
     {
         Task<ICollection<AllPostsViewModel>> GetAllPostsAsync();
 
+        Task<ICollection<AllPostsViewModel>> GetAllPostsByUserIdAsync(string id);
+
         Task<DetailPostViewModel> GetPostForDetailAsync(int id);
 
         Task<PostFormModel> FindPostByIdForEditAndDelete(int id);

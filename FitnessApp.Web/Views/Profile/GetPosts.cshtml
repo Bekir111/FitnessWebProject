@@ -1,14 +1,14 @@
-﻿@model ICollection<AllPostsViewModel>
+﻿@model IEnumerable<AllPostsViewModel>
 
 @if (!Model.Any())
 {
-	<h2 class="text-center text-danger">You do not have any programs yet!</h2>
+	<h2 class="text-center text-danger">You do not have any posts yet!</h2>
 }
 else
 {
 	<div id="programsContainer">
 		<div class="row">
-			<partial name="_ProgramPartial" model="@Model" />
+			<partial name="_PostPartial" model="@Model" />
 		</div>
 	</div>
 }

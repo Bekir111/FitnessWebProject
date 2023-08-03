@@ -100,5 +100,18 @@ namespace FitnessApp.Services.Data
 
             await dbContext.SaveChangesAsync();
         }
+
+        public async Task<ICollection<AllPostsViewModel>> GetAllPostsByUserIdAsync(string id)
+        {
+            return await this.dbContext.Posts
+                 .Where(p => p.IsActive == true && p.UserId.ToString() == id)
+                 .Select(p => new AllPostsViewModel()
+                 {
+                     Id = p.Id,
+                     Title = p.Title,
+                     CreatedOn = p.CreatedOn.ToString("dd MMMM yyyy")
+                 })
+                 .ToArrayAsync();
+        }
     }
 }

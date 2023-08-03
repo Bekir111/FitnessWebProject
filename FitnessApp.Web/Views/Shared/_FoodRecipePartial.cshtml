@@ -1,0 +1,115 @@
+﻿@model IEnumerable<AllFoodRecipeViewModel>;
+=
+<style>
+
+
+    .add-recipe-button {
+        text-decoration: none;
+        font-weight: bold;
+        transition: background-color 0.3s;
+        display: block;
+        width: 100%;
+        padding: 10px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .recipe-card {
+        background-color: dimgrey;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .recipe-details {
+        text-align: center;
+    }
+
+        .recipe-details h3 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .recipe-details p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+
+    .btn-detail {
+        text-decoration: none;
+        font-weight: bold;
+        transition: background-color 0.3s;
+        display: inline-block;
+        background-color: #337ab7;
+        color: #fff;
+        border: none;
+        padding: 10px 15px;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-right: 10px;
+        transition: background-color 0.3s;
+    }
+
+    .btn-edit {
+        text-decoration: none;
+        font-weight: bold;
+        transition: background-color 0.3s;
+        display: inline-block;
+        background-color: yellow;
+        color: black;
+        border: none;
+        padding: 10px 15px;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-right: 10px;
+        transition: background-color 0.3s;
+    }
+
+    .btn-delete {
+        text-decoration: none;
+        font-weight: bold;
+        transition: background-color 0.3s;
+        display: inline-block;
+        background-color: red;
+        color: #fff;
+        border: none;
+        padding: 10px 15px;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-right: 10px;
+    }
+</style>
+
+
+<h2>Food Recipes</h2>
+
+@foreach (var recipe in Model)
+        {
+            <div class="recipe-card">
+                <div class="recipe-details">
+                    <h3>@recipe.Name</h3>
+                    <p>Author: @recipe.UserName</p>
+                    <div>
+                        @if (User.GetId().ToString().ToLower() == recipe.UserId.ToLower())
+                        {
+                        <a class="btn-edit btn-warning " asp-route-id="@recipe.Id" asp-area="" asp-controller="FoodRecipe" asp-action="Edit">Edit</a>
+                            <a class="btn-delete btn-danger" asp-route-id="@recipe.Id" asp-area="" asp-controller="FoodRecipe" asp-action="Delete">Delete</a>
+                        }
+                    <a class="btn-detail text-white btn-primary" asp-route-id="@recipe.Id" asp-area="" asp-controller="FoodRecipe" asp-action="Detail">Detail</a>
+                    </div>
+                    </div>
+                </div>
+        }

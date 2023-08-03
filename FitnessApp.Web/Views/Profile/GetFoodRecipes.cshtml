@@ -1,5 +1,14 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@model IEnumerable<AllFoodRecipeViewModel>
+
+@if (!Model.Any())
+{
+	<h2 class="text-center text-danger">You do not have any food recipes yet!</h2>
+}
+else
+{
+	<div id="programsContainer">
+		<div class="row">
+			<partial name="_FoodRecipePartial" model="@Model" />
+		</div>
+	</div>
 }

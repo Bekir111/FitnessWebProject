@@ -1,5 +1,89 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model IEnumerable<AllPostsViewModel>
+@inject IPostService PostService
+
+<div class="container">
+    <div class="header">
+        <h1>Posts</h1>
+        <a>
+
+				<a class="btn btn-primary text-white" asp-area="" asp-controller="Post" asp-action="Add">Add Post</a>
+		</a>
+    </div>
+
+    <ul class="posts">
+        @foreach (var post in Model)
+        {
+            <a asp-route-id="@post.Id" asp-route-information="@post.GetUrlInfo()" asp-area="" asp-controller="Post" asp-action="Detail">
+            <li>
+                    @post.Title
+                <p>Published: @post.CreatedOn</p>
+                    @if (await PostService.IsThisUserAuthorOfThePost(this.User.GetId(), post.Id))
+                    {
+                    <a class="btn btn-warning text-white align-content-center" asp-route-id="@post.Id" asp-area="" asp-controller="Post" asp-action="Edit">Edit Post</a>
+                    <a class="btn btn-danger text-white  align-content-center" asp-route-id="@post.Id" asp-area="" asp-controller="Post" asp-action="Delete">Delete Post</a>
+                    }
+            </li>
+            </a>
+        }
+    </ul>
+</div>
+
+<style>
+
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+
+    .header {
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+        margin-bottom: 20px;
+    }
+
+        .header h1 {
+            font-size: 36px;
+            margin: 0;
+        }
+
+    .posts {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        background-color: dimgrey;
+    }
+
+        .posts li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: dimgrey;
+            border: 1px solid skyblue;
+            color: skyblue;
+            text-align: center;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+            .posts  a {
+                font-size: 20px;
+            color: skyblue;
+                text-decoration: none; 
+                color: inherit;
+            }
+
+                .posts li a:hover {
+                    color: #23527c;
+                }
+
+        .posts p {
+            font-size: 14px;
+            color: skyblue;
+            margin: 0;
+            text-align: right;
+        }
+</style>
