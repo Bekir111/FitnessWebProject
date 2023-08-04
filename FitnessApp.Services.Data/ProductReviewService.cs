@@ -52,6 +52,18 @@ namespace FitnessApp.Services.Data
             await dbContext.SaveChangesAsync();
         }
 
+        public async Task<ReviewFormViewModel> FindReviewById(string id)
+        {
+            var review = await dbContext.ProductReviews
+               .FirstAsync(r => r.Id.ToString() == id && r.IsActive);
+
+            return new ReviewFormViewModel()
+            {
+                Rating = review.Rating,
+                ReviewText = review.ReviewText,
+            };
+        }
+
         public async Task<ReviewFormViewModel> FindReviewByUserIdAndProductId(string userId, string productId)
         {
             var review = await dbContext.ProductReviews
@@ -93,6 +105,33 @@ namespace FitnessApp.Services.Data
                     UserName = pr.User.UserName,
                 })
                 .ToArrayAsync();
+        }
+
+        public async Task ReviewForAdminForDelete(string reviewId)
+        {
+            var review = await dbContext.ProductReviews
+                .FirstAsync(r => r.Id.ToString() == reviewId && r.IsActive);
+
+            review.IsActive = false;
+
+            await dbContext.SaveChangesAsync();
+        }
+
+        public async Task ReviewForAdminForEdit(ReviewFormViewModel model, string reviewId)
+        {
+            var review = await dbContext.ProductReviews
+                .FirstAsync(r => r.Id.ToString() == reviewId && r.IsActive);
+
+            review.ReviewText = model.ReviewText;
+            review.Rating = model.Rating;
+
+            await dbContext.SaveChangesAsync();
+        }
+
+        public async Task<bool> IsReviewExisting(string reviewId)
+        {
+            return await this.dbContext.ProductReviews
+                 .AnyAsync(r => r.Id.ToString() == reviewId && r.IsActive);
         }
 
         public async Task<bool> IsUserHaveReviewInThisProduct(string userId, string productId)

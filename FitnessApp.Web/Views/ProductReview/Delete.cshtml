@@ -55,24 +55,49 @@
 
 <h2 class="title-review">Write a Review</h2>
 
-<form id="reviewForm" method="post" asp-controller="ProductReview" asp-action="Delete">
-	<div class="form-group">
-		<label asp-for="@Model.Rating">Rating</label>
-		<input readonly asp-for="@Model.Rating" class="form-control" type="number" min="0" max="5" step="1" />
-		<span asp-validation-for="@Model.Rating" class="text-danger"></span>
-	</div>
-	<span id="ratingError" class="text-danger"></span>
+@if (User.IsAdmin())
+{
+	<form id="reviewForm" method="post" asp-controller="ProductReview" asp-action="AdminDelete">
+		<div class="form-group">
+			<label asp-for="@Model.Rating">Rating</label>
+			<input readonly asp-for="@Model.Rating" class="form-control" type="number" min="0" max="5" step="1" />
+			<span asp-validation-for="@Model.Rating" class="text-danger"></span>
+		</div>
+		<span id="ratingError" class="text-danger"></span>
 
-	<div class="form-group">
-		<label asp-for="@Model.ReviewText">Review</label>
-		<textarea readonly asp-for="@Model.ReviewText" class="form-control"></textarea>
-		<span asp-validation-for="@Model.ReviewText" class="text-danger"></span>
-	</div>
-	<span id="reviewTextError" class="text-danger"></span>
-	<dib>
-		<button id="Button" type="submit" class="btn btn-danger">Delete Review</button>
-	</dib>
-</form>
+		<div class="form-group">
+			<label asp-for="@Model.ReviewText">Review</label>
+			<textarea readonly asp-for="@Model.ReviewText" class="form-control"></textarea>
+			<span asp-validation-for="@Model.ReviewText" class="text-danger"></span>
+		</div>
+		<span id="reviewTextError" class="text-danger"></span>
+		<dib>
+			<button id="Button" type="submit" class="btn btn-danger">Delete Review</button>
+		</dib>
+	</form>
+}
+else
+{
+	<form id="reviewForm" method="post" asp-controller="ProductReview" asp-action="Delete">
+		<div class="form-group">
+			<label asp-for="@Model.Rating">Rating</label>
+			<input readonly asp-for="@Model.Rating" class="form-control" type="number" min="0" max="5" step="1" />
+			<span asp-validation-for="@Model.Rating" class="text-danger"></span>
+		</div>
+		<span id="ratingError" class="text-danger"></span>
+
+		<div class="form-group">
+			<label asp-for="@Model.ReviewText">Review</label>
+			<textarea readonly asp-for="@Model.ReviewText" class="form-control"></textarea>
+			<span asp-validation-for="@Model.ReviewText" class="text-danger"></span>
+		</div>
+		<span id="reviewTextError" class="text-danger"></span>
+		<dib>
+			<button id="Button" type="submit" class="btn btn-danger">Delete Review</button>
+		</dib>
+	</form>
+}
+
 
 <script>
 	var reviewForm = document.getElementById('reviewForm');

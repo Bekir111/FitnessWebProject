@@ -103,5 +103,43 @@ namespace FitnessApp.Services.Data
             return reviews;
         }
 
-    }
+		public async Task<bool> IsReviewExisting(string reviewId)
+		{
+            return await this.dbContext.ProgramReviews
+                 .AnyAsync(r => r.Id.ToString() == reviewId && r.IsActive);
+        }
+
+		public async Task GetReviewForAdminForDelete(string reviewId)
+		{
+            var review = await dbContext.ProgramReviews
+                .FirstAsync(r => r.Id.ToString() == reviewId && r.IsActive);
+
+            review.IsActive = false;
+
+            await dbContext.SaveChangesAsync();
+        }
+
+		public async Task GetReviewForAdminForEdit(ReviewFormViewModel model, string reviewId)
+		{
+            var review = await dbContext.ProgramReviews
+                .FirstAsync(r => r.Id.ToString() == reviewId && r.IsActive);
+
+            review.ReviewText = model.ReviewText;
+            review.Rating = model.Rating;
+
+            await dbContext.SaveChangesAsync();
+        }
+
+		public async Task<ReviewFormViewModel> FindReviewById(string id)
+		{
+            var review = await dbContext.ProgramReviews
+               .FirstAsync(r => r.Id.ToString() == id && r.IsActive);
+
+            return new ReviewFormViewModel()
+            {
+                Rating = review.Rating,
+                ReviewText = review.ReviewText,
+            };
+        }
+	}
 }

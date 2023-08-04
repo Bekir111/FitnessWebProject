@@ -67,6 +67,10 @@
 							<div class="review-text">
 								<span class="review">@review.ReviewText</span>
 							</div>
+							@if(User.IsAdmin()){
+								<a id="button" class="btn btn-warning text-white" asp-route-id="@review.Id" asp-area="" asp-controller="ProductReview" asp-action="AdminEdit">Edit Review</a>
+								<a id="button" class="btn btn-danger text-white" asp-route-id="@review.Id" asp-area="" asp-controller="ProductReview" asp-action="AdminDelete">Delete Review</a>
+							}
 						</div>
 					</div>
 

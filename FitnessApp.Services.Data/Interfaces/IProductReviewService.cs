@@ -17,5 +17,13 @@ namespace FitnessApp.Services.Data.Interfaces
         Task DeleteReviewInProduct(string userId, string productId);
 
         Task<ReviewFormViewModel> FindReviewByUserIdAndProductId(string userId, string productId);
+
+        Task<bool> IsReviewExisting(string reviewId);
+
+        Task ReviewForAdminForDelete(string reviewId);
+
+        Task ReviewForAdminForEdit(ReviewFormViewModel model, string reviewId);
+
+        Task<ReviewFormViewModel> FindReviewById(string id);
     }
 }
