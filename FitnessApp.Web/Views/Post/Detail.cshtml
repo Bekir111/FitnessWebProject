@@ -1,5 +1,6 @@
 ﻿@model DetailPostViewModel
 
+@inject IPostService PostService
 <div class="container">
 	<div class="header">
 		<h1>@Model.Title</h1>
@@ -9,7 +10,11 @@
 	<div class="post-content">
 		@Model.Text
 	</div>
-
+	 @if (await PostService.IsThisUserAuthorOfThePost(this.User.GetId(), Model.Id) || User.IsAdmin())
+                    {
+                    <a class="btn btn-warning text-white align-content-center" asp-route-id="@Model.Id" asp-area="" asp-controller="Post" asp-action="Edit">Edit Post</a>
+                    <a class="btn btn-danger text-white  align-content-center" asp-route-id="@Model.Id" asp-area="" asp-controller="Post" asp-action="Delete">Delete Post</a>
+                    }
 </div>
 
 

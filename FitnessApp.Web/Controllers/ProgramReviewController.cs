@@ -8,6 +8,8 @@ namespace FitnessApp.Web.Controllers
     using FitnessApp.Services.Data.Interfaces;
 
     using static Common.NotificationMessagesConstants;
+    using Microsoft.AspNetCore.Authorization;
+    using System.Data;
 
     public class ProgramReviewController : BaseController
     {
@@ -147,6 +149,106 @@ namespace FitnessApp.Web.Controllers
                 await this.reviewService.DeleteReviewInProgram(userId, id);
                 TempData[WarningMessage] = "Tour review was deleted successfully!";
                 return RedirectToAction("Detail", "Program", new { id = id });
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> AdminDelete(string id)
+        {
+            if (!User.IsAdmin())
+            {
+                TempData[ErrorMessage] = "You cannnot delete this review";
+                return RedirectToAction("All", "Program");
+            }
+            string userId = this.User.GetId();
+            bool isReviewExist = await this.reviewService.IsReviewExisting(id);
+            if (!isReviewExist)
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                var model = await this.reviewService.FindReviewById(id);
+                return View("Delete", model);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> AdminDelete(ReviewFormViewModel model, string id)
+        {
+            if (!User.IsAdmin())
+            {
+                TempData[ErrorMessage] = "You cannnot delete this review!";
+                return RedirectToAction("All", "Program");
+            }
+            string userId = this.User.GetId();
+            try
+            {
+                await this.reviewService.GetReviewForAdminForDelete(id);
+                TempData[SuccessMessage] = "You deleted this review successfully!";
+
+                return RedirectToAction("All", "Program");
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> AdminEdit(string id)
+        {
+            if (!User.IsAdmin())
+            {
+                TempData[ErrorMessage] = "You cannnot edit this review";
+                return RedirectToAction("All", "Program");
+            }
+            string userId = this.User.GetId();
+            bool isReviewExist = await this.reviewService.IsReviewExisting(id);
+            if (!isReviewExist)
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                var model = await this.reviewService.FindReviewById(id);
+                return View("Edit", model);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> AdminEdit(ReviewFormViewModel model, string id)
+        {
+            if (!User.IsAdmin())
+            {
+                TempData[ErrorMessage] = "You cannnot edit this review!";
+                return RedirectToAction("All", "Program");
+            }
+            string userId = this.User.GetId();
+            try
+            {
+                await this.reviewService.GetReviewForAdminForEdit(model, id);
+                TempData[SuccessMessage] = "You edited this review successfully!";
+
+                return RedirectToAction("All", "Program");
             }
             catch (Exception)
             {

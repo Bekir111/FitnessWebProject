@@ -75,5 +75,32 @@
                 return GeneralError();
             }
         }
+
+        public async Task<IActionResult> Leave(string id)
+        {
+            bool isExist = await this.programService.IsProgramExist(id);
+            if (!isExist)
+            {
+                return NotFound();
+            }
+
+            bool isJoined = await this.programService.IsUserJoinedTheProgram(id, User.GetId());
+            if (!isJoined)
+            {
+                TempData[WarningMessage] = "You are not joined this program!";
+                return RedirectToAction("All", "Program");
+            }
+
+            try
+            {
+                await this.programService.LeaveTheProgramByIdAndUserId(id, User.GetId());
+                TempData[SuccessMessage] = "You successfully left the program!";
+                return RedirectToAction("All", "Program");
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
     }
 }

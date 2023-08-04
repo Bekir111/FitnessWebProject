@@ -71,8 +71,7 @@ namespace FitnessApp.Web.Controllers
             }
             catch (Exception)
             {
-                TempData[ErrorMessage] = "This food recipe doesnt exist!";
-                return RedirectToAction("All", "FoodRecipe");
+                return NotFound();
             }
         }
 
@@ -87,6 +86,13 @@ namespace FitnessApp.Web.Controllers
                 return RedirectToAction("All", "FoodRecipe");
             }
 
+            bool isAuthor = await this.foodRecipeService.IsAuthorIdEqualToUserId(this.User.GetId(),id);
+            if (!isAuthor && !this.User.IsAdmin())
+            {
+                TempData[ErrorMessage] = "You cannot edit this food recipe!";
+                return RedirectToAction("All", "FoodRecipe");
+            }
+
             try
             {
                 var model = await this.foodRecipeService.FindFoodRecipeByIdForEditAndDelete(id);
@@ -95,8 +101,7 @@ namespace FitnessApp.Web.Controllers
             }
             catch (Exception)
             {
-                TempData[ErrorMessage] = "You cannot edit this food recipe!";
-                return RedirectToAction("All", "FoodRecipe");
+                return NotFound();
             }
         }
 
@@ -108,6 +113,12 @@ namespace FitnessApp.Web.Controllers
             if (!isExist)
             {
                 TempData[ErrorMessage] = "This food recipe doesn't exist!";
+                return RedirectToAction("All", "FoodRecipe");
+            }
+            bool isAuthor = await this.foodRecipeService.IsAuthorIdEqualToUserId(this.User.GetId(), id);
+            if (!isAuthor && !this.User.IsAdmin())
+            {
+                TempData[ErrorMessage] = "You cannot edit this food recipe!";
                 return RedirectToAction("All", "FoodRecipe");
             }
 
@@ -136,14 +147,12 @@ namespace FitnessApp.Web.Controllers
                 return RedirectToAction("All", "FoodRecipe");
             }
 
-            string userId = this.User.GetId();
-            bool isItTheAuthor = await this.foodRecipeService.IsAuthorIdEqualToUserId(userId, id);
-            if (!isItTheAuthor)
+            bool isAuthor = await this.foodRecipeService.IsAuthorIdEqualToUserId(this.User.GetId(), id);
+            if (!isAuthor && !this.User.IsAdmin())
             {
-                TempData[ErrorMessage] = "Only the author of recipe can delete it!";
+                TempData[ErrorMessage] = "You cannot edit this food recipe!";
                 return RedirectToAction("All", "FoodRecipe");
             }
-
             try
             {
                 var model = await this.foodRecipeService.FindFoodRecipeByIdForEditAndDelete(id);
@@ -164,6 +173,12 @@ namespace FitnessApp.Web.Controllers
             if (!isExist)
             {
                 TempData[ErrorMessage] = "This food recipe doesn't exist!";
+                return RedirectToAction("All", "FoodRecipe");
+            }
+            bool isAuthor = await this.foodRecipeService.IsAuthorIdEqualToUserId(this.User.GetId(), id);
+            if (!isAuthor && !this.User.IsAdmin())
+            {
+                TempData[ErrorMessage] = "You cannot edit this food recipe!";
                 return RedirectToAction("All", "FoodRecipe");
             }
 

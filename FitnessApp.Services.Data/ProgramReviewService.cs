@@ -20,7 +20,7 @@ namespace FitnessApp.Services.Data
 		public async Task<ICollection<ReviewInDetailViewModel>> FindReviewsByProgramId(string programId)
 		{
 			var reviews = await this.dbContext.ProgramReviews
-				.Where(pr => pr.ProgramId.ToString() == programId)
+				.Where(pr => pr.ProgramId.ToString() == programId && pr.IsActive)
 				.Select(pr => new ReviewInDetailViewModel()
 				{
 					Id = pr.Id.ToString(),
@@ -50,13 +50,13 @@ namespace FitnessApp.Services.Data
 		public async Task<bool> IsUserHaveReviewInThisProgram(string userId,string programId)
 		{
 			return await this.dbContext.ProgramReviews
-				.AnyAsync(r => r.UserId.ToString() == userId && r.ProgramId.ToString() == programId);
+				.AnyAsync(r => r.UserId.ToString() == userId && r.ProgramId.ToString() == programId && r.IsActive);
 		}
 
 		public async Task EditReviewInProgram(ReviewFormViewModel model, string userId,string programId)
 		{
 			var review = await dbContext.ProgramReviews
-				.FirstAsync(r => r.ProgramId.ToString() == programId && r.UserId.ToString() == userId);
+				.FirstAsync(r => r.ProgramId.ToString() == programId && r.UserId.ToString() == userId && r.IsActive);
 
 			review.ReviewText = model.ReviewText;
 			review.Rating = model.Rating;
@@ -67,7 +67,7 @@ namespace FitnessApp.Services.Data
 		public async Task DeleteReviewInProgram(string userId, string programId)
 		{
             var review = await dbContext.ProgramReviews
-                .FirstAsync(r => r.ProgramId.ToString() == programId && r.UserId.ToString() == userId);
+                .FirstAsync(r => r.ProgramId.ToString() == programId && r.UserId.ToString() == userId && r.IsActive);
 
             review.IsActive = false;
 
@@ -89,7 +89,7 @@ namespace FitnessApp.Services.Data
         public async Task<ReviewInDetailViewModel[]> GetAllReviewsByProgramId(string programId)
 		{
             var reviews = await this.dbContext.ProgramReviews
-                .Where(pr => pr.ProgramId.ToString() == programId)
+                .Where(pr => pr.ProgramId.ToString() == programId && pr.IsActive)
                 .Select(pr => new ReviewInDetailViewModel()
                 {
                     Id = pr.Id.ToString(),

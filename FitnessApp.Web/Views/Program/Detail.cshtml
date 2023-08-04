@@ -1,5 +1,7 @@
 ﻿@model DetailProgramViewModel
 
+@inject IProgramService ProgramService;
+
 <div class="program-details">
 	<div class="program-name">
 		<h2>@Model.Name</h2>
@@ -11,7 +13,14 @@
 		<p>@Model.Description</p>
 	</div>
 	<div class="program-actions">
-		<a class="btn btn-join" asp-area="" asp-controller="Program" asp-action="Join" asp-route-id="@Model.Id">Join</a>
+		@if (await ProgramService.IsUserJoinedTheProgram(Model.Id, this.User.GetId()))
+		{
+			<a class="btn-program text-danger nav-link active" asp-area="" asp-controller="Program" asp-action="Leave" asp-route-id="@Model.Id">Leave</a>
+		}
+		else
+		{
+			<a class="btn-program text-success nav-link active" asp-area="" asp-controller="Program" asp-action="Join" asp-route-id="@Model.Id">Join</a>
+		}
 	</div>
 	<div class="review-section">
 		<h3>Reviews</h3>
@@ -47,6 +56,11 @@
 							<div class="review-text">
 								<span class="review">@review.ReviewText</span>
 							</div>
+							@if (User.IsAdmin())
+							{
+								<a id="button" class="btn btn-warning text-white" asp-route-id="@review.Id" asp-area="" asp-controller="ProgramReview" asp-action="AdminEdit">Edit Review</a>
+								<a id="button" class="btn btn-danger text-white" asp-route-id="@review.Id" asp-area="" asp-controller="ProgramReview" asp-action="AdminDelete">Delete Review</a>
+							}
 						</div>
 					</div>
 

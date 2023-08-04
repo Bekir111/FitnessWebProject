@@ -1,4 +1,5 @@
 ﻿@model ICollection<AllProgramViewModel>
+@inject IProgramService ProgramService
 
 <h2 class="title">Programs</h2>
 
@@ -19,11 +20,18 @@
 						<img src="@program.PictureUrl" alt="@program.Name" class="program-image">
 						<div class="program-title">@program.Name</div>
 						<div class="rate-program">
-							Average rating: @program.AverageRating.ToString("f1")
+							Average rating: @program.AverageRating
 						</div>
 						<div class="button-group">
 							<a class="btn-program text-primary nav-link active" asp-route-id="@program.Id" asp-area="" asp-controller="Program" asp-action="Detail">Details</a>
-							<a class="btn-program text-success nav-link active" asp-area="" asp-controller="Program" asp-action="Join">Join</a>
+							@if (await ProgramService.IsUserJoinedTheProgram(program.Id, this.User.GetId()))
+							{
+								<a class="btn-program text-danger nav-link active" asp-area="" asp-controller="Program" asp-action="Leave" asp-route-id="@program.Id">Leave</a>
+							}
+							else
+							{
+								<a class="btn-program text-success nav-link active" asp-area="" asp-controller="Program" asp-action="Join" asp-route-id="@program.Id">Join</a>
+							}
 						</div>
 					</div>
 				</section>

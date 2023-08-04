@@ -108,7 +108,7 @@
                     <h3>@recipe.Name</h3>
                     <p>Author: @recipe.UserName</p>
                     <div>
-                        @if (User.GetId().ToString().ToLower() == recipe.UserId.ToLower())
+                        @if (User.GetId().ToString().ToLower() == recipe.UserId.ToLower() || User.IsAdmin())
                         {
                         <a class="btn-edit btn-warning " asp-route-id="@recipe.Id" asp-area="" asp-controller="FoodRecipe" asp-action="Edit">Edit</a>
                             <a class="btn-delete btn-danger" asp-route-id="@recipe.Id" asp-area="" asp-controller="FoodRecipe" asp-action="Delete">Delete</a>

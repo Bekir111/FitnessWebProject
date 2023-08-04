@@ -17,20 +17,9 @@ namespace FitnessApp.Web.Controllers
             this.postService = postService;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            try
-            {
-                string userId = this.User.GetId();
-                var programs = await this.programService.GetProgramsByUserId(userId);
-
-                return View(programs);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            return View();
         }
 
         public async Task<IActionResult> GetPrograms()
@@ -52,6 +41,13 @@ namespace FitnessApp.Web.Controllers
         {
             try
             {
+                if (this.User.IsAdmin())
+                {
+                    var foodRecipesAll = await this.foodRecipeService.GetAllFoodRecipes();
+
+                    return View(foodRecipesAll);
+                }
+
                 string userId = this.User.GetId();
                 var foodRecipes = await this.foodRecipeService.GetAllFoodRecipesByUserId(userId);
 
@@ -67,6 +63,13 @@ namespace FitnessApp.Web.Controllers
         {
             try
             {
+                if (this.User.IsAdmin())
+                {
+                    var postsAll = await this.postService.GetAllPostsAsync();
+
+                    return View(postsAll);
+                }
+
                 string userId = this.User.GetId();
                 var posts = await this.postService.GetAllPostsByUserIdAsync(userId);
 

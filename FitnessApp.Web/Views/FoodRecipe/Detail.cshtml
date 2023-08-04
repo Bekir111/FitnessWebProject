@@ -14,7 +14,7 @@
     </div>
     <div class="button-container">
 
-    @if (User.GetId().ToString().ToLower() == Model.UserId.ToLower())
+    @if (User.GetId().ToString().ToLower() == Model.UserId.ToLower() || User.IsAdmin())
     {
         <a class="btn-edit btn-warning text-black nav-link active" asp-route-id="@Model.Id" asp-area="" asp-controller="FoodRecipe" asp-action="Edit">Edit</a>
         <a class="btn-delete btn-danger text-white nav-link active" asp-route-id="@Model.Id" asp-area="" asp-controller="FoodRecipe" asp-action="Delete">Delete</a>

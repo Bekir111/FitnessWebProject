@@ -12,6 +12,6 @@
 
 		public string CategoryName { get; set; } = null!;
 
-		public double AverageRating { get; set; }
+		public string AverageRating { get; set; }
 	}
 }
