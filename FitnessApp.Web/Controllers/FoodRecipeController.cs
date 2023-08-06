@@ -122,6 +122,11 @@ namespace FitnessApp.Web.Controllers
                 return RedirectToAction("All", "FoodRecipe");
             }
 
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
             try
             {
                 await this.foodRecipeService.EditExistingFoodRecipe(model,id);

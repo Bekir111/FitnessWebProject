@@ -1,10 +1,9 @@
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using FitnessApp.Data;
 namespace FitnessApp.Web
 {
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.AspNetCore.Mvc;
 
     using FitnessApp.Data;
     using FitnessApp.Data.Models;
@@ -13,7 +12,7 @@ namespace FitnessApp.Web
     using FitnessApp.Services.Data;
     using FitnessApp.Web.Infrastructure.ModelBinders;
     using FitnessApp.Web.Controllers;
-    using Microsoft.AspNetCore.Mvc;
+    using FitnessApp.Web.Areas.Admin.Services.Interfaces;
 
     public class Program
     {
@@ -38,6 +37,7 @@ namespace FitnessApp.Web
                 .AddEntityFrameworkStores<FitnessAppDbContext>();
 
             builder.Services.AddApplicationServices(typeof(IProgramService));
+            builder.Services.AddApplicationServices(typeof(IAdminProgramService));
 
 
             builder.Services.ConfigureApplicationCookie(config =>
