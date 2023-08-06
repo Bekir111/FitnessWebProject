@@ -1,0 +1,80 @@
+﻿@using FitnessApp.Web.Areas.Admin.ViewModels.Program;
+@using static FitnessApp.Common.EntityValidationConstants.Program;
+@model ProgramFormModel;
+
+<style>
+
+    .form-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 40px;
+        background-color: dimgray;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+        .form-container label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .form-container input[type="text"],
+        .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            background-color: #272727;
+            border: 1px solid #444;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #fff;
+        }
+
+        .form-container button[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: darkred;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+</style>
+
+<div class="form-container">
+    <h2>Delete Program</h2>
+
+    <form id="recipeForm" method="post" asp-controller="Program" asp-action="Delete" asp-area="Admin">
+        <div>
+            <label readonly asp-for="@Model.Name" class="form-label">Name:</label>
+            <textarea readonly asp-for="@Model.Name" class="form-control text-black" type="text" id="@Model.Name" name="Name" required minlength="@ProgramNameMinLength" maxlength="@ProgramNameMaxLength"></textarea>
+        </div>
+        <div>
+            <label readonly asp-for="@Model.Description" class="form-label">Description:</label>
+            <textarea readonly asp-for="@Model.Description" class="form-control text-black" required minlength="@ProgramDescriptionMinLength" maxlength="@ProgramDescriptionMaxLength"></textarea>
+        </div>
+        <div>
+            <label readonly asp-for="@Model.PictureUrl" class="form-label">Method:</label>
+            <textarea readonly asp-for="@Model.PictureUrl" class="form-control text-black" required minlength="" maxlength="@ProgramPictureUrlMaxLength"></textarea>
+        </div>
+        <div>
+            <label readonly asp-for="CategoryId"></label>
+            <select readonly asp-for="CategoryId" class="form-control text-black">
+                @foreach (var category in Model.Categories)
+                {
+                    <option value="@category.Id">@category.Name</option>
+                }
+            </select>
+            <span asp-validation-for="CategoryId" class="small text-danger"></span>
+        </div>
+        <button type="submit" class="btn-danger text-black">Delete Program</button>
+    </form>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    }

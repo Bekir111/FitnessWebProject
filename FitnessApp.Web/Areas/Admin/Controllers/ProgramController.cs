@@ -37,22 +37,92 @@ namespace FitnessApp.Web.Areas.Admin.Controllers
             if (!ModelState.IsValid)
             {
                 model.Categories = await categoryService.AllCategoriesAsync();
+                TempData[ErrorMessage] = "Some of the data that you filled are incorrect!";
                 return View(model);
             }
 
-            try
+            bool isCategoryExist = await this.categoryService.ExistsByIdAsync(model.CategoryId);
+            if (!isCategoryExist)
             {
-                await this.adminProgramService.AddProgram(model);
-                TempData[SuccessMessage] = "You added program successfully";
+                model.Categories = await categoryService.AllCategoriesAsync();
+                TempData[ErrorMessage] = "This type of category doesnt exist";
+                return View(model);
+            }
+
+            await this.adminProgramService.AddProgram(model);
+            TempData[SuccessMessage] = "You added program successfully";
+            return RedirectToAction("All", "Program", new { Area = "" });
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(string id)
+        {
+            bool isExist = await this.programService.IsProgramExist(id);
+            if (!isExist)
+            {
+                TempData[ErrorMessage] = "This program doesn't exist!";
                 return RedirectToAction("All", "Program", new { Area = "" });
             }
-            catch (Exception)
-            {
 
-                throw;
+            var model = await this.adminProgramService.GetProgramForEditAndDelete(id);
+            model.Categories = await categoryService.AllCategoriesAsync();
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(ProgramFormModel model,string id)
+        {
+            if (!ModelState.IsValid)
+            {
+                model.Categories = await categoryService.AllCategoriesAsync();
+                TempData[ErrorMessage] = "Some of the data that you filled are incorrect!";
+                return View(model);
             }
 
+            bool isCategoryExist = await this.categoryService.ExistsByIdAsync(model.CategoryId);
+            if (!isCategoryExist)
+            {
+                model.Categories = await categoryService.AllCategoriesAsync();
+                TempData[ErrorMessage] = "This type of category doesnt exist";
+                return View(model);
+            }
+
+            await this.adminProgramService.EditProgram(model,id);
+            TempData[SuccessMessage] = "You edited program successfully";
+            return RedirectToAction("All", "Program", new { Area = "" });
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(string id)
+        {
+            bool isExist = await this.programService.IsProgramExist(id);
+            if (!isExist)
+            {
+                TempData[ErrorMessage] = "This program doesn't exist!";
+                return RedirectToAction("All", "Program", new { Area = "" });
+            }
+
+            var model = await this.adminProgramService.GetProgramForEditAndDelete(id);
+            model.Categories = await categoryService.AllCategoriesAsync();
             return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(ProgramFormModel model, string id)
+        {
+            bool isExist = await this.programService.IsProgramExist(id);
+            if (!isExist)
+            {
+                TempData[ErrorMessage] = "This program doesn't exist!";
+                return RedirectToAction("All", "Program", new { Area = "" });
+            }
+
+            await this.adminProgramService.DeleteProgram(id);
+            TempData[SuccessMessage] = "You deleted program successfully";
+            return RedirectToAction("All", "Program", new { Area = "" });
+
         }
     }
 }

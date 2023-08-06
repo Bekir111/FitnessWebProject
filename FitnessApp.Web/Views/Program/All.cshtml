@@ -32,6 +32,11 @@
 							{
 								<a class="btn-program text-success nav-link active" asp-area="" asp-controller="Program" asp-action="Join" asp-route-id="@program.Id">Join</a>
 							}
+							@if(this.User.IsAdmin())
+							{
+								<a class="btn-program btn-warning text-primary nav-link active" asp-route-id="@program.Id" asp-area="Admin" asp-controller="Program" asp-action="Edit">Edit</a>
+								<a class="btn-program btn-danger text-primary nav-link active" asp-route-id="@program.Id" asp-area="Admin" asp-controller="Program" asp-action="Delete">Delete</a>
+							}
 						</div>
 					</div>
 				</section>

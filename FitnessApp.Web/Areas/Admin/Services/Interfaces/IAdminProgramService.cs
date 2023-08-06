@@ -7,5 +7,8 @@ namespace FitnessApp.Web.Areas.Admin.Services.Interfaces
     public interface IAdminProgramService
     {
         Task AddProgram(ProgramFormModel model);
+        Task EditProgram(ProgramFormModel model,string id);
+        Task DeleteProgram(string id);
+        Task<ProgramFormModel> GetProgramForEditAndDelete(string id);
     }
 }

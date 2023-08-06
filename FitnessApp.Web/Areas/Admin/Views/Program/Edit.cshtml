@@ -35,7 +35,7 @@
             width: 100%;
             padding: 10px;
             margin-top: 20px;
-            background-color: #007bff;
+            background-color: yellow;
             color: #fff;
             border: none;
             border-radius: 5px;
@@ -45,9 +45,9 @@
 </style>
 
 <div class="form-container">
-    <h2>Add Recipe</h2>
+    <h2>Edit Program</h2>
 
-    <form id="recipeForm" method="post" asp-controller="FoodRecipe" asp-action="Add">
+    <form id="recipeForm" method="post" asp-controller="Program" asp-action="Edit" asp-area="Admin">
         <div>
             <label asp-for="@Model.Name" class="form-label">Name:</label>
             <textarea asp-for="@Model.Name" class="form-control" type="text" id="@Model.Name" name="Name" required minlength="@ProgramNameMinLength" maxlength="@ProgramNameMaxLength"></textarea>
@@ -70,48 +70,12 @@
             </select>
             <span asp-validation-for="CategoryId" class="small text-danger"></span>
         </div>
-        <button type="submit">Add Recipe</button>
+        <button type="submit" class="btn-warning text-black">Edit Program</button>
     </form>
 </div>
 
 
-    @section Scripts {
-   <partial name="_ValidationScriptsPartial" />
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
     }
 
-<style>
-
-    .form-group {
-        background-color: #333;
-        padding: 10px;
-        border-radius: 5px;
-        margin-bottom: 20px;
-    }
-
-
-        .form-group label {
-            color: #ff0000;
-            font-weight: bold;
-        }
-
-        .form-group textarea {
-            color: #ff0000;
-            border: 1px solid #fff;
-            border-radius: 5px;
-            padding: 5px;
-        }
-
-
-        .form-group input[type="submit"] {
-            color: #ff0000;
-            background-color: #444;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-            .form-group input[type="submit"]:hover {
-                background-color: #555;
-            }
-</style>

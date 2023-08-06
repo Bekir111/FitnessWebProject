@@ -10,6 +10,12 @@
             <p>Price: $@product.Price</p>
             <a class="detail-btn" asp-action="Detail" asp-controller="Product" asp-route-id="@product.Id" asp-area="">Detail</a>
             <a class="add-to-cart-btn" asp-controller="Cart" asp-action="Add" asp-route-id="@product.Id">Add to Cart</a>
+            @if(this.User.IsAdmin())
+							{
+                <a class="edit-btn btn-warning text-black" asp-action="Detail" asp-controller="Product" asp-route-id="@product.Id" asp-area="">Edit</a>
+                <a class="available-btn btn-success" asp-action="Detail" asp-controller="Product" asp-route-id="@product.Id" asp-area="">Make Available</a>
+                <a class="unavailable-btn btn-danger" asp-action="Detail" asp-controller="Product" asp-route-id="@product.Id" asp-area="">Make Unavailable</a>
+							}
         }
         else
         {
@@ -53,15 +59,16 @@
 }
 
 .product .detail-btn, .product .add-to-cart-btn {
-  padding: 10px 20px;
-  font-size: 18px;
-  font-weight: bold;
-  color: #fff;
-  background-color: #e74c3c;
-  border: none;
-  border-radius: 5px;
-  margin-top: 10px;
-  cursor: pointer;
+      display: inline-block;
+      padding: 10px 20px;
+      margin-bottom: 5px;
+      text-align: center;
+      text-decoration: none;
+          background-color: #4da1ff; /* Green color, you can change it to any color you like */
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
 }
 
 .product .add-to-cart-btn {
@@ -73,6 +80,40 @@
   font-weight: bold;
   color: #e74c3c;
 }
+    .edit-btn{
+              display: inline-block;
+          padding: 10px 20px;
+          text-align: center;
+          text-decoration: none;
+          background-color: yellow;; /* Green color, you can change it to any color you like */
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+
+    .available-btn{
+          display: inline-block;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      background-color: #4CAF50; /* Green color, you can change it to any color you like */
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+        .unavailable-btn{
+              display: inline-block;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      background-color: red; /* Green color, you can change it to any color you like */
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+        }
 
 .product .shadow-effect {
   position: absolute;
