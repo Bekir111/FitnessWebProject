@@ -24,6 +24,7 @@ namespace FitnessApp.Web.Areas.Admin.ViewModels.Program
 
         [Required]
         [StringLength(ProgramPictureUrlMaxLength)]
+        [Display(Name = "Image Link")]
         public string PictureUrl { get; set; } = null!;
 
 

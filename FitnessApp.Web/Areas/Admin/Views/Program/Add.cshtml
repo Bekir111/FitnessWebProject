@@ -45,9 +45,9 @@
 </style>
 
 <div class="form-container">
-    <h2>Add Recipe</h2>
+    <h2>Add Program</h2>
 
-    <form id="recipeForm" method="post" asp-controller="FoodRecipe" asp-action="Add">
+    <form id="recipeForm" method="post" asp-controller="Program" asp-action="Add" asp-area="Admin">
         <div>
             <label asp-for="@Model.Name" class="form-label">Name:</label>
             <textarea asp-for="@Model.Name" class="form-control" type="text" id="@Model.Name" name="Name" required minlength="@ProgramNameMinLength" maxlength="@ProgramNameMaxLength"></textarea>
@@ -70,7 +70,7 @@
             </select>
             <span asp-validation-for="CategoryId" class="small text-danger"></span>
         </div>
-        <button type="submit">Add Recipe</button>
+        <button type="submit">Add Program</button>
     </form>
 </div>
 

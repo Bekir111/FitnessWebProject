@@ -10,17 +10,18 @@
             <p>Price: $@product.Price</p>
             <a class="detail-btn" asp-action="Detail" asp-controller="Product" asp-route-id="@product.Id" asp-area="">Detail</a>
             <a class="add-to-cart-btn" asp-controller="Cart" asp-action="Add" asp-route-id="@product.Id">Add to Cart</a>
-            @if(this.User.IsAdmin())
-							{
-                <a class="edit-btn btn-warning text-black" asp-action="Detail" asp-controller="Product" asp-route-id="@product.Id" asp-area="">Edit</a>
-                <a class="available-btn btn-success" asp-action="Detail" asp-controller="Product" asp-route-id="@product.Id" asp-area="">Make Available</a>
-                <a class="unavailable-btn btn-danger" asp-action="Detail" asp-controller="Product" asp-route-id="@product.Id" asp-area="">Make Unavailable</a>
-							}
+            
         }
         else
         {
             <p class="not-available">Not Available</p>
             <div class="shadow-effect"></div>
+        }
+        @if (this.User.IsAdmin())
+        {
+            <a class="edit-btn btn-warning text-black" asp-action="Edit" asp-controller="Product" asp-route-id="@product.Id" asp-area="Admin">Edit</a>
+            <a class="available-btn btn-success" asp-action="Available" asp-controller="Product" asp-route-id="@product.Id" asp-area="Admin">Make Available</a>
+            <a class="unavailable-btn btn-danger" asp-action="Unavailable" asp-controller="Product" asp-route-id="@product.Id" asp-area="Admin">Make Unavailable</a>
         }
     </div>
 }

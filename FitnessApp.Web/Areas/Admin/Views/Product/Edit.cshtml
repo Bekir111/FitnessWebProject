@@ -1,0 +1,112 @@
+﻿@using FitnessApp.Web.Areas.Admin.ViewModels.Product;
+@using static FitnessApp.Common.EntityValidationConstants.Product;
+@using static FitnessApp.Common.EntityValidationConstants.Program;
+@model ProductFormModel;
+
+<style>
+
+    .form-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 40px;
+        background-color: dimgray;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+        .form-container label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .form-container input[type="text"],
+        .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            background-color: #272727;
+            border: 1px solid #444;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #fff;
+        }
+
+        .form-container button[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: yellow;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+</style>
+
+<div class="form-container">
+    <h2>Edit Product</h2>
+
+    <form id="recipeForm" method="post" asp-controller="Product" asp-action="Edit" asp-area="Admin">
+        <div>
+            <label asp-for="@Model.Name" class="form-label">Name:</label>
+            <textarea asp-for="@Model.Name" class="form-control" type="text" id="@Model.Name" name="Name" required minlength="@ProductNameMinLength" maxlength="@ProductNameMaxLength"></textarea>
+        </div>
+        <div>
+            <label asp-for="@Model.Description" class="form-label">Description:</label>
+            <textarea asp-for="@Model.Description" class="form-control" required minlength="@ProductDescriptionMinLength" maxlength="@ProductDescriptionMaxLength"></textarea>
+        </div>
+        <div>
+            <label asp-for="@Model.PictureUrl" class="form-label">PictureUrl:</label>
+            <textarea asp-for="@Model.PictureUrl" class="form-control" required minlength="" maxlength="@ProgramPictureUrlMaxLength"></textarea>
+        </div>
+        <div>
+            <label asp-for="@Model.Price" class="form-label">Price:</label>
+            <textarea asp-for="@Model.Price" class="form-control" required minlength="0" maxlength="1000"></textarea>
+        </div>
+        <button type="submit" class="text-black">Edit Product</button>
+    </form>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    }
+
+    <style>
+
+        .form-group {
+            background-color: #333;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+
+            .form-group label {
+                color: #ff0000;
+                font-weight: bold;
+            }
+
+            .form-group textarea {
+                color: #ff0000;
+                border: 1px solid #fff;
+                border-radius: 5px;
+                padding: 5px;
+            }
+
+
+            .form-group input[type="submit"] {
+                color: #ff0000;
+                background-color: #444;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+                .form-group input[type="submit"]:hover {
+                    background-color: #555;
+                }
+    </style>
