@@ -1,15 +1,17 @@
 ﻿
 namespace FitnessApp.Web.Controllers
 {
+    using System.Data;
+    
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Authorization;
 
     using FitnessApp.Services.Data.Interfaces;
     using FitnessApp.Web.Infrastructure.Extensions;
     using FitnessApp.Web.ViewModels.Reviews;
 
     using static FitnessApp.Common.NotificationMessagesConstants;
-    using Microsoft.AspNetCore.Authorization;
-    using System.Data;
+    using static Common.AdminConstants;
 
     public class ProductReviewController : BaseController
     {
@@ -158,7 +160,7 @@ namespace FitnessApp.Web.Controllers
 
 
         [HttpGet]
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = AdminRoleName)]
         public async Task<IActionResult> AdminDelete(string id)
         {
             if (!User.IsAdmin())
@@ -185,7 +187,7 @@ namespace FitnessApp.Web.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = AdminRoleName)]
         public async Task<IActionResult> AdminDelete(ReviewFormViewModel model,string id)
         {
             if (!User.IsAdmin())
@@ -208,7 +210,7 @@ namespace FitnessApp.Web.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = AdminRoleName)]
         public async Task<IActionResult> AdminEdit(string id)
         {
             if (!User.IsAdmin())
@@ -235,7 +237,7 @@ namespace FitnessApp.Web.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = AdminRoleName)]
         public async Task<IActionResult> AdminEdit(ReviewFormViewModel model, string id)
         {
             if (!User.IsAdmin())

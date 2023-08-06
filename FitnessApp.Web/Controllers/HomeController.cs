@@ -7,6 +7,9 @@ namespace FitnessApp.Web.Controllers
     using Microsoft.AspNetCore.Authorization;   
 
     using FitnessApp.Web.ViewModels.Home;
+    using FitnessApp.Web.Infrastructure.Extensions;
+
+    using static FitnessApp.Common.AdminConstants;
 
     [AllowAnonymous]
     public class HomeController : BaseController
@@ -18,6 +21,10 @@ namespace FitnessApp.Web.Controllers
 
         public IActionResult Index()
         {
+            if (this.User.IsAdmin())
+            {
+                return RedirectToAction("Index","Home", new { Area = AdminAreaName});
+            }
             return View();
         }
 
@@ -27,6 +34,10 @@ namespace FitnessApp.Web.Controllers
             if (statusCode == 400 || statusCode == 404)
             {
                 return View("Error404");
+            }
+            if (statusCode == 401)
+            {
+                return View("Error401");
             }
 
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

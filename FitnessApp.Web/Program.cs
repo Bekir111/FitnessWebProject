@@ -43,6 +43,7 @@ namespace FitnessApp.Web
             builder.Services.ConfigureApplicationCookie(config =>
             {
                 config.LoginPath = "/User/Login";
+                config.AccessDeniedPath = "/Home/Error/401";
             });
 
             builder.Services.AddDistributedMemoryCache();
@@ -95,11 +96,18 @@ namespace FitnessApp.Web
             app.UseEndpoints(config =>
             {
                 config.MapControllerRoute(
+                    name: "areas",
+                    pattern: "/{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                    );
+
+                config.MapControllerRoute(
                     name: "ProtectingUrlPattern",
                     pattern: "/{controller}/{action}/{id}/{information}",
                     defaults: new { Controller = "Post", Action = "Detail" }
                     );
+
                 config.MapDefaultControllerRoute();
+
                 config.MapRazorPages();
             });
 

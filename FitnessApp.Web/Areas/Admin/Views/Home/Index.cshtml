@@ -1,0 +1,52 @@
+﻿@{
+    ViewData["Title"] = "Admin Home Page";
+}
+
+<style>
+    .welcome-message {
+        text-align: center;
+        margin-top: 50px;
+    }
+
+    .button-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+    }
+
+    .btn {
+        margin-bottom: 10px;
+        padding: 10px 20px;
+        font-size: 18px;
+        border-radius: 5px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        color: #fff;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        color: #fff;
+    }
+</style>
+
+<div class="welcome-message">
+    <h2>Welcome, Admin!</h2>
+</div>
+
+<div class="button-container">
+    <a class="btn btn-success" >Add Program</a>
+    <a class="btn btn-primary" >All Programs</a>
+    <a class="btn btn-success" >Add Product</a>
+    <a class="btn btn-primary" >All Products</a>
+    <a class="btn btn-danger" >All Users</a>
+</div>
