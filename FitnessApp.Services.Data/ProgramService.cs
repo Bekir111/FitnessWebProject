@@ -29,7 +29,7 @@ namespace FitnessApp.Services.Data
                     PictureUrl = p.PictureUrl,
                     CategoryId = p.CategoryId,
                     CategoryName = p.Category.Name,
-                    AverageRating = p.Reviews.Count == 0 ? "0.0" : p.Reviews.Average(p => p.Rating).ToString("f1")
+                    AverageRating = p.Reviews.Count == 0 ? "0.0" : p.Reviews.Where(r => r.IsActive).Average(p => p.Rating).ToString("f1")
 
                 })
                 .ToArrayAsync();
@@ -64,7 +64,7 @@ namespace FitnessApp.Services.Data
                     CategoryName = pu.Program.Category.Name,
                     Name = pu.Program.Name,
                     PictureUrl = pu.Program.PictureUrl,
-                    AverageRating = pu.Program.Reviews.Average(p => p.Rating).ToString("f1")
+                    AverageRating = pu.Program.Reviews.Count == 0 ? "0.0" : pu.Program.Reviews.Where(r => r.IsActive).Average(p => p.Rating).ToString("f1")
                 })
                 .ToArrayAsync();
         }

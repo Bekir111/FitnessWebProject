@@ -54,9 +54,8 @@
 </style>
 
 <h2 class="title-review">Delete a Review</h2>
-	
 
-<form id="reviewForm" method="post" asp-controller="ProgramReview" asp-action="Delete">
+<form id="reviewForm" method="post" asp-controller="ProgramReview" asp-action="AdminDelete" asp-area="Admin">
 	<div class="form-group">
 		<label asp-for="@Model.Rating">Rating</label>
 		<input readonly asp-for="@Model.Rating" class="form-control" type="number" min="0" max="5" step="1" />
@@ -101,6 +100,6 @@
 		}
 
 		// Perform additional validation or submit the form as needed
-		 reviewForm.submit();
+		reviewForm.submit();
 	});
 </script>
