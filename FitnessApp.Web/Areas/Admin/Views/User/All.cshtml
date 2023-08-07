@@ -1,0 +1,72 @@
+﻿@model ICollection<UserViewModel>
+
+<h1>User List</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th class="text-black">First Name</th>
+            <th class="text-black">Last Name</th>
+            <th class="text-black">Username</th>
+            <th class="text-black">Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td >@user.FirstName</td>
+                <td>@user.LastName</td>
+                <td>@user.UserName</td>
+                <td>@user.Email</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<style>
+    /* Reset default margin and padding for the entire page */
+    /* Center align the heading */
+    h1 {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    /* Style the table */
+    table {
+        width: 80%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        border: 1px solid #ccc;
+        background-color: #34495e;
+    }
+
+    /* Style the table header cells */
+    th {
+        background-color: #e74c3c;
+        color: #fff;
+        padding: 10px;
+        text-align: left;
+    }
+
+    /* Style the table data cells */
+    td {
+        padding: 10px;
+    }
+
+    /* Style alternating rows with a darker background color */
+    tbody tr:nth-child(even) {
+        background-color: #2c3e50;
+    }
+
+    /* Add hover effect on table rows */
+    tbody tr:hover {
+        background-color: #3b5064;
+    }
+
+    /* Make specific words red */
+    a, h1, th {
+        color: #e74c3c;
+    }
+
+</style>
