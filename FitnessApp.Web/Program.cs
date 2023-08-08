@@ -40,6 +40,7 @@ namespace FitnessApp.Web
             builder.Services.AddApplicationServices(typeof(IAdminProgramService));
 
             builder.Services.AddMemoryCache();
+            builder.Services.AddResponseCaching();
 
 
             builder.Services.ConfigureApplicationCookie(config =>
@@ -86,6 +87,8 @@ namespace FitnessApp.Web
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseResponseCaching();
 
             app.UseAuthentication();
             app.UseAuthorization();

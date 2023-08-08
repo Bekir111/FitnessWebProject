@@ -18,7 +18,7 @@ namespace FitnessApp.Web.Areas.Admin.Controllers
             this.memoryCache = memoryCache;
         }
 
-        [ResponseCache(Duration = 30)]
+        [ResponseCache(Duration = 30, Location = ResponseCacheLocation.Client, NoStore = false)]
         public async Task<IActionResult> All()
         {
             var users = this.memoryCache.Get<ICollection<UserViewModel>>(UsersCacheKey);

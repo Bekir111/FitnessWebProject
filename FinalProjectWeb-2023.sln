@@ -23,9 +23,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessApp.Services.Data", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessApp.Web.Infrastructure", "FitnessApp.Web.Infrastructure\FitnessApp.Web.Infrastructure.csproj", "{E38A4485-7A8E-4275-BED7-79BFA0CFCFF6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessApp.WebAPI", "FitnessApp.WebAPI\FitnessApp.WebAPI.csproj", "{B6FC0BB4-CE1F-4C00-A96C-32D3472073B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessApp.WebAPI", "FitnessApp.WebAPI\FitnessApp.WebAPI.csproj", "{B6FC0BB4-CE1F-4C00-A96C-32D3472073B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessApp.Services.Data.Models", "FitnessApp.Services.Data.Models\FitnessApp.Services.Data.Models.csproj", "{6C81B6E8-DCEA-432B-AF72-B4F1BE9E04A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessApp.Services.Data.Models", "FitnessApp.Services.Data.Models\FitnessApp.Services.Data.Models.csproj", "{6C81B6E8-DCEA-432B-AF72-B4F1BE9E04A1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B4B30D5C-97C2-416C-B86A-0C2C8E0D8ECD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessApp.Services.Tests", "FitnessApp.Services.Tests\FitnessApp.Services.Tests.csproj", "{D4FD178F-A059-46E2-B5CC-1F0FAB225BAF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +73,10 @@ Global
 		{6C81B6E8-DCEA-432B-AF72-B4F1BE9E04A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C81B6E8-DCEA-432B-AF72-B4F1BE9E04A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C81B6E8-DCEA-432B-AF72-B4F1BE9E04A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4FD178F-A059-46E2-B5CC-1F0FAB225BAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4FD178F-A059-46E2-B5CC-1F0FAB225BAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4FD178F-A059-46E2-B5CC-1F0FAB225BAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4FD178F-A059-46E2-B5CC-1F0FAB225BAF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -82,6 +90,7 @@ Global
 		{E38A4485-7A8E-4275-BED7-79BFA0CFCFF6} = {B57FDFBD-2A32-4E08-961D-AA6BE396556E}
 		{B6FC0BB4-CE1F-4C00-A96C-32D3472073B8} = {B57FDFBD-2A32-4E08-961D-AA6BE396556E}
 		{6C81B6E8-DCEA-432B-AF72-B4F1BE9E04A1} = {61AFA861-5B60-41DD-8D8D-802AC9322950}
+		{D4FD178F-A059-46E2-B5CC-1F0FAB225BAF} = {B4B30D5C-97C2-416C-B86A-0C2C8E0D8ECD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DA5A749F-BC5E-423F-A4BB-769E87B5729F}
