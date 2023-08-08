@@ -8,7 +8,7 @@ namespace FitnessApp.Web.Areas.Admin.Controllers
     using FitnessApp.Web.Infrastructure.Extensions;
     using FitnessApp.Web.ViewModels.Reviews;
 
-    using static FitnessApp.Common.AdminConstants;
+    using static FitnessApp.Common.GeneralApplicationConstants;
     using static FitnessApp.Common.NotificationMessagesConstants;
     using FitnessApp.Services.Data.Interfaces;
 

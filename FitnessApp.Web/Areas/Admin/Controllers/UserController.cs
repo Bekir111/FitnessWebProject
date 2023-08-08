@@ -1,22 +1,39 @@
-﻿using FitnessApp.Services.Data.Interfaces;
-using Microsoft.AspNetCore.Mvc;
-
+﻿
 namespace FitnessApp.Web.Areas.Admin.Controllers
 {
-	public class UserController : BaseAdminController
-	{
-		private readonly IUserService userService;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Caching.Memory;
 
-		public UserController(IUserService userService)
-		{
-			this.userService = userService;
-		}
+    using FitnessApp.Services.Data.Interfaces;
+    using FitnessApp.Web.ViewModels.User;
+    using static FitnessApp.Common.GeneralApplicationConstants;
+    public class UserController : BaseAdminController
+    {
+        private readonly IUserService userService;
+        private readonly IMemoryCache memoryCache;
 
-		public async Task<IActionResult> All()
-		{
-			var users = await this.userService.GetUsers();
+        public UserController(IUserService userService, IMemoryCache memoryCache)
+        {
+            this.userService = userService;
+            this.memoryCache = memoryCache;
+        }
 
-			return View(users);
-		}
-	}
+        [ResponseCache(Duration = 30)]
+        public async Task<IActionResult> All()
+        {
+            var users = this.memoryCache.Get<ICollection<UserViewModel>>(UsersCacheKey);
+
+            if (users == null)
+            {
+                users = await this.userService.GetUsers();
+
+                MemoryCacheEntryOptions cacheOptions =
+                    new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(UsersCacheDurationMinutes));
+
+                this.memoryCache.Set(UsersCacheKey, users, cacheOptions);
+            }
+
+            return View(users);
+        }
+    }
 }

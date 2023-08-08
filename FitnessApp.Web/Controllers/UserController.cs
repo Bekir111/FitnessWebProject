@@ -3,25 +3,29 @@ namespace FitnessApp.Web.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Authentication;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.Extensions.Caching.Memory;
+
 
     using FitnessApp.Data.Models;
     using FitnessApp.Web.ViewModels.User;
     using static FitnessApp.Common.NotificationMessagesConstants;
-    using Microsoft.AspNetCore.Authentication;
-    using Microsoft.AspNetCore.Authorization;
-
+    using static FitnessApp.Common.GeneralApplicationConstants;
     [AllowAnonymous]
     public class UserController : BaseController
     {
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IUserStore<ApplicationUser> userStore;
+        private readonly IMemoryCache memoryCache;
 
-        public UserController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, IUserStore<ApplicationUser> userStore)
+        public UserController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, IUserStore<ApplicationUser> userStore, IMemoryCache memoryCache)
         {
             this.signInManager = signInManager;
             this.userManager = userManager;
             this.userStore = userStore;
+            this.memoryCache = memoryCache;
         }
 
         [HttpGet]
@@ -61,6 +65,8 @@ namespace FitnessApp.Web.Controllers
             }
 
             await this.signInManager.SignInAsync(user, false);
+
+            this.memoryCache.Remove(UsersCacheKey);
 
             TempData[SuccessMessage] = "You was registered successfully!";
 

@@ -11,7 +11,7 @@ namespace FitnessApp.Web.Controllers
     using FitnessApp.Web.ViewModels.Reviews;
 
     using static FitnessApp.Common.NotificationMessagesConstants;
-    using static Common.AdminConstants;
+    using static Common.GeneralApplicationConstants;
 
     public class ProductReviewController : BaseController
     {

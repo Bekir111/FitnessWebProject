@@ -9,7 +9,7 @@ namespace FitnessApp.Web.Controllers
     using FitnessApp.Web.ViewModels.Home;
     using FitnessApp.Web.Infrastructure.Extensions;
 
-    using static FitnessApp.Common.AdminConstants;
+    using static FitnessApp.Common.GeneralApplicationConstants;
 
     [AllowAnonymous]
     public class HomeController : BaseController

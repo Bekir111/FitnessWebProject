@@ -8,7 +8,7 @@ namespace FitnessApp.Web.Controllers
     using FitnessApp.Services.Data.Interfaces;
 
     using static Common.NotificationMessagesConstants;
-    using static Common.AdminConstants;
+    using static Common.GeneralApplicationConstants;
     using Microsoft.AspNetCore.Authorization;
     using System.Data;
 

@@ -39,6 +39,8 @@ namespace FitnessApp.Web
             builder.Services.AddApplicationServices(typeof(IProgramService));
             builder.Services.AddApplicationServices(typeof(IAdminProgramService));
 
+            builder.Services.AddMemoryCache();
+
 
             builder.Services.ConfigureApplicationCookie(config =>
             {
