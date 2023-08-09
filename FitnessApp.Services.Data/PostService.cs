@@ -71,7 +71,7 @@ namespace FitnessApp.Services.Data
 
         public async Task<bool> IsPostExistbyId(int id)
         {
-            return await this.dbContext.Posts.AnyAsync(p => p.Id == id);
+            return await this.dbContext.Posts.AnyAsync(p => p.Id == id && p.IsActive);
         }
 
         public async Task<bool> IsThisUserAuthorOfThePost(string userId, int postId)

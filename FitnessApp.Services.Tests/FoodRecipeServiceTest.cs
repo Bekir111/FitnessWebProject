@@ -43,7 +43,7 @@ namespace FitnessApp.Services.Tests
 
 
             Assert.IsNotNull(result);
-            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual(this.dbContext.FoodRecipes.Count(fr => fr.IsActive), result.Count);
         }
 
         [Test]
@@ -76,7 +76,7 @@ namespace FitnessApp.Services.Tests
             Assert.AreEqual(expected.Ingredients, actual.Ingredients);
             Assert.AreEqual(expected.MethodToMake, actual.MethodToMake);
             Assert.AreEqual(expected.Name, actual.Name);
-            Assert.AreEqual(expected.UserId, actual.UserId);
+            Assert.AreEqual(expected.UserId.ToString(), actual.UserId.ToString());
         }
 
         [Test]
@@ -101,6 +101,7 @@ namespace FitnessApp.Services.Tests
         public async Task IsFoodRecipeExistShouldReturnTrue()
         {
             FoodRecipe.IsActive = true;
+
             bool actual = await this.foodRecipeService.IsFoodRecipeExist(FoodRecipe.Id.ToString());
 
             Assert.AreEqual(true, actual);
@@ -143,7 +144,7 @@ namespace FitnessApp.Services.Tests
 
             FoodRecipeFormModel expected = new FoodRecipeFormModel()
             {
-                Name = FoodRecipe.Name + "1",
+                Name = expectedName,
                 Ingredients = FoodRecipe.Ingredients,
                 MethodToMake = FoodRecipe.MethodToMake
             };

@@ -11,6 +11,8 @@ namespace FitnessApp.Services.Tests
         public static ApplicationUser ApplicationUser;
         public static FoodRecipe FoodRecipe;
         public static FoodRecipe NotActiveFoodRecipe;
+        public static Post Post;
+        public static Post NotActivePost;
 
         public static void SeedDatabase(FitnessAppDbContext dbContext)
         {
@@ -48,8 +50,27 @@ namespace FitnessApp.Services.Tests
                 IsActive = false,
             };
 
+            Post = new Post()
+            {
+                Title = "What Is Hypertrophy?",
+                Text = "Hypertrophy is an increase in your muscle size. Most of the time, this increase is accomplished through exercises and workouts that incorporate strength training—lifting weights is the most common way to increase hypertrophy.\r\n\r\nThere are two main types of muscle hypertrophy—sarcoplasmic hypertrophy and myofibril hypertrophy. Sarcoplasmic hypertrophy is the physical increase of your muscle and is what most people mean when they refer to hypertrophy training.1 Meanwhile, myofibril hypertrophy is when a muscle becomes more dense and compact. \r\n\r\nIf increasing your muscle size is your goal, your workout routine should be designed to optimize and increase muscle mass. Generally, this means that you should lift weights and gradually increase the volume of your workouts in order to change the size and shape of your muscles.\r\n\r\nGoals of Hypertrophy Training\r\nHypertrophy training is a type of resistance training that involves focusing on specific techniques that will increase your muscle tone, size, and mass. Although everyone has different workout goals, a lot of people pursue hypertrophy training to support their health goals. Others might engage in this type of training to prevent injury, change their appearance, or even to feel a sense of accomplishment.\r\n\r\nDeveloping adequate levels of muscle mass plays an important role in your health and wellness. For example, having low levels of muscle mass is associated with an increased risk of several diseases, including cardiovascular disease. Low muscle mass also can influence the development of cardio-metabolic issues, type 2 diabetes,4 osteoporosis, and even increase the risk of falls.5\r\n\r\nRegardless of your goals, hypertrophy training is a great option for building muscle mass. Research indicates that you can build muscle mass by focusing on mechanical tension—using a heavy weight and performing exercises through a full range of motion for a period of time—and metabolic stress, which is essentially the pump you achieve as a result of working out at a higher intensity with shorter rest periods. In fact, consistently implementing this type of training regimen is essential to getting results.\r\n\r\nBenefits of Hypertrophy Training\r\nBuilding muscle mass through hypertrophy training can benefit your health in a number of ways. In fact, it is so beneficial that the American Heart Association recommends that everyone incorporate muscle strengthening activities at least twice per week into their workout regimen.",
+                CreatedOn = DateTime.Parse("2023-07-25 08:40:00.9444068"),
+                IsActive = true,
+                UserId = ApplicationUser.Id,
+            };
+
+            NotActivePost = new Post()
+            {
+                Title = "Hypertrophy?",
+                Text = "Hypertrophy refers to the enlargement of skeletal muscle fibers in response to being recruited to develop increased levels of tension, as seen in resistance training. It is characterized by an increase in the cross-sectional area of individual muscle fibers resulting from an increase in myofibril proteins (myofilaments). There are two types of muscular hypertrophy: myofibrillar, which is an increase in myofibrils, and sarcoplasmic, which is an increase in muscle glycogen storage.0 Hypertrophy is achieved through exercises and workouts that incorporate strength training, and lifting weights is the most common way to increase hypertrophy.2 Hypertrophy is different from strength training, which refers to increasing the ability of a muscle to produce force through lifting heavier weights.",
+                CreatedOn = DateTime.Parse("2023-07-25 08:40:00.9444068"),
+                IsActive = false,
+                UserId = ApplicationUser.Id,
+            };
+
             dbContext.Users.Add(ApplicationUser);
             dbContext.FoodRecipes.AddRange(FoodRecipe,NotActiveFoodRecipe);
+            dbContext.Posts.AddRange(Post,NotActivePost);
             dbContext.SaveChanges();
         }
     }

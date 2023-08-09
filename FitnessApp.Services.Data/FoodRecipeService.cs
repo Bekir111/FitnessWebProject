@@ -128,7 +128,7 @@ namespace FitnessApp.Services.Data
         public async Task<bool> IsFoodRecipeExist(string id)
         {
             return await this.dbContext.FoodRecipes
-                .AnyAsync(fr => fr.Id.ToString() == id && fr.IsActive != false);
+                .AnyAsync(fr => fr.Id.ToString() == id && fr.IsActive == true);
         }
     }
 }
