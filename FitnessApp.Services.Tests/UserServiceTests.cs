@@ -1,7 +1,14 @@
 
 namespace FitnessApp.Services.Tests
 {
+    using System.Collections.ObjectModel;
+    using System.Collections;
+    using System.Collections.Generic;
+
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.AspNetCore.Http;
+    
+    using NUnit.Framework;
     
     using FitnessApp.Data;
     using FitnessApp.Data.Migrations;
@@ -9,11 +16,6 @@ namespace FitnessApp.Services.Tests
     using FitnessApp.Web.ViewModels.User;
     using FitnessApp.Services.Data.Interfaces;
     using FitnessApp.Services.Data;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Collections;
-    using NUnit.Framework;
-    using Microsoft.AspNetCore.Http;
 
     public class UserServiceTests
     {
