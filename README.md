@@ -9,3 +9,4 @@ This FitnessApp project is for demonstration and learning purposes only. The con
 Important!
 -In Program.cs i have method that seeds administrator. When you run the app the first user that you will register need to be the admin. In the method in Program.cs only you need to write your 
 registered user's e-mail or just first user that you going to register to have this e-mail "admin@admin.com".
+-You have to change with your connection string in User Secrets "Server=.;Database=FitnessApp;Trusted_Connection=True;MultipleActiveResultSets=true"
