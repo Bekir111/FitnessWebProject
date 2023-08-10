@@ -1,1 +1,3 @@
-﻿-In Program.cs i have method that seeds administrator. When you run the app the first user that you will register to be the admin. In the method in Program.cs only you need to write your user's e-mail. 
+﻿-In Program.cs i have method that seeds administrator. When you run the app the first user that you will register to be the admin. In the method in Program.cs only you need to write your user's e-mail or register user with this e-mail "admin@admin.com" 
+-In WEB Api Program.cs in Services.AddCors replace the origin with your local host server.
+-You have to change with your connection string in User Secrets "Server=.;Database=FitnessApp;Trusted_Connection=True;MultipleActiveResultSets=true".
