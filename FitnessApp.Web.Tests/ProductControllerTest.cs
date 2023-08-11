@@ -21,7 +21,7 @@ namespace FitnessApp.Web.Tests
             this.controller = new ProductController(mockProductService.Object, mockProductReviewService.Object);
         }
         [Fact]
-        public async Task Index_ReturnsCollectionOfPrograms()
+        public async Task Index_ReturnsCollectionOfProducts()
         {
             this.mockProductService
                 .Setup(service => service.GetAllProducts())
