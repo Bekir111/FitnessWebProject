@@ -91,6 +91,7 @@ namespace FitnessApp.Web.Areas.Admin.Controllers
             }
 
             var model = await this.adminProductService.GetProductForEditAndDelete(id);
+
             return View(model);
         }
 

@@ -20,8 +20,12 @@
         @if (this.User.IsAdmin())
         {
             <a class="edit-btn btn-warning text-black" asp-action="Edit" asp-controller="Product" asp-route-id="@product.Id" asp-area="Admin">Edit</a>
+            @if(!product.IsAvailable){
             <a class="available-btn btn-success" asp-action="Available" asp-controller="Product" asp-route-id="@product.Id" asp-area="Admin">Make Available</a>
+            }
+            else{
             <a class="unavailable-btn btn-danger" asp-action="Unavailable" asp-controller="Product" asp-route-id="@product.Id" asp-area="Admin">Make Unavailable</a>
+            }        
         }
     </div>
 }
