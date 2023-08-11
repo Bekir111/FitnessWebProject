@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0.20" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.20" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
     <PackageReference Include="Moq" Version="4.20.0" />
@@ -24,6 +25,7 @@
     <ProjectReference Include="..\FitnessApp.Services.Data.Models\FitnessApp.Services.Data.Models.csproj" />
     <ProjectReference Include="..\FitnessApp.Services.Data\FitnessApp.Services.Data.csproj" />
     <ProjectReference Include="..\FitnessApp.Web.ViewModels\FitnessApp.Web.ViewModels.csproj" />
+    <ProjectReference Include="..\FitnessApp.Web\FitnessApp.Web.csproj" />
   </ItemGroup>
 
 </Project>

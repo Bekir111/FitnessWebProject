@@ -13,6 +13,11 @@ namespace FitnessApp.Services.Tests
         public static FoodRecipe NotActiveFoodRecipe;
         public static Post Post;
         public static Post NotActivePost;
+        public static Product Product;
+        public static Program Program;
+        public static ProgramReview ProgramReview;
+        public static ProductReview ProductReview;
+        public static Category Category;
 
         public static void SeedDatabase(FitnessAppDbContext dbContext)
         {
@@ -68,9 +73,57 @@ namespace FitnessApp.Services.Tests
                 UserId = ApplicationUser.Id,
             };
 
+            Category = new Category()
+            {
+                Name = "Programs for women",
+            };
+
+            Product = new Product()
+            {
+                Name = "Vital Protein Bar",
+                Description = "A perfect blend of taste and nutrition! Packed with high-quality proteins, essential vitamins, and minerals, our protein bar is designed to fuel your active lifestyle. Whether it's pre-workout energy or post-workout recovery, our delicious protein bar will keep you going strong.",
+                IsAvailable = true,
+                PictureUrl = "https://imgs.search.brave.com/UYY0AslZqnXM_Y9jRAdic7n9ZB04crBLWMOWK674GeE/rs:fit:500:0:0/g:ce/aHR0cHM6Ly93d3cu/dml0YWxwcm90ZWlu/cy5jb20vY2RuL3No/b3AvcHJvZHVjdHMv/UERQYXNzZXRzX0pB/X0NCX0JhcnNfMV9D/YXJ0b24uanBnP3Y9/MTY1MzU4ODMwMyZ3/aWR0aD0yNjA",
+                Price = 19.99M,
+            };
+
+            Program = new Program()
+            {
+                Name = "Her Fit",
+                Description = "Customized Workout Solutions for Women. Tailored exercise programs designed to meet the unique fitness goals of women. Varied routines targeting strength, cardio, and flexibility. Achieve your desired results with HerFit, your personalized workout plan for a stronger and healthier you.",
+                PictureUrl = "https://medicalchannelasia.com/wp-content/uploads/2022/05/2022.05.31-squats.jpg",
+                CreatedOn = DateTime.Parse("2023-07-10 13:25:34.4307669"),
+                CategoryId = Category.Id,
+                IsActive = true,
+            };
+
+            ProductReview = new ProductReview()
+            {
+                IsActive = true,
+                ProductId = Product.Id,
+                UserId = ApplicationUser.Id,
+                Rating = 5,
+                ReviewText = "Amazing review for product!"
+            };
+
+            ProgramReview = new ProgramReview()
+            {
+                IsActive = true,
+                ProgramId = Program.Id,
+                UserId = ApplicationUser.Id,
+                Rating = 5,
+                ReviewText = "Amazing review for program!"
+            };
+
+
             dbContext.Users.Add(ApplicationUser);
             dbContext.FoodRecipes.AddRange(FoodRecipe,NotActiveFoodRecipe);
             dbContext.Posts.AddRange(Post,NotActivePost);
+            dbContext.Categories.Add(Category);
+            dbContext.Products.Add(Product);
+            dbContext.Programs.Add(Program);
+            dbContext.ProductReviews.Add(ProductReview);
+            dbContext.ProgramReviews.Add(ProgramReview);
             dbContext.SaveChanges();
         }
     }

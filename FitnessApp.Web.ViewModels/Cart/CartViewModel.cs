@@ -1,4 +1,4 @@
-﻿using FitnessApp.Data.Models;
+﻿
 
 namespace FitnessApp.Web.ViewModels.Cart
 {

@@ -9,6 +9,8 @@ namespace FitnessApp.Web.Controllers
     using FitnessApp.Services.Data.Interfaces;
 
     using static FitnessApp.Common.NotificationMessagesConstants;
+    using FitnessApp.Web.ViewModels;
+
     public class CartController : BaseController
     {
         private readonly IProductService productService;

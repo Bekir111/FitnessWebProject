@@ -4,6 +4,7 @@ namespace FitnessApp.Services.Data
     using FitnessApp.Data;
     using FitnessApp.Data.Models;
     using FitnessApp.Services.Data.Interfaces;
+    using FitnessApp.Web.ViewModels;
     using FitnessApp.Web.ViewModels.Product;
     using Microsoft.EntityFrameworkCore;
     public class ProductService : IProductService
@@ -17,7 +18,7 @@ namespace FitnessApp.Services.Data
 
         public async Task<CartItem> FindProductById(string id)
         {
-            var product = await this.dbContext.Products.FindAsync(Guid.Parse(id));
+            var product = await this.dbContext.Products.Where(p => p.IsAvailable).FirstAsync(p => p.Id == Guid.Parse(id));
 
             return new CartItem()
             {

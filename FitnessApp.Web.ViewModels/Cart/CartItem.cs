@@ -1,4 +1,4 @@
-﻿namespace FitnessApp.Data.Models
+﻿namespace FitnessApp.Web.ViewModels
 {
     public class CartItem
     {
