@@ -15,10 +15,6 @@ namespace FitnessApp.Data.Configurations
                 .WithMany(p => p.ProgramUsers)
                 .HasForeignKey(pu => pu.ProgramId)
                 .OnDelete(DeleteBehavior.Restrict);
-
-            builder
-               .Property(fr => fr.IsActive)
-               .HasDefaultValue(true);
         }
     }
 }

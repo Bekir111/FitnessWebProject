@@ -56,7 +56,7 @@ namespace FitnessApp.Services.Data
         public async Task<ICollection<AllProgramViewModel>> GetProgramsByUserId(string id)
         {
             return await this.dbContext.ProgramUsers
-                .Where(pu => pu.UserId.ToString() == id && pu.IsActive)
+                .Where(pu => pu.UserId.ToString() == id)
                 .Select(pu => new AllProgramViewModel()
                 {
                     Id = pu.ProgramId.ToString(),
@@ -77,7 +77,7 @@ namespace FitnessApp.Services.Data
         public async Task<bool> IsUserJoinedTheProgram(string programId, string userId)
         {
             return await this.dbContext.ProgramUsers
-                .AnyAsync(pu => pu.ProgramId.ToString() == programId && pu.UserId.ToString() == userId && pu.IsActive);
+                .AnyAsync(pu => pu.ProgramId.ToString() == programId && pu.UserId.ToString() == userId);
         }
 
         public async Task JoinTheProgramByIdAndUserId(string programId, string userId)
@@ -95,9 +95,9 @@ namespace FitnessApp.Services.Data
         public async Task LeaveTheProgramByIdAndUserId(string programId, string userId)
         {
             var programUser = await this.dbContext.ProgramUsers
-                .FirstAsync(pu => pu.UserId.ToString() == userId && pu.ProgramId.ToString() == programId && pu.IsActive);
+                .FirstAsync(pu => pu.UserId.ToString() == userId && pu.ProgramId.ToString() == programId);
 
-            programUser.IsActive = false;
+            dbContext.ProgramUsers.Remove(programUser);
 
             await dbContext.SaveChangesAsync();
         }
